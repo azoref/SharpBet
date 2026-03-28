@@ -4,7 +4,7 @@ import Nav from '@/components/ui/Nav'
 import LiveStatsBar from '@/components/landing/LiveStatsBar'
 import ArbTicker from '@/components/landing/ArbTicker'
 import BookStrip from '@/components/landing/BookStrip'
-import MathCard from '@/components/landing/MathCard'
+import DashboardPreview from '@/components/landing/DashboardPreview'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
 import ComparisonTable from '@/components/landing/ComparisonTable'
 import TelegramPreview from '@/components/landing/TelegramPreview'
@@ -36,50 +36,61 @@ export default async function LandingPage() {
       <LiveStatsBar />
 
       {/* Hero */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left copy */}
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              LIVE · SHARPBET · NBA ARBITRAGE
+      <section className="relative overflow-hidden">
+        {/* Background glows */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/8 rounded-full blur-[120px]" />
+          <div className="absolute top-20 right-1/4 w-80 h-80 bg-emerald-600/6 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-teal-500/5 rounded-full blur-[80px]" />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left copy */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                LIVE · SHARPBET · NBA ARBITRAGE
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+                Pure math.<br />
+                <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+                  Zero luck.<BlinkingCursor />
+                </span>
+              </h1>
+
+              <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
+                SharpBet watches every major US sportsbook around the clock.
+                When the math lines up, we text you. You act. Guaranteed profit, no edge required.
+              </p>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <Link
+                  href="/auth/signup"
+                  className="px-7 py-3.5 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 rounded-full text-base font-semibold transition-all shadow-lg shadow-green-900/30"
+                >
+                  Start for free
+                </Link>
+                <Link
+                  href="/demo"
+                  className="px-7 py-3.5 border border-[#2a2a32] hover:border-green-500/30 rounded-full text-base font-medium text-[#9999aa] hover:text-[#e8e8f0] transition-all"
+                >
+                  Try demo →
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-6 mt-8 text-xs text-[#4a4a55]">
+                <span>✓ Free to start</span>
+                <span>✓ No credit card</span>
+                <span>✓ Telegram alerts</span>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-5">
-              Pure math.<br />
-              <span className="text-green-400">Zero luck.<BlinkingCursor /></span>
-            </h1>
-
-            <p className="text-[#9999aa] text-lg leading-relaxed mb-8">
-              SharpBet watches every major US sportsbook around the clock.
-              When the math lines up, we text you. You act. Guaranteed profit, no edge required.
-            </p>
-
-            <div className="flex items-center gap-3 flex-wrap">
-              <Link
-                href="/auth/signup"
-                className="px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg text-base font-semibold transition-colors"
-              >
-                Start for free
-              </Link>
-              <Link
-                href="/demo"
-                className="px-6 py-3 border border-[#2a2a32] hover:border-[#3a3a45] rounded-lg text-base font-medium text-[#9999aa] hover:text-[#e8e8f0] transition-colors"
-              >
-                Try demo →
-              </Link>
+            {/* Right — dashboard preview */}
+            <div className="flex justify-center lg:justify-end">
+              <DashboardPreview />
             </div>
-
-            <div className="flex items-center gap-6 mt-8 text-xs text-[#4a4a55]">
-              <span>✓ Free to start</span>
-              <span>✓ No credit card</span>
-              <span>✓ Telegram alerts</span>
-            </div>
-          </div>
-
-          {/* Right — animated math card */}
-          <div className="flex justify-center lg:justify-end">
-            <MathCard />
           </div>
         </div>
       </section>
@@ -283,7 +294,7 @@ export default async function LandingPage() {
           </p>
           <Link
             href="/auth/signup"
-            className="inline-block px-8 py-3.5 bg-green-600 hover:bg-green-500 rounded-lg text-base font-semibold transition-colors"
+            className="inline-block px-8 py-3.5 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 rounded-full text-base font-semibold transition-all shadow-lg shadow-green-900/30"
           >
             Get started — it&apos;s free
           </Link>
