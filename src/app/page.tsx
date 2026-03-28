@@ -6,6 +6,8 @@ import ArbTicker from '@/components/landing/ArbTicker'
 import BookStrip from '@/components/landing/BookStrip'
 import MathCard from '@/components/landing/MathCard'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
+import ComparisonTable from '@/components/landing/ComparisonTable'
+import TelegramPreview from '@/components/landing/TelegramPreview'
 
 export const dynamic = 'force-dynamic'
 
@@ -156,6 +158,12 @@ export default async function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Telegram preview */}
+      <TelegramPreview />
+
+      {/* Comparison table */}
+      <ComparisonTable />
 
       {/* Books strip */}
       <BookStrip />
