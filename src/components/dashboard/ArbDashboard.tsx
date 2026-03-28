@@ -6,6 +6,9 @@ import { Arb } from '@/types'
 import { MARKET_LABELS, FREE_TIER } from '@/lib/config'
 import { formatDistanceToNow } from 'date-fns'
 import Link from 'next/link'
+import OddsTable from './OddsTable'
+
+type Tab = 'arbs' | 'odds'
 
 const REFRESH_INTERVAL = 30_000
 
@@ -33,6 +36,7 @@ function maskBookName(name: string): string {
 
 export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
   const supabase = createClient()
+  const [tab, setTab] = useState<Tab>('arbs')
   const [arbs, setArbs] = useState<Arb[]>([])
   const [loading, setLoading] = useState(true)
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date())
@@ -88,18 +92,57 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
       {/* Header row */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold">Live Arb Opportunities</h1>
+          <h1 className="text-xl font-semibold">NBA Dashboard</h1>
           <p className="text-[#6b6b80] text-sm mt-0.5">
-            {loading ? 'Loading...' : `${arbs.length} active · refreshed ${formatDistanceToNow(lastRefresh, { addSuffix: true })}`}
+            {tab === 'arbs'
+              ? (loading ? 'Loading...' : `${arbs.length} active arbs · refreshed ${formatDistanceToNow(lastRefresh, { addSuffix: true })}`)
+              : 'Live odds across all major US sportsbooks'}
           </p>
         </div>
+        {tab === 'arbs' && (
+          <button
+            onClick={fetchArbs}
+            className="text-sm text-[#6b6b80] hover:text-[#e8e8f0] border border-[#2a2a32] rounded-md px-3 py-1.5 hover:border-[#3a3a45] transition-colors"
+          >
+            Refresh
+          </button>
+        )}
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-6 border-b border-[#2a2a32]">
         <button
-          onClick={fetchArbs}
-          className="text-sm text-[#6b6b80] hover:text-[#e8e8f0] border border-[#2a2a32] rounded-md px-3 py-1.5 hover:border-[#3a3a45] transition-colors"
+          onClick={() => setTab('arbs')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+            tab === 'arbs'
+              ? 'border-green-500 text-green-400'
+              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+          }`}
         >
-          Refresh
+          🎯 Arb Opportunities
+          {arbs.length > 0 && (
+            <span className="ml-2 px-1.5 py-0.5 rounded text-xs bg-green-500/10 text-green-400 font-mono">
+              {arbs.length}
+            </span>
+          )}
+        </button>
+        <button
+          onClick={() => setTab('odds')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+            tab === 'odds'
+              ? 'border-green-500 text-green-400'
+              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+          }`}
+        >
+          📊 Live Odds
         </button>
       </div>
+
+      {/* Live Odds tab */}
+      {tab === 'odds' && <OddsTable />}
+
+      {/* Arbs tab */}
+      {tab === 'arbs' && <>
 
       {/* Free tier banner */}
       {!isPremium && (
@@ -264,6 +307,8 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
           for full access.
         </div>
       )}
+
+      </>}
     </div>
   )
 }
