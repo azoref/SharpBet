@@ -5,6 +5,7 @@ import LiveStatsBar from '@/components/landing/LiveStatsBar'
 import ArbTicker from '@/components/landing/ArbTicker'
 import BookStrip from '@/components/landing/BookStrip'
 import MathCard from '@/components/landing/MathCard'
+import BlinkingCursor from '@/components/landing/BlinkingCursor'
 
 export const dynamic = 'force-dynamic'
 
@@ -44,7 +45,7 @@ export default async function LandingPage() {
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-5">
               You don&apos;t have<br />
               to watch a screen.<br />
-              <span className="text-green-400">We do.</span>
+              <span className="text-green-400">We do.<BlinkingCursor /></span>
             </h1>
 
             <p className="text-[#9999aa] text-lg leading-relaxed mb-8">
@@ -60,10 +61,10 @@ export default async function LandingPage() {
                 Start for free
               </Link>
               <Link
-                href="/dashboard"
+                href="/demo"
                 className="px-6 py-3 border border-[#2a2a32] hover:border-[#3a3a45] rounded-lg text-base font-medium text-[#9999aa] hover:text-[#e8e8f0] transition-colors"
               >
-                View live odds →
+                Try demo →
               </Link>
             </div>
 
