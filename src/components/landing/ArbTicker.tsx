@@ -79,17 +79,40 @@ export default function ArbTicker() {
         {display.map((arb, i) => (
           <div
             key={`${arb.id}-${i}`}
-            className="flex items-center gap-3 px-4 py-1.5 rounded border border-[#1a1a1f] bg-[#0d0d10] shrink-0 font-mono text-xs"
+            className="flex items-center gap-2.5 px-4 py-1.5 rounded border border-[#1a1a1f] bg-[#0d0d10] shrink-0 font-mono text-xs"
           >
-            <span className="text-green-400 font-semibold">+{arb.profit_margin.toFixed(2)}%</span>
-            <span className="text-[#4a4a55]">·</span>
+            {/* Event */}
+            <span className="text-[#4a4a55] text-[9px] uppercase tracking-widest">EVENT</span>
             <span className="text-[#9999aa]">{arb.event_name}</span>
-            <span className="text-[#4a4a55]">·</span>
-            <span className="px-1 rounded bg-[#1a1a1f] text-[#6b6b80]">{MARKET_SHORT[arb.market] ?? arb.market}</span>
-            <span className="text-[#6b6b80]">{arb.book_a} <span className="text-green-400/70">{fmt(arb.odds_a)}</span></span>
-            <span className="text-[#3a3a45]">vs</span>
-            <span className="text-[#6b6b80]">{arb.book_b} <span className="text-green-400/70">{fmt(arb.odds_b)}</span></span>
-            <span className="text-[#4a4a55]">·</span>
+
+            <span className="text-[#2a2a32]">·</span>
+
+            {/* Market */}
+            <span className="text-[#4a4a55] text-[9px] uppercase tracking-widest">MKT</span>
+            <span className="text-[#6b6b80] uppercase">{MARKET_SHORT[arb.market] ?? arb.market}</span>
+
+            <span className="text-[#2a2a32]">·</span>
+
+            {/* BID */}
+            <span className="text-[#4a4a55] text-[9px] uppercase tracking-widest">BID</span>
+            <span className="text-[#6b6b80]">{arb.book_a}</span>
+            <span className="text-green-400 font-semibold">{fmt(arb.odds_a)}</span>
+
+            <span className="text-[#2a2a32]">·</span>
+
+            {/* ASK */}
+            <span className="text-[#4a4a55] text-[9px] uppercase tracking-widest">ASK</span>
+            <span className="text-[#6b6b80]">{arb.book_b}</span>
+            <span className="text-green-400 font-semibold">{fmt(arb.odds_b)}</span>
+
+            <span className="text-[#2a2a32]">·</span>
+
+            {/* Margin */}
+            <span className="text-[#4a4a55] text-[9px] uppercase tracking-widest">MARGIN</span>
+            <span className="text-green-400 font-bold">+{arb.profit_margin.toFixed(2)}%</span>
+
+            <span className="text-[#2a2a32]">·</span>
+
             <span className="text-[#3a3a45]">{timeAgo(arb.created_at)}</span>
           </div>
         ))}
@@ -105,7 +128,7 @@ export default function ArbTicker() {
           100% { transform: translateX(-50%); }
         }
         .animate-ticker {
-          animation: ticker 40s linear infinite;
+          animation: ticker 90s linear infinite;
         }
       `}</style>
     </div>

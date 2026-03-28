@@ -237,13 +237,13 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[#2a2a32] bg-[#111114]">
-                <th className="text-left px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Event</th>
-                <th className="text-left px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Market</th>
-                <th className="text-left px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Book A</th>
-                <th className="text-left px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Book B</th>
-                <th className="text-right px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Profit</th>
-                <th className="text-right px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Stakes</th>
-                <th className="text-right px-4 py-3 text-xs text-[#6b6b80] font-medium uppercase tracking-wider">Found</th>
+                <th className="text-left px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Event</th>
+                <th className="text-left px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Mkt</th>
+                <th className="text-left px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Bid</th>
+                <th className="text-left px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Ask</th>
+                <th className="text-right px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Margin</th>
+                <th className="text-right px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Stakes</th>
+                <th className="text-right px-4 py-3 text-[10px] text-[#4a4a55] font-medium uppercase tracking-widest font-mono">Found</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1a1a1f]">
