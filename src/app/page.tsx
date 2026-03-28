@@ -46,14 +46,13 @@ export default async function LandingPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-5">
-              You don&apos;t have<br />
-              to watch a screen.<br />
-              <span className="text-green-400">We do.<BlinkingCursor /></span>
+              Pure math.<br />
+              <span className="text-green-400">Zero luck.<BlinkingCursor /></span>
             </h1>
 
             <p className="text-[#9999aa] text-lg leading-relaxed mb-8">
               ArbFinder watches every major US sportsbook around the clock.
-              When the math lines up — we text you. You act. Guaranteed profit, no edge required.
+              When the math lines up, we text you. You act. Guaranteed profit, no edge required.
             </p>
 
             <div className="flex items-center gap-3 flex-wrap">
