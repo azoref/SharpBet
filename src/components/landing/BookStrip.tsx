@@ -5,7 +5,7 @@ const BOOKS = [
   { name: 'FanDuel',     domain: 'fanduel.com',        color: '#1493ff' },
   { name: 'BetMGM',      domain: 'betmgm.com',         color: '#c8a96e' },
   { name: 'Caesars',     domain: 'caesars.com',        color: '#b8973a' },
-  { name: 'PointsBet',   domain: 'pointsbet.com',      color: '#ff3b3b' },
+  { name: 'Fanatics',    domain: 'sportsbook.fanatics.com', color: '#e8222a' },
   { name: 'WynnBET',     domain: 'wynnbet.com',        color: '#c9a84c' },
   { name: 'Barstool',    domain: 'barstoolsports.com', color: '#e8e8f0' },
   { name: 'BetOnline',   domain: 'betonline.ag',       color: '#00c46e' },
