@@ -2,11 +2,6 @@ import { NextResponse } from 'next/server'
 
 export const revalidate = 60 // cache for 60 seconds
 
-const BOOKS = [
-  'draftkings', 'fanduel', 'betmgm', 'caesars', 'pointsbet',
-  'williamhill_us', 'barstool', 'bovada', 'mybookie_ag', 'betonlineag',
-]
-
 export async function GET() {
   const apiKey = process.env.ODDS_API_KEY
   if (!apiKey) {
@@ -19,11 +14,11 @@ export async function GET() {
     url.searchParams.set('regions', 'us')
     url.searchParams.set('markets', 'h2h,spreads,totals')
     url.searchParams.set('oddsFormat', 'american')
-    url.searchParams.set('bookmakers', BOOKS.join(','))
 
     const res = await fetch(url.toString(), { next: { revalidate: 60 } })
     if (!res.ok) {
-      return NextResponse.json({ error: 'Odds API error', status: res.status }, { status: 502 })
+      const body = await res.text()
+      return NextResponse.json({ error: 'Odds API error', status: res.status, detail: body }, { status: 502 })
     }
 
     const data = await res.json()
