@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const BOOKS = [
   { name: 'DraftKings',  domain: 'draftkings.com',     color: '#53d337' },
@@ -24,9 +25,12 @@ export default function BookStrip() {
         </p>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
           {BOOKS.map(book => (
-            <div
+            <Link
               key={book.name}
-              className="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#1a1a1f] bg-[#0d0d10] hover:border-[#2a2a32] transition-all hover:scale-105 group cursor-default"
+              href={`https://${book.domain}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#1a1a1f] bg-[#0d0d10] hover:border-[#2a2a32] transition-all hover:scale-105 group"
               style={{ boxShadow: `inset 0 0 20px ${book.color}08` }}
             >
               {/* Logo */}
@@ -49,7 +53,7 @@ export default function BookStrip() {
               >
                 {book.name}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
