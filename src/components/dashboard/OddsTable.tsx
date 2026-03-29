@@ -85,9 +85,10 @@ export default function OddsTable() {
 
   if (error) {
     return (
-      <div className="text-center py-20 text-red-400">
-        <div className="text-2xl mb-3">⚠️</div>
-        <p>{error}</p>
+      <div className="text-center py-20 text-[#6b6b80]">
+        <div className="text-2xl mb-3">📡</div>
+        <p className="font-medium text-[#9999aa]">Odds data is loading</p>
+        <p className="text-sm mt-1">The worker fetches fresh odds every 30 minutes. Check back shortly.</p>
       </div>
     )
   }

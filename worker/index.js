@@ -42,6 +42,14 @@ async function poll() {
         if (requestsRemaining <= LOW_REQUEST_THRESHOLD) {
           console.warn(`⚠️  [worker] LOW API REQUESTS: only ${requestsRemaining} remaining!`)
         }
+
+        // Save odds snapshot to Supabase so frontend can read without using API credits
+        await supabase.from('odds_snapshot').upsert({
+          sport,
+          data: events,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'sport' })
+
       } catch (err) {
         console.error(`[worker] Failed to fetch odds for ${sport}:`, err.message)
         continue
