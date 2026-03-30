@@ -5,11 +5,11 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://getsharpbet.com'
 
 export const metadata: Metadata = {
   title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-  description: 'SharpBet scans 12+ US sportsbooks around the clock and sends a Telegram alert the moment a guaranteed profit opportunity appears. No math, no monitoring — just profit.',
+  description: 'SharpBet scans 12+ US sportsbooks around the clock and alerts you the moment a guaranteed profit opportunity appears. No math, no monitoring, just profit.',
   metadataBase: new URL(APP_URL),
   openGraph: {
     title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-    description: 'Guaranteed profit opportunities delivered straight to your Telegram. SharpBet watches every major US sportsbook so you don\'t have to.',
+    description: 'Guaranteed profit opportunities delivered straight to you. SharpBet watches every major US sportsbook so you don\'t have to.',
     url: APP_URL,
     siteName: 'SharpBet',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-    description: 'Guaranteed profit opportunities delivered straight to your Telegram.',
+    description: 'Guaranteed profit opportunities delivered straight to you. Never miss an edge.',
     images: ['/api/og'],
   },
 }
