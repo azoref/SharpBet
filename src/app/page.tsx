@@ -288,8 +288,8 @@ export default async function LandingPage() {
               {
                 tag: 'LIVE NOW',
                 icon: '📊',
-                title: 'Divergence score',
-                body: 'Each signal shows the gap between Polymarket implied probability and the closest sportsbook line. The bigger the gap, the bigger the edge.',
+                title: 'Wallet track record',
+                body: 'Every whale comes with their on-chain history. Win rate, total volume, buy/sell ratio. Know who is actually sharp before you act.',
                 live: true,
               },
               {
