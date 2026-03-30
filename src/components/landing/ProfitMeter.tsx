@@ -57,20 +57,8 @@ export default function ProfitMeter() {
 
   const animated = useCountUp(whaleVolume ?? 0)
 
-  // Format: show as $1.24M or $842K or $42,310
-  function formatBig(n: number) {
-    if (n >= 1_000_000) {
-      const m = n / 1_000_000
-      return { int: m.toFixed(2).split('.')[0], dec: m.toFixed(2).split('.')[1], suffix: 'M' }
-    }
-    if (n >= 1_000) {
-      const k = n / 1_000
-      return { int: k.toFixed(1).split('.')[0], dec: k.toFixed(1).split('.')[1], suffix: 'K' }
-    }
-    return { int: Math.floor(n).toLocaleString(), dec: null, suffix: '' }
-  }
-
-  const { int, dec, suffix } = formatBig(animated)
+  const dollars = Math.floor(animated)
+  const cents = Math.round((animated - dollars) * 100).toString().padStart(2, '0')
 
   return (
     <section className="border-t border-[#2a2a32] bg-[#050507]">
@@ -84,14 +72,11 @@ export default function ProfitMeter() {
           <div className="flex items-start justify-center gap-1">
             <span className="text-4xl font-bold text-green-400/60 mt-3 font-mono">$</span>
             <span className="text-7xl sm:text-8xl font-bold text-green-400 font-mono tabular-nums tracking-tight">
-              {whaleVolume === null ? '——' : int}
+              {whaleVolume === null ? '——' : dollars.toLocaleString()}
             </span>
-            {dec && (
-              <span className="text-3xl font-bold text-green-400/60 mt-4 font-mono">.{dec}</span>
-            )}
-            {suffix && (
-              <span className="text-4xl font-bold text-green-400/80 mt-3 font-mono">{suffix}</span>
-            )}
+            <span className="text-3xl font-bold text-green-400/60 mt-4 font-mono">
+              .{whaleVolume === null ? '00' : cents}
+            </span>
           </div>
 
           {/* Live pulse */}
