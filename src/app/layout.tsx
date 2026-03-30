@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
   description: 'SharpBet scans 12+ US sportsbooks around the clock and alerts you the moment a guaranteed profit opportunity appears. No math, no monitoring, just profit.',
   metadataBase: new URL(APP_URL),
+  verification: {
+    google: 'N6Vln7FN8HorEoPhzTcVrGMGZW9BxQuDjgaCJaqxn2Y',
+  },
   openGraph: {
     title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
     description: 'Guaranteed profit opportunities delivered straight to you. SharpBet watches every major US sportsbook so you don\'t have to.',
