@@ -37,7 +37,7 @@ function maskBookName(name: string): string {
 
 export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
   const supabase = createClient()
-  const [tab, setTab] = useState<Tab>('arbs')
+  const [tab, setTab] = useState<Tab>('signals')
   const [arbs, setArbs] = useState<Arb[]>([])
   const [loading, setLoading] = useState(true)
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date())
@@ -113,6 +113,16 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
       {/* Tabs */}
       <div className="flex gap-1 mb-6 border-b border-[#2a2a32]">
         <button
+          onClick={() => setTab('signals')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+            tab === 'signals'
+              ? 'border-green-500 text-green-400'
+              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+          }`}
+        >
+          🐋 Signals
+        </button>
+        <button
           onClick={() => setTab('arbs')}
           className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
             tab === 'arbs'
@@ -136,16 +146,6 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
           }`}
         >
           📊 Live Odds
-        </button>
-        <button
-          onClick={() => setTab('signals')}
-          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
-            tab === 'signals'
-              ? 'border-green-500 text-green-400'
-              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
-          }`}
-        >
-          🐋 Signals
         </button>
       </div>
 

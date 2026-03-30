@@ -31,11 +31,13 @@ interface PolyMarket {
   endDate: string
 }
 
-async function getNBAMarkets(): Promise<PolyMarket[]> {
+async function getSportsMarkets(): Promise<PolyMarket[]> {
   try {
-    const res = await fetch(`${GAMMA_API}/events?active=true&closed=false&tag_slug=nba&limit=20`, {
-      next: { revalidate: 120 },
-    })
+    // Fetch top markets by volume across all sports
+    const res = await fetch(
+      `${GAMMA_API}/events?active=true&closed=false&limit=50`,
+      { next: { revalidate: 120 } }
+    )
     if (!res.ok) return []
     const events = await res.json()
 
@@ -49,7 +51,11 @@ async function getNBAMarkets(): Promise<PolyMarket[]> {
         }
       }
     }
-    return markets.slice(0, 10)
+
+    // Sort by volume descending and return top markets
+    return markets
+      .sort((a, b) => (b.volume ?? 0) - (a.volume ?? 0))
+      .slice(0, 15)
   } catch {
     return []
   }
@@ -81,7 +87,7 @@ async function getWalletStats(wallet: string) {
 
 export async function GET() {
   try {
-    const markets = await getNBAMarkets()
+    const markets = await getSportsMarkets()
 
     if (markets.length === 0) {
       return NextResponse.json({ signals: [], markets: [] })
