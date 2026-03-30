@@ -4,15 +4,15 @@ import './globals.css'
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://getsharpbet.com'
 
 export const metadata: Metadata = {
-  title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-  description: 'SharpBet scans 12+ US sportsbooks around the clock and alerts you the moment a guaranteed profit opportunity appears. No math, no monitoring, just profit.',
+  title: 'SharpBet — Follow the Smart Money',
+  description: 'SharpBet tracks whale activity on Polymarket, surfaces arbitrage across 12+ sportsbooks, and alerts you the moment an edge appears. Follow the smart money.',
   metadataBase: new URL(APP_URL),
   verification: {
     google: 'N6Vln7FN8HorEoPhzTcVrGMGZW9BxQuDjgaCJaqxn2Y',
   },
   openGraph: {
-    title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-    description: 'Guaranteed profit opportunities delivered straight to you. SharpBet watches every major US sportsbook so you don\'t have to.',
+    title: 'SharpBet — Follow the Smart Money',
+    description: 'Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Alerts straight to you before the lines move.',
     url: APP_URL,
     siteName: 'SharpBet',
     images: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: '/api/og',
         width: 1200,
         height: 630,
-        alt: 'SharpBet — Real-Time NBA Arbitrage',
+        alt: 'SharpBet — Follow the Smart Money',
       },
     ],
     locale: 'en_US',
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SharpBet — Real-Time NBA Arbitrage Alerts',
-    description: 'Guaranteed profit opportunities delivered straight to you. Never miss an edge.',
+    title: 'SharpBet — Follow the Smart Money',
+    description: 'Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Never miss an edge.',
     images: ['/api/og'],
   },
 }

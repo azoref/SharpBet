@@ -67,7 +67,7 @@ export async function GET() {
             }}
           >
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ade80' }} />
-            <span style={{ color: '#4ade80', fontSize: '14px', letterSpacing: '2px' }}>WORKER ONLINE</span>
+            <span style={{ color: '#4ade80', fontSize: '14px', letterSpacing: '2px' }}>SIGNALS LIVE</span>
           </div>
         </div>
 
@@ -75,21 +75,21 @@ export async function GET() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <span style={{ color: '#4a4a55', fontSize: '14px', letterSpacing: '3px' }}>
-              REAL-TIME NBA ARBITRAGE
+              SMART MONEY INTELLIGENCE
             </span>
             <span style={{ color: '#e8e8f0', fontSize: '72px', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
-              Pure math.
+              Follow the
             </span>
             <span style={{ color: '#4ade80', fontSize: '72px', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
-              Zero luck.
+              smart money.
             </span>
           </div>
           <p style={{ color: '#6b6b80', fontSize: '22px', maxWidth: '640px', lineHeight: 1.5, margin: 0 }}>
-            SharpBet scans 12+ sportsbooks around the clock and texts you the moment guaranteed profit appears.
+            Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Alerts before the lines move.
           </p>
         </div>
 
-        {/* Bottom bar — fake arb ticker */}
+        {/* Bottom bar: whale signal + arb ticker */}
         <div
           style={{
             display: 'flex',
@@ -99,10 +99,10 @@ export async function GET() {
           }}
         >
           {[
-            { label: 'ARB DETECTED', value: 'LAL vs GSW · ML', color: '#4ade80' },
-            { label: 'BID', value: 'DraftKings +165', color: '#e8e8f0' },
-            { label: 'ASK', value: 'FanDuel -148', color: '#e8e8f0' },
-            { label: 'MARGIN', value: '+2.41%', color: '#4ade80' },
+            { label: 'WHALE SIGNAL', value: 'Chiefs ML · $42K', color: '#4ade80' },
+            { label: 'POLY PRICE', value: '67% implied', color: '#e8e8f0' },
+            { label: 'BOOK PRICE', value: 'DraftKings +145', color: '#e8e8f0' },
+            { label: 'EDGE', value: '+21pt divergence', color: '#4ade80' },
           ].map(({ label, value, color }) => (
             <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <span style={{ color: '#4a4a55', fontSize: '11px', letterSpacing: '2px' }}>{label}</span>
