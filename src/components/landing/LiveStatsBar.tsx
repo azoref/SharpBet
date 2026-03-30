@@ -8,6 +8,14 @@ interface Stats {
   booksMonitored: number
   allTime: number
   totalProfit: number
+  whaleSignalCount: number
+  whaleVolume: number
+}
+
+function formatVolume(n: number): string {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000)     return `$${(n / 1_000).toFixed(0)}K`
+  return `$${n}`
 }
 
 export default function LiveStatsBar() {
@@ -31,27 +39,29 @@ export default function LiveStatsBar() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-6 overflow-x-auto">
         <div className="flex items-center gap-8 shrink-0">
           <Stat
-            label="Arbs found"
-            value={stats ? stats.allTime.toLocaleString() : '—'}
+            label="Whale volume tracked"
+            value={stats ? formatVolume(stats.whaleVolume) : '—'}
             accent
           />
           <Stat
-            label="Avg margin"
-            value={stats ? `+${stats.avgMargin}%` : '—'}
+            label="Whale signals"
+            value={stats ? stats.whaleSignalCount.toLocaleString() : '—'}
             accent
+          />
+          <Stat
+            label="Arbs found"
+            value={stats ? stats.allTime.toLocaleString() : '—'}
           />
           <Stat
             label="Books monitored"
             value={stats ? `${stats.booksMonitored}` : '12'}
           />
-          <Stat
-            label="All-time profit"
-            value={stats ? `$${stats.totalProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : '—'}
-          />
         </div>
         <div className="flex items-center gap-1.5 shrink-0 text-xs text-[#3a3a45]">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          {updated ? `Updated ${updated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}` : 'Live'}
+          {updated
+            ? `Updated ${updated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`
+            : 'Live'}
         </div>
       </div>
     </div>

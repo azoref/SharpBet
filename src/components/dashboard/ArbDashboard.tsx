@@ -93,7 +93,7 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
       {/* Header row */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold">NBA Dashboard</h1>
+          <h1 className="text-xl font-semibold">Dashboard</h1>
           <p className="text-[#6b6b80] text-sm mt-0.5">
             {tab === 'arbs'
               ? (loading ? 'Loading...' : `${arbs.length} active arbs · refreshed ${formatDistanceToNow(lastRefresh, { addSuffix: true })}`)

@@ -32,7 +32,7 @@ export default function DashboardPreview() {
         {/* Dashboard header */}
         <div className="px-4 pt-3 pb-2 flex items-center justify-between border-b border-[#1a1a1f]">
           <div>
-            <p className="text-xs font-semibold text-[#e8e8f0]">NBA Dashboard</p>
+            <p className="text-xs font-semibold text-[#e8e8f0]">Dashboard</p>
             <p className="text-[10px] text-[#4a4a55] font-mono mt-0.5">4 active arbs · live</p>
           </div>
           <div className="flex gap-2">
