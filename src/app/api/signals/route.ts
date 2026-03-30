@@ -1,185 +1,53 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
 
-export const revalidate = 60 // cache for 60 seconds
-
-const GAMMA_API = 'https://gamma-api.polymarket.com'
-const DATA_API = 'https://data-api.polymarket.com'
-const WHALE_THRESHOLD_USD = 10000 // flag trades above this size
-
-interface PolyTrade {
-  proxyWallet: string
-  side: string
-  size: number
-  price: number
-  timestamp: number
-  title: string
-  slug: string
-  outcome: string
-  pseudonym: string
-  transactionHash: string
-}
-
-interface PolyMarket {
-  conditionId: string
-  clobTokenIds: string[]
-  outcomePrices: string[]
-  outcomes: string[]
-  question: string
-  volume: number
-  liquidity: number
-  startDate: string
-  endDate: string
-}
-
-// Sports-related keywords to identify sports markets vs political/crypto
-const SPORTS_KEYWORDS = [
-  'nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga',
-  'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis', 'golf',
-  'championship', 'playoffs', 'super bowl', 'world series', 'stanley cup',
-  'world cup', 'champions league', 'premier league', 'la liga',
-  'winner', 'mvp', 'draft', 'trade', 'match', 'game', 'series', 'tournament',
-  'bowl', 'cup', 'open', 'grand slam', 'masters',
-]
-
-function isSportsEvent(event: { title?: string; category?: string; tags?: Array<{ label: string }> }): boolean {
-  const text = [
-    event.title ?? '',
-    event.category ?? '',
-    ...(event.tags ?? []).map((t) => t.label),
-  ].join(' ').toLowerCase()
-
-  return SPORTS_KEYWORDS.some((kw) => text.includes(kw))
-}
-
-async function getSportsMarkets(): Promise<PolyMarket[]> {
-  try {
-    // Fetch top 100 active events by volume, then filter for sports
-    const res = await fetch(
-      `${GAMMA_API}/events?active=true&closed=false&limit=100`,
-      { next: { revalidate: 120 } }
-    )
-    if (!res.ok) return []
-    const events = await res.json()
-
-    const markets: PolyMarket[] = []
-    for (const event of events) {
-      if (!event.markets) continue
-      // Only include events that look like sports
-      if (!isSportsEvent(event)) continue
-      for (const m of event.markets) {
-        if (m.clobTokenIds && m.active && !m.closed) {
-          markets.push(m)
-        }
-      }
-    }
-
-    // Sort by volume descending and return top 20
-    return markets
-      .sort((a, b) => (b.volume ?? 0) - (a.volume ?? 0))
-      .slice(0, 20)
-  } catch {
-    return []
-  }
-}
-
-async function getRecentTrades(tokenId: string): Promise<PolyTrade[]> {
-  try {
-    const res = await fetch(`${DATA_API}/trades?market=${tokenId}&limit=100`, {
-      next: { revalidate: 60 },
-    })
-    if (!res.ok) return []
-    return await res.json()
-  } catch {
-    return []
-  }
-}
-
-async function getWalletStats(wallet: string) {
-  try {
-    const res = await fetch(`${DATA_API}/value?user=${wallet}`, {
-      next: { revalidate: 300 },
-    })
-    if (!res.ok) return null
-    return await res.json()
-  } catch {
-    return null
-  }
-}
+// No Next.js cache — we want fresh data from Supabase on every request
+export const revalidate = 0
 
 export async function GET() {
   try {
-    const markets = await getSportsMarkets()
-
-    if (markets.length === 0) {
-      return NextResponse.json({ signals: [], markets: [] })
-    }
-
-    const signals: Array<{
-      wallet: string
-      pseudonym: string
-      side: string
-      outcome: string
-      price: number
-      usdSize: number
-      title: string
-      slug: string
-      timestamp: number
-      txHash: string
-      impliedProb: number
-    }> = []
-
-    // Fetch trades for each market's first token across all sports
-    await Promise.all(
-      markets.slice(0, 10).map(async (market) => {
-        if (!market.clobTokenIds?.length) return
-        const tokenId = market.clobTokenIds[0]
-        const trades = await getRecentTrades(tokenId)
-
-        for (const trade of trades) {
-          const usdSize = trade.size * trade.price
-          if (usdSize >= WHALE_THRESHOLD_USD) {
-            signals.push({
-              wallet: trade.proxyWallet,
-              pseudonym: trade.pseudonym || trade.proxyWallet.slice(0, 6) + '...' + trade.proxyWallet.slice(-4),
-              side: trade.side,
-              outcome: trade.outcome,
-              price: trade.price,
-              usdSize,
-              title: trade.title,
-              slug: trade.slug,
-              timestamp: trade.timestamp,
-              txHash: trade.transactionHash,
-              impliedProb: trade.price * 100,
-            })
-          }
-        }
-      })
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    // Sort by size descending, dedupe by wallet+market
-    const seen = new Set<string>()
-    const deduped = signals
-      .sort((a, b) => b.usdSize - a.usdSize)
-      .filter(s => {
-        const key = `${s.wallet}-${s.slug}`
-        if (seen.has(key)) return false
-        seen.add(key)
-        return true
-      })
-      .slice(0, 30)
+    // Pull last 24h of whale signals, biggest first
+    const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString()
+
+    const { data, error } = await supabase
+      .from('whale_signals')
+      .select('*')
+      .gte('traded_at', since)
+      .order('usd_size', { ascending: false })
+      .limit(30)
+
+    if (error) {
+      console.error('[signals API] Supabase error:', error.message)
+      return NextResponse.json({ signals: [], error: error.message })
+    }
+
+    const signals = (data ?? []).map(row => ({
+      wallet:      row.wallet,
+      pseudonym:   row.pseudonym || `${row.wallet.slice(0, 6)}...${row.wallet.slice(-4)}`,
+      side:        row.side,
+      outcome:     row.outcome,
+      price:       row.price,
+      usdSize:     row.usd_size,
+      title:       row.title,
+      slug:        row.event_slug || row.slug,
+      timestamp:   Math.floor(new Date(row.traded_at).getTime() / 1000),
+      txHash:      row.tx_hash,
+      impliedProb: Math.round(row.price * 100),
+    }))
 
     return NextResponse.json({
-      signals: deduped,
-      markets: markets.map(m => ({
-        question: m.question,
-        volume: m.volume,
-        liquidity: m.liquidity,
-        outcomePrices: m.outcomePrices,
-        outcomes: m.outcomes,
-      })),
+      signals,
       updatedAt: new Date().toISOString(),
     })
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 })
+    return NextResponse.json(
+      { signals: [], error: err.message },
+      { status: 500 }
+    )
   }
 }

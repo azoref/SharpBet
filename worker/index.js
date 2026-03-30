@@ -6,6 +6,7 @@ const { createClient } = require('@supabase/supabase-js')
 const { fetchOdds, getApiUsage, SPORTS } = require('./odds')
 const { detectArbs } = require('./arb')
 const { getBot, sendAlerts } = require('./telegram')
+const { pollSignals } = require('./signals')
 
 const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS ?? '60000')
 const LOW_REQUEST_THRESHOLD = 50
@@ -167,9 +168,13 @@ async function main() {
   // Initialize Telegram bot immediately so commands work from startup
   getBot()
 
-  // Run immediately, then on interval
+  // Run arb poll immediately, then on interval
   await poll()
   setInterval(poll, POLL_INTERVAL_MS)
+
+  // Polymarket whale signals: poll every 60s independently of arb interval
+  await pollSignals(supabase)
+  setInterval(() => pollSignals(supabase), 60_000)
 }
 
 main().catch(err => {
