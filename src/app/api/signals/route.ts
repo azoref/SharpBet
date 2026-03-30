@@ -31,11 +31,31 @@ interface PolyMarket {
   endDate: string
 }
 
+// Sports-related keywords to identify sports markets vs political/crypto
+const SPORTS_KEYWORDS = [
+  'nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga',
+  'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis', 'golf',
+  'championship', 'playoffs', 'super bowl', 'world series', 'stanley cup',
+  'world cup', 'champions league', 'premier league', 'la liga',
+  'winner', 'mvp', 'draft', 'trade', 'match', 'game', 'series', 'tournament',
+  'bowl', 'cup', 'open', 'grand slam', 'masters',
+]
+
+function isSportsEvent(event: { title?: string; category?: string; tags?: Array<{ label: string }> }): boolean {
+  const text = [
+    event.title ?? '',
+    event.category ?? '',
+    ...(event.tags ?? []).map((t) => t.label),
+  ].join(' ').toLowerCase()
+
+  return SPORTS_KEYWORDS.some((kw) => text.includes(kw))
+}
+
 async function getSportsMarkets(): Promise<PolyMarket[]> {
   try {
-    // Fetch top markets by volume across all sports
+    // Fetch top 100 active events by volume, then filter for sports
     const res = await fetch(
-      `${GAMMA_API}/events?active=true&closed=false&limit=50`,
+      `${GAMMA_API}/events?active=true&closed=false&limit=100`,
       { next: { revalidate: 120 } }
     )
     if (!res.ok) return []
@@ -43,19 +63,20 @@ async function getSportsMarkets(): Promise<PolyMarket[]> {
 
     const markets: PolyMarket[] = []
     for (const event of events) {
-      if (event.markets) {
-        for (const m of event.markets) {
-          if (m.clobTokenIds && m.active && !m.closed) {
-            markets.push(m)
-          }
+      if (!event.markets) continue
+      // Only include events that look like sports
+      if (!isSportsEvent(event)) continue
+      for (const m of event.markets) {
+        if (m.clobTokenIds && m.active && !m.closed) {
+          markets.push(m)
         }
       }
     }
 
-    // Sort by volume descending and return top markets
+    // Sort by volume descending and return top 20
     return markets
       .sort((a, b) => (b.volume ?? 0) - (a.volume ?? 0))
-      .slice(0, 15)
+      .slice(0, 20)
   } catch {
     return []
   }
@@ -107,9 +128,9 @@ export async function GET() {
       impliedProb: number
     }> = []
 
-    // Fetch trades for each market's first token (home team)
+    // Fetch trades for each market's first token across all sports
     await Promise.all(
-      markets.slice(0, 6).map(async (market) => {
+      markets.slice(0, 10).map(async (market) => {
         if (!market.clobTokenIds?.length) return
         const tokenId = market.clobTokenIds[0]
         const trades = await getRecentTrades(tokenId)
@@ -145,7 +166,7 @@ export async function GET() {
         seen.add(key)
         return true
       })
-      .slice(0, 20)
+      .slice(0, 30)
 
     return NextResponse.json({
       signals: deduped,

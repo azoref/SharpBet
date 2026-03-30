@@ -153,8 +153,8 @@ export default function SignalsTab() {
 
         <p className="text-xs text-[#6b7280] mt-3 italic">
           {signals.length === 0
-            ? 'No whale activity detected on NBA markets right now.'
-            : `${buys.length} whale buy${buys.length !== 1 ? 's' : ''} vs ${sells.length} sell${sells.length !== 1 ? 's' : ''} detected on active NBA markets.`}
+            ? 'No whale activity detected on active sports markets right now.'
+            : `${buys.length} whale buy${buys.length !== 1 ? 's' : ''} vs ${sells.length} sell${sells.length !== 1 ? 's' : ''} detected across active sports markets.`}
         </p>
       </div>
 
@@ -217,7 +217,7 @@ export default function SignalsTab() {
           <div className="text-4xl mb-3">🐋</div>
           <p className="text-[#4a4a55] text-sm font-mono mb-1">No whale signals detected</p>
           <p className="text-[#3a3a45] text-xs max-w-sm">
-            Signals appear when a wallet trades $10K+ on an active NBA game market on Polymarket. Check back closer to tip-off.
+            Signals appear when a wallet trades $10K+ on an active sports market on Polymarket. Check back when games are live.
           </p>
         </div>
       ) : (
