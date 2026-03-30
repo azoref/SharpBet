@@ -13,6 +13,12 @@ interface Signal {
   timestamp: number
   txHash: string
   impliedProb: number
+  polyAmericanOdds: string
+  // Matched sportsbook data (null when no odds_snapshot match)
+  bookName:        string | null
+  bookOdds:        number | null
+  bookImpliedProb: number | null
+  divergencePts:   number | null
 }
 
 interface SignalsData {
@@ -248,12 +254,69 @@ export default function SignalsTab() {
                   <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1c1c2e] text-[#9999aa]">
                     {signal.outcome}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1c1c2e] text-[#9999aa]">
-                    {signal.impliedProb.toFixed(1)}% probability
-                  </span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/20">
                     ⊙ ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   </span>
+                </div>
+
+                {/* Divergence card */}
+                <div className="mt-3 bg-[#08080f] border border-[#1c1c2e] rounded-lg p-3">
+                  <div className="flex items-center justify-between gap-4">
+
+                    {/* Polymarket side */}
+                    <div className="text-center">
+                      <p className="text-[10px] text-[#4a4a55] font-mono uppercase tracking-widest mb-1">Polymarket</p>
+                      <p className="text-lg font-bold text-white">{signal.impliedProb}%</p>
+                      <p className="text-[11px] font-mono text-[#6b7280]">{signal.polyAmericanOdds ?? '—'}</p>
+                    </div>
+
+                    {/* Gap indicator */}
+                    <div className="flex-1 flex flex-col items-center gap-1">
+                      {signal.divergencePts !== null ? (
+                        <>
+                          <div className={`text-sm font-bold px-2 py-0.5 rounded ${
+                            signal.divergencePts > 5
+                              ? 'text-green-400 bg-green-500/10'
+                              : signal.divergencePts < -5
+                              ? 'text-red-400 bg-red-500/10'
+                              : 'text-yellow-400 bg-yellow-500/10'
+                          }`}>
+                            {signal.divergencePts > 0 ? '+' : ''}{signal.divergencePts}pt
+                          </div>
+                          <div className="w-full h-1.5 rounded-full bg-[#1c1c2e] overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${signal.divergencePts > 0 ? 'bg-green-500' : 'bg-red-500'}`}
+                              style={{ width: `${Math.min(Math.abs(signal.divergencePts) * 2, 100)}%`, marginLeft: signal.divergencePts < 0 ? 'auto' : undefined }}
+                            />
+                          </div>
+                          <p className="text-[10px] text-[#4a4a55]">
+                            {signal.divergencePts > 5 ? 'Poly higher than books' : signal.divergencePts < -5 ? 'Books higher than Poly' : 'Roughly aligned'}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-[10px] text-[#3a3a45] text-center font-mono">no book line<br />matched</p>
+                      )}
+                    </div>
+
+                    {/* Sportsbook side */}
+                    <div className="text-center">
+                      <p className="text-[10px] text-[#4a4a55] font-mono uppercase tracking-widest mb-1">
+                        {signal.bookName ?? 'Sportsbook'}
+                      </p>
+                      {signal.bookImpliedProb !== null ? (
+                        <>
+                          <p className="text-lg font-bold text-[#9999aa]">{signal.bookImpliedProb}%</p>
+                          <p className="text-[11px] font-mono text-[#6b7280]">
+                            {signal.bookOdds !== null
+                              ? `${signal.bookOdds > 0 ? '+' : ''}${signal.bookOdds}`
+                              : '—'}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-lg font-bold text-[#3a3a45]">—</p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
