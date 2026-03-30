@@ -60,7 +60,7 @@ export default async function LandingPage() {
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                SharpBet is the intelligence layer for prediction markets. Track whale wallets on Polymarket, follow proven traders, and act on edges before the market catches up.
+                Sportsbooks ban sharp bettors. Polymarket can't. We track the wallets that move the market and alert you the moment they act.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -104,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Prediction markets are the most efficient price discovery mechanism in the world. SharpBet surfaces the signal inside them.
+            Sharp money can't be limited on Polymarket. SharpBet surfaces it the moment it moves.
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export default async function LandingPage() {
             {
               num: '03',
               title: 'You act with conviction',
-              body: 'You see who moved, how much, their track record, and the gap between Polymarket and sportsbook lines. The edge is clear before you place a cent.',
+              body: 'You see who moved, how much, and their track record. The whale signal is the conviction. You decide what to do with it.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -145,17 +145,17 @@ export default async function LandingPage() {
                 <span className="text-green-400">leave footprints.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Prediction markets like Polymarket aggregate information from the smartest traders globally, including people with genuine informational edges. Sportsbooks can't limit them. The signal is public.
+                Prediction markets like Polymarket are open smart contracts. Anyone can trade any size. The sharpest bettors in the world — people with real informational edges — can't be limited, so they trade freely. The price reflects that.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                SharpBet reads those footprints in real time, cross-references them against sportsbook lines, and alerts you the moment the gap is wide enough to act on.
+                SharpBet reads those footprints in real time. When a proven wallet bets big, that trade is the signal. No sportsbook comparison required.
               </p>
             </div>
             <div className="space-y-3">
               {[
                 { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $500+ sports trade on Polymarket, live' },
                 { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history for any wallet' },
-                { emoji: '📊', label: 'Divergence score', sub: 'Polymarket implied prob vs sportsbook gap' },
+                { emoji: '📊', label: 'Wallet track record', sub: 'Win rate, volume, and ROI for every whale' },
                 { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires the moment a whale moves' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
@@ -178,9 +178,9 @@ export default async function LandingPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
               THE THESIS
             </div>
-            <h2 className="text-2xl font-semibold mb-3">Why prediction markets change everything</h2>
+            <h2 className="text-2xl font-semibold mb-3">The only market where insiders can't be limited</h2>
             <p className="text-[#6b6b80] max-w-xl mx-auto text-sm">
-              Sportsbooks are closed systems. Polymarket is open. That difference is the edge.
+              When sharp money can't be shut out, the price tells the truth. That is the entire thesis.
             </p>
           </div>
 
@@ -196,13 +196,13 @@ export default async function LandingPage() {
               <div className="border-l-2 border-green-500/30 pl-5">
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">Prediction markets can&apos;t do that</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract on a public blockchain. There are no accounts to limit, no managers to call, no restrictions on bet size. A hedge fund and a college student trade at the same price. The sharpest bettors in the world are free to trade at full size.
+                  Polymarket is a smart contract on a public blockchain. There are no accounts to limit, no managers to call, no restrictions on size. Anyone with an edge can express it fully. The sharpest bettors in the world trade right alongside everyone else.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">The result: better prices</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The result: the price is already sharp</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Because sharp money flows freely, Polymarket prices are often more accurate than sportsbook lines. When Polymarket says a team has a 63% chance and the sportsbook is still pricing them at +150 (40%), one of them is wrong. It&apos;s almost never Polymarket.
+                  Because nothing filters out informed traders, the Polymarket price is already the most accurate price available. A $40K bet from a wallet with a strong track record is not noise. It is a statement. You don&apos;t need a sportsbook line to validate it.
                 </p>
               </div>
             </div>
@@ -218,17 +218,17 @@ export default async function LandingPage() {
                 {
                   step: '01',
                   title: 'Whale takes a position',
-                  body: 'A wallet with a strong track record buys $40K of Team A on Polymarket at 61%. On-chain, public, verifiable.',
+                  body: 'A wallet with a strong track record buys $40K on Team A at 61%. On-chain, public, verifiable. No one can stop them.',
                 },
                 {
                   step: '02',
-                  title: 'Sportsbook hasn\'t moved',
-                  body: 'DraftKings still has Team A at +155 (39% implied). The books are slow. They aggregate public data, not on-chain signals.',
+                  title: 'The track record matters',
+                  body: 'This wallet has hit 68% of its last 50 trades. That is not luck. When they move size, it means something.',
                 },
                 {
                   step: '03',
-                  title: 'You see it first',
-                  body: 'SharpBet detects the divergence and alerts you. You place the bet at the sportsbook before the line adjusts. That\'s the edge.',
+                  title: 'You act with conviction',
+                  body: 'SharpBet fires the alert the moment it happens. You have the wallet history, the size, the market. The signal speaks for itself.',
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -372,8 +372,8 @@ export default async function LandingPage() {
               a: 'A whale signal is a large trade ($500+) placed on a sports market on Polymarket, the on-chain prediction market. Because Polymarket cannot limit sharp bettors the way sportsbooks can, these trades reflect some of the most informed money in the world.',
             },
             {
-              q: 'Why does Polymarket price matter?',
-              a: 'Polymarket is a free market with no account restrictions. The sharpest bettors trade at full size, which means Polymarket prices tend to be ahead of sportsbook lines. When Polymarket has a team at 62% and a sportsbook has them at +150 (40%), one of them is wrong.',
+              q: 'Why is a Polymarket whale trade a signal?',
+              a: 'Because Polymarket cannot limit sharp bettors. On a sportsbook, if you win consistently they cut your limits and eventually ban you. On Polymarket there are no accounts and no limits. Informed traders can express their full conviction. When a wallet with a proven track record bets big, that trade is the sharpest price available anywhere.',
             },
             {
               q: 'How accurate are whale wallets?',
