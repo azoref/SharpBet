@@ -7,8 +7,9 @@ import { MARKET_LABELS, FREE_TIER } from '@/lib/config'
 import { formatDistanceToNow } from 'date-fns'
 import Link from 'next/link'
 import OddsTable from './OddsTable'
+import SignalsTab from './SignalsTab'
 
-type Tab = 'arbs' | 'odds'
+type Tab = 'arbs' | 'odds' | 'signals'
 
 const REFRESH_INTERVAL = 30_000
 
@@ -119,7 +120,7 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
               : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
           }`}
         >
-          🎯 Arb Opportunities
+          🎯 Arbs
           {arbs.length > 0 && (
             <span className="ml-2 px-1.5 py-0.5 rounded text-xs bg-green-500/10 text-green-400 font-mono">
               {arbs.length}
@@ -136,10 +137,23 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
         >
           📊 Live Odds
         </button>
+        <button
+          onClick={() => setTab('signals')}
+          className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+            tab === 'signals'
+              ? 'border-green-500 text-green-400'
+              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+          }`}
+        >
+          🐋 Signals
+        </button>
       </div>
 
       {/* Live Odds tab */}
       {tab === 'odds' && <OddsTable />}
+
+      {/* Signals tab */}
+      {tab === 'signals' && <SignalsTab />}
 
       {/* Arbs tab */}
       {tab === 'arbs' && <>

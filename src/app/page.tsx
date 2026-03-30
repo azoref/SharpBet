@@ -49,19 +49,18 @@ export default async function LandingPage() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                LIVE · SHARPBET · NBA ARBITRAGE
+                LIVE · SHARPBET · SMART MONEY INTELLIGENCE
               </div>
 
               <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                Pure math.<br />
+                Follow the<br />
                 <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                  Zero luck.<BlinkingCursor />
+                  smart money.<BlinkingCursor />
                 </span>
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                SharpBet watches every major US sportsbook around the clock.
-                When the math lines up, we text you. You act. Guaranteed profit, no edge required.
+                SharpBet tracks whale activity on Polymarket, surfaces arbitrage across 12+ sportsbooks, and alerts you the moment an edge appears.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -82,7 +81,7 @@ export default async function LandingPage() {
               <div className="flex items-center gap-6 mt-8 text-xs text-[#4a4a55]">
                 <span>✓ Free to start</span>
                 <span>✓ No credit card</span>
-                <span>✓ Telegram alerts</span>
+                <span>✓ Instant alerts</span>
               </div>
             </div>
 
@@ -105,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Sportsbooks disagree on lines constantly. When the disagreement creates a mathematical edge, we catch it in seconds.
+            Smart money moves first. SharpBet watches where it goes — across prediction markets, sportsbooks, and on-chain — and tells you before the lines catch up.
           </p>
         </div>
 
@@ -113,18 +112,18 @@ export default async function LandingPage() {
           {[
             {
               num: '01',
-              title: 'We scan every book',
-              body: 'Our worker polls 12+ US sportsbooks every 60 seconds: moneylines, spreads, and totals across all NBA games.',
+              title: 'We watch the whales',
+              body: 'Polymarket is fully on-chain. Every trade is public. We track wallets that consistently beat the market and alert you when they make a big move.',
             },
             {
               num: '02',
-              title: 'The math finds the edge',
-              body: 'When two books\' implied probabilities sum to less than 100%, a guaranteed profit exists. We flag it instantly.',
+              title: 'We find the gaps',
+              body: 'When Polymarket prices a team at 62% and a sportsbook has them at +145 (40%), that\'s an edge. We surface it instantly across 12+ books.',
             },
             {
               num: '03',
-              title: 'You get the alert',
-              body: 'A Telegram message hits your phone with exact stakes to place on each book. You bet, you profit. No matter the outcome.',
+              title: 'You act first',
+              body: 'You get the signal before the sportsbook adjusts the line. Place the bet, lock the edge, move on. No math, no monitoring required.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -142,22 +141,22 @@ export default async function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-2xl font-semibold mb-4">
-                Most tools assume you&apos;re glued to a dashboard.<br />
-                <span className="text-green-400">We don&apos;t.</span>
+                The sharpest bettors in the world<br />
+                <span className="text-green-400">leave footprints.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Arb windows close fast, sometimes in minutes. The only way to catch them is to be watching constantly. Nobody has time for that.
+                Prediction markets like Polymarket aggregate information from the smartest traders globally — including people with genuine informational edges. Sportsbooks can't limit them. The signal is public.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                That&apos;s why SharpBet sends a Telegram alert the moment an opportunity appears, with the exact books, odds, and stakes you need to act. You&apos;re in, you&apos;re out, you&apos;re profitable.
+                SharpBet reads those footprints in real time, cross-references them against sportsbook lines, and alerts you the moment the gap is wide enough to act on.
               </p>
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '📡', label: 'Scans 12+ books', sub: 'Every 60 seconds, 24/7' },
-                { emoji: '⚡', label: 'Instant Telegram alert', sub: 'Fires the moment an arb is found' },
-                { emoji: '🧮', label: 'Exact stakes calculated', sub: 'Optimal split for your bankroll' },
-                { emoji: '🔒', label: 'Risk-free by definition', sub: 'Math guarantees profit on both outcomes' },
+                { emoji: '🐋', label: 'Whale tracker', sub: 'Follows top Polymarket wallets in real time' },
+                { emoji: '📡', label: 'Scans 12+ books', sub: 'Arbitrage detection every 60 seconds' },
+                { emoji: '📊', label: 'Prediction market edge', sub: 'Polymarket vs sportsbook gap analysis' },
+                { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires before the line moves' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
                   <span className="text-2xl">{emoji}</span>
@@ -187,24 +186,24 @@ export default async function LandingPage() {
             </div>
             <h2 className="text-2xl font-semibold mb-3">What&apos;s coming next</h2>
             <p className="text-[#6b6b80] max-w-md mx-auto text-sm">
-              NBA arbitrage is just the start. Here&apos;s what we&apos;re building.
+              The platform is expanding. Here&apos;s what we&apos;re building.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-5">
             {[
               {
-                tag: 'MORE SPORTS',
-                icon: '🏈',
-                title: 'NFL, MLB, NHL + more',
-                body: 'The same real-time arb detection across football, baseball, hockey, soccer, and college sports. More games means more edges.',
+                tag: 'SIGNALS',
+                icon: '🐋',
+                title: 'Whale signal tracker',
+                body: 'Track top-performing Polymarket wallets in real time. When smart money moves on a game, you\'ll know before the sportsbook adjusts.',
                 soon: true,
               },
               {
-                tag: '+EV BETTING',
-                icon: '📊',
-                title: 'Expected value finder',
-                body: 'Compare sharp reference books against soft books to find mispriced lines. You don\'t need two accounts — just one edge.',
+                tag: 'MORE SPORTS',
+                icon: '🏈',
+                title: 'NFL, MLB, NHL + more',
+                body: 'The same arb detection and signal tracking across football, baseball, hockey, soccer, and college sports.',
                 soon: true,
               },
               {
