@@ -353,65 +353,33 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing */}
+      {/* Pricing teaser */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-[#2a2a32]">
-        <h2 className="text-2xl font-semibold text-center mb-3">Simple pricing</h2>
-        <p className="text-center text-[#6b6b80] mb-12 text-sm">Start free. Upgrade when you&apos;re ready to move fast.</p>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {/* Free */}
-          <div className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 space-y-5">
-            <div>
-              <h3 className="font-semibold text-lg">Free</h3>
-              <p className="text-3xl font-bold mt-1">$0</p>
-              <p className="text-xs text-[#4a4a55] mt-1">forever</p>
+        <div className="bg-[#0d0d10] border border-[#2a2a32] rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-8">
+          <div>
+            <p className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest mb-2">Pricing</p>
+            <h2 className="text-2xl font-semibold mb-2">Start free. Go pro when ready.</h2>
+            <p className="text-[#6b6b80] text-sm max-w-md leading-relaxed">
+              Free gives you limited signals and delayed arbs. SharpBet Pro unlocks real-time whale feeds, divergence scores, wallet profiles, and instant alerts — everything you need to act before the line moves.
+            </p>
+            <div className="flex items-center gap-6 mt-4 text-xs text-[#4a4a55]">
+              <span>✓ Free forever plan</span>
+              <span>✓ Pro from $29/mo</span>
+              <span>✓ Cancel anytime</span>
             </div>
-            <ul className="space-y-2.5 text-sm text-[#9999aa]">
-              {[
-                'Up to 5 arbs visible',
-                '5-minute data delay',
-                'Book names hidden',
-                'Arb calculator',
-                'Live odds viewer',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-[#3a3a45]">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-            <Link href="/auth/signup" className="block text-center py-2.5 border border-[#2a2a32] rounded-lg text-sm font-medium hover:bg-[#1a1a1f] transition-colors">
-              Get started free
-            </Link>
           </div>
-
-          {/* SharpBet Pro */}
-          <div className="bg-[#0d0d10] border border-green-500/30 rounded-xl p-6 space-y-5 relative overflow-hidden">
-            <div className="absolute top-4 right-4">
-              <span className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-green-500/10 text-green-400 border border-green-500/20">
-                PRO
-              </span>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">SharpBet Pro</h3>
-              <p className="text-3xl font-bold mt-1 text-green-400">$29<span className="text-base font-normal text-[#9999aa]">/mo</span></p>
-              <p className="text-xs text-[#4a4a55] mt-1">cancel anytime</p>
-            </div>
-            <ul className="space-y-2.5 text-sm text-[#9999aa]">
-              {[
-                'Real-time arbs, no delay',
-                'All book names revealed',
-                'Unlimited arbs',
-                'Telegram alerts instantly',
-                'Custom bankroll calculator',
-                'Filter by book / margin / market',
-                'Live odds comparison table',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-            <Link href="/auth/signup" className="block text-center py-2.5 bg-green-600 hover:bg-green-500 rounded-lg text-sm font-medium text-white transition-colors">
-              Start free, upgrade anytime
+          <div className="flex flex-col gap-3 shrink-0">
+            <Link
+              href="/pricing"
+              className="px-7 py-3 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 rounded-full text-sm font-semibold text-white transition-all whitespace-nowrap text-center shadow-lg shadow-green-900/20"
+            >
+              See full pricing →
+            </Link>
+            <Link
+              href="/auth/signup"
+              className="px-7 py-3 border border-[#2a2a32] hover:border-[#3a3a45] rounded-full text-sm font-medium text-[#9999aa] hover:text-[#e8e8f0] transition-all whitespace-nowrap text-center"
+            >
+              Start for free
             </Link>
           </div>
         </div>
@@ -444,9 +412,10 @@ export default async function LandingPage() {
             Arbitrage opportunities are time-sensitive and not guaranteed to remain available.
           </p>
           <div className="flex gap-4">
+            <Link href="/pricing" className="hover:text-[#6b6b80]">Pricing</Link>
             <Link href="/calculator" className="hover:text-[#6b6b80]">Calculator</Link>
             <Link href="/tracker" className="hover:text-[#6b6b80]">Tracker</Link>
-            <Link href="/dashboard" className="hover:text-[#6b6b80]">Dashboard</Link>
+            <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
           </div>
         </div>
       </footer>

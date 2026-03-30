@@ -68,6 +68,12 @@ export default function Nav({ user, isPremium }: NavProps) {
             ) : (
               <>
                 <Link
+                  href="/pricing"
+                  className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors"
+                >
+                  Pricing
+                </Link>
+                <Link
                   href="/auth/signin"
                   className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors"
                 >
