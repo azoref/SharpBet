@@ -3,13 +3,10 @@
 import { useEffect, useState } from 'react'
 
 interface Stats {
-  today: number
-  avgMargin: number
-  booksMonitored: number
-  allTime: number
-  totalProfit: number
   whaleSignalCount: number
   whaleVolume: number
+  walletsTracked: number
+  marketsMonitored: number
 }
 
 function formatVolume(n: number): string {
@@ -49,12 +46,12 @@ export default function LiveStatsBar() {
             accent
           />
           <Stat
-            label="Arbs found"
-            value={stats ? stats.allTime.toLocaleString() : '—'}
+            label="Wallets tracked"
+            value={stats ? stats.walletsTracked.toLocaleString() : '—'}
           />
           <Stat
-            label="Books monitored"
-            value={stats ? `${stats.booksMonitored}` : '12'}
+            label="Markets monitored"
+            value={stats ? stats.marketsMonitored.toLocaleString() : '—'}
           />
         </div>
         <div className="flex items-center gap-1.5 shrink-0 text-xs text-[#3a3a45]">
