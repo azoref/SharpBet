@@ -53,7 +53,7 @@ export default function SignalsTab() {
         <div className="text-4xl mb-4">🐋</div>
         <p className="text-[#4a4a55] font-mono text-sm mb-2">No whale signals detected</p>
         <p className="text-[#3a3a45] text-xs max-w-sm">
-          Signals appear when a wallet trades $3,000+ on an active NBA game market on Polymarket.
+          Signals appear when a wallet trades $10,000+ on an active NBA game market on Polymarket.
           Check back closer to tip-off.
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function SignalsTab() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs text-[#4a4a55] font-mono">
-            Tracking large trades ($3K+) on Polymarket NBA markets · Powered by on-chain data
+            Tracking whale trades ($10K+) on Polymarket NBA markets · Powered by on-chain data
           </p>
         </div>
         {data.updatedAt && (

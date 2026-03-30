@@ -4,7 +4,7 @@ export const revalidate = 60 // cache for 60 seconds
 
 const GAMMA_API = 'https://gamma-api.polymarket.com'
 const DATA_API = 'https://data-api.polymarket.com'
-const WHALE_THRESHOLD_USD = 3000 // flag trades above this size
+const WHALE_THRESHOLD_USD = 10000 // flag trades above this size
 
 interface PolyTrade {
   proxyWallet: string
