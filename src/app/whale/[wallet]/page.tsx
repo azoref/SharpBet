@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
+import FollowButton from '@/components/whale/FollowButton'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
@@ -163,19 +164,7 @@ export default async function WhalePage({
             </div>
           </div>
 
-          {/* Follow CTA */}
-          {isPremium ? (
-            <button className="shrink-0 px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold transition-colors">
-              Follow wallet
-            </button>
-          ) : (
-            <Link
-              href="/pricing"
-              className="shrink-0 px-4 py-2 rounded-lg border border-violet-500/30 bg-violet-500/10 text-violet-400 text-sm font-semibold hover:bg-violet-500/20 transition-colors"
-            >
-              Follow wallet (Pro)
-            </Link>
-          )}
+          <FollowButton wallet={wallet} isPremium={isPremium} isLoggedIn={!!user} />
         </div>
 
         {/* KPI row */}
@@ -333,6 +322,8 @@ export default async function WhalePage({
                 </Link>
               </div>
             )}
+
+
 
           </div>
         </div>

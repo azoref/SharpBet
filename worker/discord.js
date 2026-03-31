@@ -117,4 +117,25 @@ async function sendAlerts(supabase, newArbs) {
   }
 }
 
-module.exports = { sendAlerts, postToWebhook, whaleEmbed, arbEmbed }
+function followedWalletEmbed(signal) {
+  const isBuy = signal.side === 'BUY'
+  return {
+    embeds: [{
+      color: isBuy ? 0x7c3aed : 0xef4444,
+      title: `🔔 Wallet you follow just traded`,
+      description: `**${signal.pseudonym || signal.wallet?.slice(0, 10) + '...'}** made a new $10K+ move on Polymarket.`,
+      fields: [
+        { name: 'Market', value: signal.title || 'Unknown', inline: false },
+        { name: 'Side', value: `**${isBuy ? '↑ BUY' : '↓ SELL'}**`, inline: true },
+        { name: 'Outcome', value: signal.outcome || 'Unknown', inline: true },
+        { name: 'Size', value: `**$${Math.round(signal.usd_size).toLocaleString()}**`, inline: true },
+        { name: 'Implied Prob', value: `**${Math.round((signal.price || 0) * 100)}%**`, inline: true },
+        { name: 'Profile', value: `[View on SharpBet](https://getsharpbet.com/whale/${signal.wallet})`, inline: true },
+      ],
+      footer: { text: 'SharpBet · Polymarket on-chain · getsharpbet.com' },
+      timestamp: new Date().toISOString(),
+    }],
+  }
+}
+
+module.exports = { sendAlerts, postToWebhook, whaleEmbed, arbEmbed, followedWalletEmbed }

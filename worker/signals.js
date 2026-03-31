@@ -1,6 +1,6 @@
 'use strict'
 
-const { postToWebhook, whaleEmbed } = require('./discord')
+const { postToWebhook, whaleEmbed, followedWalletEmbed } = require('./discord')
 
 // Polymarket whale signal harvester.
 // Called every ~60s by the main worker loop.
@@ -86,6 +86,9 @@ async function pollSignals(supabase) {
           }
         }
       }
+
+      // Fire followed wallet alerts to Pro users
+      await sendFollowedWalletAlerts(supabase, records)
     }
 
     // Prune signals older than 7 days to keep the table lean but historically rich
@@ -94,6 +97,57 @@ async function pollSignals(supabase) {
 
   } catch (err) {
     console.error('[signals] Poll error:', err.message)
+  }
+}
+
+async function sendFollowedWalletAlerts(supabase, records) {
+  if (records.length === 0) return
+
+  const wallets = [...new Set(records.map(r => r.wallet).filter(Boolean))]
+  if (wallets.length === 0) return
+
+  // Find all users following any of these wallets
+  const { data: follows } = await supabase
+    .from('followed_wallets')
+    .select('user_id, wallet')
+    .in('wallet', wallets)
+
+  if (!follows || follows.length === 0) return
+
+  // Get Pro users with Discord webhooks
+  const userIds = [...new Set(follows.map(f => f.user_id))]
+  const { data: users } = await supabase
+    .from('users')
+    .select('id, discord_webhook_url')
+    .in('id', userIds)
+    .eq('is_premium', true)
+    .not('discord_webhook_url', 'is', null)
+
+  if (!users || users.length === 0) return
+
+  const webhookByUser = Object.fromEntries(users.map(u => [u.id, u.discord_webhook_url]))
+
+  // Build a map: wallet -> signals
+  const signalsByWallet = {}
+  for (const record of records) {
+    if (!record.wallet) continue
+    if (!signalsByWallet[record.wallet]) signalsByWallet[record.wallet] = []
+    signalsByWallet[record.wallet].push(record)
+  }
+
+  for (const follow of follows) {
+    const webhook = webhookByUser[follow.user_id]
+    if (!webhook) continue
+
+    const signals = signalsByWallet[follow.wallet] || []
+    for (const signal of signals) {
+      try {
+        await postToWebhook(webhook, followedWalletEmbed(signal))
+        console.log(`[signals] Sent followed wallet alert to user ${follow.user_id} for ${signal.pseudonym}`)
+      } catch (err) {
+        console.error(`[signals] Followed wallet alert failed for user ${follow.user_id}:`, err.message)
+      }
+    }
   }
 }
 
