@@ -27,13 +27,15 @@ async function computeStrengthScore(supabase, wallet, usdSize) {
   else if (usdSize >= 50000)  sizeScore = 3
   else if (usdSize >= 25000)  sizeScore = 2
 
-  // Wallet activity component (1–5): how many prior trades this wallet has
+  // Wallet activity component (1–5): all-time trade count from wallet_activity
   let activityScore = 1
   try {
-    const { count } = await supabase
-      .from('whale_signals')
-      .select('*', { count: 'exact', head: true })
+    const { data } = await supabase
+      .from('wallet_activity')
+      .select('trade_count')
       .eq('wallet', wallet)
+      .single()
+    const count = data?.trade_count ?? 0
     if (count >= 31)      activityScore = 5
     else if (count >= 16) activityScore = 4
     else if (count >= 6)  activityScore = 3
@@ -106,6 +108,12 @@ async function pollSignals(supabase) {
       console.error('[signals] Supabase upsert error:', error.message)
     } else {
       console.log(`[signals] Stored ${records.length} whale signal(s): ${records.map(r => `$${r.usd_size.toLocaleString()} ${r.side} "${r.title?.slice(0, 40)}"`).join(' | ')}`)
+
+      // Increment all-time wallet activity counts
+      const wallets = records.map(r => r.wallet).filter(Boolean)
+      if (wallets.length > 0) {
+        await supabase.rpc('increment_wallet_trades', { p_wallets: wallets })
+      }
 
       // Fire admin Discord webhook for each new signal
       const adminWebhook = process.env.DISCORD_ADMIN_WEBHOOK
