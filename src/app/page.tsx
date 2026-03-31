@@ -291,11 +291,11 @@ export default async function LandingPage() {
                 live: true,
               },
               {
-                tag: 'COMING SOON',
+                tag: 'LIVE NOW',
                 icon: '🏆',
                 title: 'Wallet leaderboard',
-                body: 'Every whale wallet ranked by ROI, win rate, and total volume. See who is actually sharp before you follow their trades.',
-                live: false,
+                body: 'Every whale wallet ranked by total volume, trade count, buy ratio, and top category. See who is moving the most money on Polymarket.',
+                live: true,
               },
               {
                 tag: 'COMING SOON',
@@ -305,11 +305,11 @@ export default async function LandingPage() {
                 live: false,
               },
               {
-                tag: 'COMING SOON',
+                tag: 'LIVE NOW',
                 icon: '🔔',
                 title: 'Follow a wallet',
-                body: 'Subscribe to any specific wallet. Get a Discord alert the instant they make a move, filtered to your minimum trade size.',
-                live: false,
+                body: 'Subscribe to any specific whale wallet. Get a personalized Discord alert the instant they make a $10K+ move on Polymarket.',
+                live: true,
               },
               {
                 tag: 'COMING SOON',
