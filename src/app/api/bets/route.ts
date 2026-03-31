@@ -28,12 +28,12 @@ export async function POST(req: NextRequest) {
     .from('bets')
     .insert({
       user_id: user.id,
-      sport,
+      sport: sport || 'Other',
       event,
-      market,
-      selection,
-      book,
-      odds: parseInt(odds),
+      market: market || selection || '',
+      selection: selection || '',
+      book: book || 'Polymarket',
+      odds: parseFloat(odds),
       stake: parseFloat(stake),
       notes: notes || null,
       is_arb: is_arb || false,

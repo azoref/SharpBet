@@ -1,9 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-const SPORTS = ['NBA', 'NFL', 'MLB', 'NHL', 'NCAAB', 'NCAAF', 'Soccer', 'Tennis', 'MMA', 'Other']
-const MARKETS = ['Moneyline', 'Spread', 'Total (Over)', 'Total (Under)', 'Player Prop', 'Other']
-const BOOKS = ['DraftKings', 'FanDuel', 'BetMGM', 'Caesars', 'ESPN BET', 'Fanatics', 'BetRivers', 'Hard Rock', 'WynnBET', 'Bovada', 'BetOnline', 'MyBookie', 'Other']
+const CATEGORIES = ['Politics', 'Crypto', 'Sports', 'Other']
 
 interface Props {
   onClose: () => void
@@ -12,11 +10,9 @@ interface Props {
 
 export default function AddBetModal({ onClose, onSave }: Props) {
   const [form, setForm] = useState({
-    sport: 'NBA',
+    sport: 'Politics',
     event: '',
-    market: 'Moneyline',
-    selection: '',
-    book: 'DraftKings',
+    selection: 'Yes',
     odds: '',
     stake: '',
     notes: '',
@@ -29,8 +25,13 @@ export default function AddBetModal({ onClose, onSave }: Props) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!form.event || !form.selection || !form.odds || !form.stake) {
+    if (!form.event || !form.odds || !form.stake) {
       setError('Please fill in all required fields.')
+      return
+    }
+    const price = parseFloat(form.odds)
+    if (isNaN(price) || price <= 0 || price >= 100) {
+      setError('Entry price must be between 1 and 99.')
       return
     }
     setSaving(true)
@@ -38,13 +39,13 @@ export default function AddBetModal({ onClose, onSave }: Props) {
     const res = await fetch('/api/bets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, market: form.selection, book: 'Polymarket' }),
     })
     if (res.ok) {
       onSave()
     } else {
       const d = await res.json()
-      setError(d.error ?? 'Failed to save bet.')
+      setError(d.error ?? 'Failed to save trade.')
       setSaving(false)
     }
   }
@@ -54,58 +55,44 @@ export default function AddBetModal({ onClose, onSave }: Props) {
       <div className="bg-[#0d0d10] border border-[#2a2a32] rounded-2xl w-full max-w-lg">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#1a1a1f]">
-          <h2 className="font-semibold text-[#e8e8f0]">Log a bet</h2>
+          <h2 className="font-semibold text-[#e8e8f0]">Log a trade</h2>
           <button onClick={onClose} className="text-[#4a4a55] hover:text-[#9999aa] transition-colors text-xl leading-none">✕</button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          {/* Row 1: sport + market */}
+          {/* Row 1: category + outcome */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Sport</label>
+              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Category</label>
               <select value={form.sport} onChange={e => set('sport', e.target.value)}
                 className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] focus:outline-none focus:border-green-500/50">
-                {SPORTS.map(s => <option key={s}>{s}</option>)}
+                {CATEGORIES.map(s => <option key={s}>{s}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Market</label>
-              <select value={form.market} onChange={e => set('market', e.target.value)}
+              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Outcome</label>
+              <select value={form.selection} onChange={e => set('selection', e.target.value)}
                 className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] focus:outline-none focus:border-green-500/50">
-                {MARKETS.map(m => <option key={m}>{m}</option>)}
+                <option>Yes</option>
+                <option>No</option>
               </select>
             </div>
           </div>
 
-          {/* Event */}
+          {/* Market question */}
           <div>
-            <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Event *</label>
+            <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Market *</label>
             <input value={form.event} onChange={e => set('event', e.target.value)}
-              placeholder="e.g. Lakers vs Warriors"
+              placeholder="e.g. Will Republicans win the House in 2026?"
               className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] placeholder-[#3a3a45] focus:outline-none focus:border-green-500/50" />
           </div>
 
-          {/* Selection */}
-          <div>
-            <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Selection *</label>
-            <input value={form.selection} onChange={e => set('selection', e.target.value)}
-              placeholder="e.g. Lakers -3.5"
-              className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] placeholder-[#3a3a45] focus:outline-none focus:border-green-500/50" />
-          </div>
-
-          {/* Row: book + odds + stake */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Row: entry price + stake */}
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Book</label>
-              <select value={form.book} onChange={e => set('book', e.target.value)}
-                className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] focus:outline-none focus:border-green-500/50">
-                {BOOKS.map(b => <option key={b}>{b}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Odds *</label>
+              <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Entry price (¢) *</label>
               <input value={form.odds} onChange={e => set('odds', e.target.value)}
-                placeholder="-110"
+                placeholder="e.g. 65"
                 className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] placeholder-[#3a3a45] focus:outline-none focus:border-green-500/50" />
             </div>
             <div>
@@ -120,17 +107,17 @@ export default function AddBetModal({ onClose, onSave }: Props) {
           <div>
             <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Notes</label>
             <input value={form.notes} onChange={e => set('notes', e.target.value)}
-              placeholder="Optional"
+              placeholder="Optional — e.g. which whale signal you followed"
               className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] placeholder-[#3a3a45] focus:outline-none focus:border-green-500/50" />
           </div>
 
-          {/* Arb toggle */}
+          {/* Followed signal toggle */}
           <label className="flex items-center gap-3 cursor-pointer">
             <div className={`w-8 h-4 rounded-full transition-colors ${form.is_arb ? 'bg-green-500' : 'bg-[#2a2a32]'}`}
               onClick={() => set('is_arb', !form.is_arb)}>
               <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${form.is_arb ? 'translate-x-4' : 'translate-x-0'}`} />
             </div>
-            <span className="text-sm text-[#6b6b80]">This is part of an arb</span>
+            <span className="text-sm text-[#6b6b80]">Followed a whale signal</span>
           </label>
 
           {error && <p className="text-red-400 text-xs">{error}</p>}
@@ -142,7 +129,7 @@ export default function AddBetModal({ onClose, onSave }: Props) {
             </button>
             <button type="submit" disabled={saving}
               className="flex-1 px-4 py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-semibold text-sm transition-colors disabled:opacity-50">
-              {saving ? 'Saving...' : 'Log bet'}
+              {saving ? 'Saving...' : 'Log trade'}
             </button>
           </div>
         </form>

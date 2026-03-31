@@ -36,7 +36,7 @@ export default function Nav({ user, isPremium }: NavProps) {
                     Dashboard
                   </Link>
                   <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                    Tracker
+                    Journal
                   </Link>
                 </>
               )}

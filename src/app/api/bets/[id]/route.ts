@@ -5,9 +5,9 @@ function calcProfit(odds: number, stake: number, result: string): number | null 
   if (result === 'pending') return null
   if (result === 'push') return 0
   if (result === 'loss') return -stake
-  // win
-  if (odds > 0) return stake * (odds / 100)
-  return stake * (100 / Math.abs(odds))
+  // win: odds stored as entry price in cents (e.g. 65 = 65¢)
+  // profit = stake * (100 - price) / price
+  return parseFloat((stake * (100 - odds) / odds).toFixed(2))
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
