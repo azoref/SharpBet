@@ -31,18 +31,18 @@ export default function Nav({ user, isPremium }: NavProps) {
             </Link>
             <div className="hidden sm:flex items-center gap-6">
               {user && (
-                <>
-                  <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                    Dashboard
-                  </Link>
-                  <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                    Journal
-                  </Link>
-                </>
+                <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                  Dashboard
+                </Link>
               )}
               <Link href="/leaderboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Leaderboard
               </Link>
+              {user && (
+                <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                  Journal
+                </Link>
+              )}
               <Link href="/pricing" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Pricing
               </Link>
