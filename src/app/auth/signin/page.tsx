@@ -42,8 +42,8 @@ function SignInForm() {
     <div className="w-full max-w-sm">
       <div className="text-center mb-8">
         <Link href="/" className="inline-flex items-center gap-2 mb-6">
-          <span className="text-green-500 font-mono font-bold text-xl">ARB</span>
-          <span className="text-[#e8e8f0] font-semibold text-xl">Finder</span>
+          <span className="text-green-500 font-mono font-bold text-xl">SHARP</span>
+          <span className="text-[#e8e8f0] font-semibold text-xl">Bet</span>
         </Link>
         <h1 className="text-2xl font-semibold">Sign in</h1>
         <p className="text-[#6b6b80] text-sm mt-1">Welcome back</p>
