@@ -456,6 +456,7 @@ export default async function LandingPage() {
             For informational purposes only. Not financial advice. Prediction market prices are not guaranteed to reflect future outcomes.
           </p>
           <div className="flex gap-4">
+            <Link href="/leaderboard" className="hover:text-[#6b6b80]">Leaderboard</Link>
             <Link href="/pricing" className="hover:text-[#6b6b80]">Pricing</Link>
             <Link href="/tracker" className="hover:text-[#6b6b80]">Journal</Link>
             <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
