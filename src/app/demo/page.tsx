@@ -12,7 +12,7 @@ export default function DemoPage() {
         <div className="flex items-center gap-2 text-sm text-green-400">
           <span className="font-mono font-semibold">DEMO MODE</span>
           <span className="text-green-400/50">·</span>
-          <span className="text-[#9999aa]">You&apos;re viewing sample data. Sign up for live whale signals and real-time arbs.</span>
+          <span className="text-[#9999aa]">You&apos;re viewing sample data. Sign up to see live whale signals across all Polymarket categories.</span>
         </div>
         <Link
           href="/auth/signup"
