@@ -118,6 +118,7 @@ export async function GET() {
         // Polymarket probability
         impliedProb:     polyProb,
         polyAmericanOdds: impliedToAmerican(row.price ?? 0),
+        strengthScore:   row.strength_score ?? null,
         // Matched sportsbook (null if no match in odds_snapshot)
         bookName:        match?.bookName        ?? null,
         bookOdds:        match?.americanOdds    ?? null,

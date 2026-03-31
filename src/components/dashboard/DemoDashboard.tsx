@@ -19,6 +19,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 180,
     txHash: '0xabc123def456abc123def456abc123def456abc123def456abc123def456abc123',
     impliedProb: 67,
+    strengthScore: 7,
   },
   {
     wallet: '0x9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b',
@@ -33,6 +34,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 420,
     txHash: '0xdef456abc123def456abc123def456abc123def456abc123def456abc123def456',
     impliedProb: 34,
+    strengthScore: 6,
   },
   {
     wallet: '0x1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d',
@@ -47,6 +49,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 900,
     txHash: '0x789abc123def456789abc123def456789abc123def456789abc123def456789abc',
     impliedProb: 72,
+    strengthScore: 9,
   },
   {
     wallet: '0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
@@ -61,6 +64,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 1800,
     txHash: '0x321cba654fed987321cba654fed987321cba654fed987321cba654fed987321cb',
     impliedProb: 58,
+    strengthScore: 4,
   },
   {
     wallet: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c',
@@ -75,6 +79,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 3600,
     txHash: '0x654fed321cba987654fed321cba987654fed321cba987654fed321cba987654fe',
     impliedProb: 41,
+    strengthScore: 8,
   },
   {
     wallet: '0x7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e',
@@ -89,6 +94,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 5400,
     txHash: '0x987321654cba321987654abc321cba987654abc321cba987654abc321cba98765',
     impliedProb: 63,
+    strengthScore: 5,
   },
   {
     wallet: '0x4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a',
@@ -103,6 +109,7 @@ const DEMO_SIGNALS = [
     timestamp: now - 9000,
     txHash: '0xcba987654321cba987654321cba987654321cba987654321cba987654321cba98',
     impliedProb: 55,
+    strengthScore: 3,
   },
 ]
 
@@ -111,6 +118,18 @@ const CAT_COLORS: Record<string, string> = {
   Crypto: '#06b6d4',
   Sports: '#22c55e',
   Other: '#9999aa',
+}
+
+function StrengthBadge({ score }: { score: number | null }) {
+  if (score == null) return null
+  const color = score >= 8 ? { text: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' }
+    : score >= 5 ? { text: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' }
+    : { text: 'text-[#6b7280]', bg: 'bg-[#1c1c2e]', border: 'border-[#2a2a3e]' }
+  return (
+    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${color.text} ${color.bg} ${color.border}`}>
+      ⚡{score}
+    </span>
+  )
 }
 
 function WalletAvatar({ name }: { name: string }) {
@@ -324,6 +343,7 @@ export default function DemoDashboard() {
                         >
                           {signal.category.toUpperCase()}
                         </span>
+                        <StrengthBadge score={signal.strengthScore} />
                         <span className="text-[11px] text-[#6b7280]">{demoTimeAgo(signal.timestamp)}</span>
                       </div>
                     </div>

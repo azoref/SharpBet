@@ -19,6 +19,30 @@ function inferCategory(title) {
   return 'other'
 }
 
+async function computeStrengthScore(supabase, wallet, usdSize) {
+  // Size component (1–5)
+  let sizeScore = 1
+  if (usdSize >= 200000)     sizeScore = 5
+  else if (usdSize >= 100000) sizeScore = 4
+  else if (usdSize >= 50000)  sizeScore = 3
+  else if (usdSize >= 25000)  sizeScore = 2
+
+  // Wallet activity component (1–5): how many prior trades this wallet has
+  let activityScore = 1
+  try {
+    const { count } = await supabase
+      .from('whale_signals')
+      .select('*', { count: 'exact', head: true })
+      .eq('wallet', wallet)
+    if (count >= 31)      activityScore = 5
+    else if (count >= 16) activityScore = 4
+    else if (count >= 6)  activityScore = 3
+    else if (count >= 3)  activityScore = 2
+  } catch (_) {}
+
+  return sizeScore + activityScore // 2–10
+}
+
 async function pollSignals(supabase) {
   try {
     const res = await fetch(`${DATA_API}/trades?limit=2000`, {
@@ -50,7 +74,7 @@ async function pollSignals(supabase) {
     }
 
     // Map to DB schema
-    const records = whales.map(t => ({
+    const rawRecords = whales.map(t => ({
       tx_hash:    t.transactionHash,
       wallet:     t.proxyWallet || '',
       pseudonym:  t.pseudonym || t.name || `${(t.proxyWallet || '').slice(0,6)}...${(t.proxyWallet || '').slice(-4)}`,
@@ -64,7 +88,15 @@ async function pollSignals(supabase) {
       traded_at:  new Date((t.timestamp || Date.now() / 1000) * 1000).toISOString(),
     })).filter(r => r.tx_hash) // skip records without a tx hash
 
-    if (records.length === 0) return
+    if (rawRecords.length === 0) return
+
+    // Compute strength scores (parallel for performance)
+    const records = await Promise.all(
+      rawRecords.map(async r => ({
+        ...r,
+        strength_score: await computeStrengthScore(supabase, r.wallet, r.usd_size),
+      }))
+    )
 
     const { error } = await supabase
       .from('whale_signals')

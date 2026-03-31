@@ -15,6 +15,7 @@ interface Signal {
   txHash: string
   impliedProb: number
   polyAmericanOdds: string
+  strengthScore: number | null
 }
 
 interface SignalsData {
@@ -38,6 +39,18 @@ function timeAgo(ts: number) {
   if (diff < 60) return `${diff}s ago`
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
   return `${Math.floor(diff / 3600)}h ago`
+}
+
+function StrengthBadge({ score }: { score: number | null }) {
+  if (score == null) return null
+  const color = score >= 8 ? { text: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' }
+    : score >= 5 ? { text: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' }
+    : { text: 'text-[#6b7280]', bg: 'bg-[#1c1c2e]', border: 'border-[#2a2a3e]' }
+  return (
+    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${color.text} ${color.bg} ${color.border}`}>
+      ⚡{score}
+    </span>
+  )
 }
 
 function WalletAvatar({ name }: { name: string }) {
@@ -286,6 +299,7 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
                           style={{ color: catColors[cat], borderColor: catColors[cat] + '40', background: catColors[cat] + '15' }}>
                           {cat.toUpperCase()}
                         </span>
+                        <StrengthBadge score={signal.strengthScore} />
                         {followedWallets.has(signal.wallet) && (
                           <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20">
                             ★ FOLLOWING
