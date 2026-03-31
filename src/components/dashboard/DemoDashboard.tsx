@@ -6,455 +6,252 @@ import Link from 'next/link'
 const now = Math.floor(Date.now() / 1000)
 
 const DEMO_SIGNALS = [
-  {
-    wallet: '0x3a1f9b2c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a',
-    pseudonym: 'CryptoKing',
-    side: 'BUY',
-    outcome: 'Yes',
-    price: 0.67,
-    usdSize: 42000,
-    title: 'Will Republicans win the House in 2026?',
-    category: 'Politics',
-    slug: 'republicans-win-house-2026',
-    timestamp: now - 180,
-    txHash: '0xabc123def456abc123def456abc123def456abc123def456abc123def456abc123',
-    impliedProb: 67,
-    strengthScore: 7,
-  },
-  {
-    wallet: '0x9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b',
-    pseudonym: 'SharpMoney7',
-    side: 'SELL',
-    outcome: 'No',
-    price: 0.34,
-    usdSize: 28500,
-    title: 'Will Bitcoin hit $150K before July 2026?',
-    category: 'Crypto',
-    slug: 'bitcoin-150k-july-2026',
-    timestamp: now - 420,
-    txHash: '0xdef456abc123def456abc123def456abc123def456abc123def456abc123def456',
-    impliedProb: 34,
-    strengthScore: 6,
-  },
-  {
-    wallet: '0x1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d',
-    pseudonym: 'EdgeHunter',
-    side: 'BUY',
-    outcome: 'Yes',
-    price: 0.72,
-    usdSize: 55000,
-    title: 'Will the Fed cut rates in May 2026?',
-    category: 'Politics',
-    slug: 'fed-rate-cut-may-2026',
-    timestamp: now - 900,
-    txHash: '0x789abc123def456789abc123def456789abc123def456789abc123def456789abc',
-    impliedProb: 72,
-    strengthScore: 9,
-  },
-  {
-    wallet: '0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
-    pseudonym: 'WhalePunter',
-    side: 'BUY',
-    outcome: 'Yes',
-    price: 0.58,
-    usdSize: 19000,
-    title: 'Will the Celtics win the 2026 NBA Finals?',
-    category: 'Sports',
-    slug: 'celtics-win-nba-finals-2026',
-    timestamp: now - 1800,
-    txHash: '0x321cba654fed987321cba654fed987321cba654fed987321cba654fed987321cb',
-    impliedProb: 58,
-    strengthScore: 4,
-  },
-  {
-    wallet: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c',
-    pseudonym: 'PolyShark',
-    side: 'SELL',
-    outcome: 'No',
-    price: 0.41,
-    usdSize: 31000,
-    title: 'Will Ethereum flip Bitcoin by market cap in 2026?',
-    category: 'Crypto',
-    slug: 'ethereum-flip-bitcoin-2026',
-    timestamp: now - 3600,
-    txHash: '0x654fed321cba987654fed321cba987654fed321cba987654fed321cba987654fe',
-    impliedProb: 41,
-    strengthScore: 8,
-  },
-  {
-    wallet: '0x7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e',
-    pseudonym: 'AlphaFlow',
-    side: 'BUY',
-    outcome: 'Yes',
-    price: 0.63,
-    usdSize: 22000,
-    title: 'Will Trump sign a crypto reserve bill in 2026?',
-    category: 'Politics',
-    slug: 'trump-crypto-reserve-2026',
-    timestamp: now - 5400,
-    txHash: '0x987321654cba321987654abc321cba987654abc321cba987654abc321cba98765',
-    impliedProb: 63,
-    strengthScore: 5,
-  },
-  {
-    wallet: '0x4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a',
-    pseudonym: 'DeepLiquid',
-    side: 'BUY',
-    outcome: 'Yes',
-    price: 0.55,
-    usdSize: 12500,
-    title: 'Will the US enter a recession in 2026?',
-    category: 'Other',
-    slug: 'us-recession-2026',
-    timestamp: now - 9000,
-    txHash: '0xcba987654321cba987654321cba987654321cba987654321cba987654321cba98',
-    impliedProb: 55,
-    strengthScore: 3,
-  },
+  { pseudonym: 'CryptoKing',  side: 'BUY',  outcome: 'Yes', usdSize: 42000, title: 'Will Republicans win the House in 2026?',          slug: 'republicans-win-house-2026',    timestamp: now - 180,  impliedProb: 67, strengthScore: 9, category: 'POL', catColor: '#f59e0b' },
+  { pseudonym: 'SharpMoney7', side: 'SELL', outcome: 'No',  usdSize: 28500, title: 'Will Bitcoin hit $150K before July 2026?',          slug: 'bitcoin-150k-july-2026',        timestamp: now - 420,  impliedProb: 34, strengthScore: 6, category: 'CRY', catColor: '#06b6d4' },
+  { pseudonym: 'EdgeHunter',  side: 'BUY',  outcome: 'Yes', usdSize: 55000, title: 'Will the Fed cut rates in May 2026?',               slug: 'fed-rate-cut-may-2026',         timestamp: now - 900,  impliedProb: 72, strengthScore: 9, category: 'POL', catColor: '#f59e0b' },
+  { pseudonym: 'WhalePunter', side: 'BUY',  outcome: 'Yes', usdSize: 19000, title: 'Will the Celtics win the 2026 NBA Finals?',         slug: 'celtics-win-nba-finals-2026',   timestamp: now - 1800, impliedProb: 58, strengthScore: 4, category: 'SPT', catColor: '#22c55e' },
+  { pseudonym: 'PolyShark',   side: 'SELL', outcome: 'No',  usdSize: 31000, title: 'Will Ethereum flip Bitcoin by market cap in 2026?', slug: 'ethereum-flip-bitcoin-2026',    timestamp: now - 3600, impliedProb: 41, strengthScore: 8, category: 'CRY', catColor: '#06b6d4' },
+  { pseudonym: 'AlphaFlow',   side: 'BUY',  outcome: 'Yes', usdSize: 22000, title: 'Will Trump sign a crypto reserve bill in 2026?',    slug: 'trump-crypto-reserve-2026',     timestamp: now - 5400, impliedProb: 63, strengthScore: 5, category: 'POL', catColor: '#f59e0b' },
+  { pseudonym: 'DeepLiquid',  side: 'BUY',  outcome: 'Yes', usdSize: 12500, title: 'Will the US enter a recession in 2026?',            slug: 'us-recession-2026',             timestamp: now - 9000, impliedProb: 55, strengthScore: 3, category: 'OTH', catColor: '#666666' },
 ]
 
-const CAT_COLORS: Record<string, string> = {
-  Politics: '#f59e0b',
-  Crypto: '#06b6d4',
-  Sports: '#22c55e',
-  Other: '#9999aa',
-}
+const DEMO_HOT_MARKETS = [
+  { rank: 1, title: 'Will Republicans win the House in 2026?',          vol: '$124K', buyPct: 72, cat: 'POL', catColor: '#f59e0b' },
+  { rank: 2, title: 'Will Bitcoin hit $150K before July 2026?',         vol: '$98K',  buyPct: 34, cat: 'CRY', catColor: '#06b6d4' },
+  { rank: 3, title: 'Will the Fed cut rates in May 2026?',              vol: '$87K',  buyPct: 68, cat: 'POL', catColor: '#f59e0b' },
+  { rank: 4, title: 'Will the Celtics win the 2026 NBA Finals?',        vol: '$61K',  buyPct: 55, cat: 'SPT', catColor: '#22c55e' },
+  { rank: 5, title: 'Will Ethereum flip Bitcoin by market cap in 2026?',vol: '$44K',  buyPct: 29, cat: 'CRY', catColor: '#06b6d4' },
+]
 
-function StrengthBadge({ score }: { score: number | null }) {
-  if (score == null) return null
-  const color = score >= 8 ? { text: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' }
-    : score >= 5 ? { text: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' }
-    : { text: 'text-[#6b7280]', bg: 'bg-[#1c1c2e]', border: 'border-[#2a2a3e]' }
-  return (
-    <span className="relative group">
-      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${color.text} ${color.bg} ${color.border}`}>
-        ⚡{score}
-      </span>
-      <span className="pointer-events-none absolute top-full left-0 mt-1.5 w-52 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e] px-2.5 py-2 text-[11px] text-[#c4c4d4] leading-snug opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-xl">
-        <span className="font-semibold text-white">Signal strength: {score}/10</span>
-        <br />Based on trade size and wallet activity.
-        <br /><span className="text-green-400">8–10</span> strong · <span className="text-amber-400">5–7</span> moderate · <span className="text-[#6b7280]">2–4</span> weak
-      </span>
-    </span>
-  )
-}
+const DEMO_LEADERBOARD = [
+  { rank: '🥇', name: 'CryptoKing',  vol: '$4.2M', trades: 38, buyPct: 74, cat: 'POL', catColor: '#f59e0b', initial: 'C', color: '#00c805' },
+  { rank: '🥈', name: 'EdgeHunter',  vol: '$2.8M', trades: 24, buyPct: 68, cat: 'CRY', catColor: '#06b6d4', initial: 'E', color: '#06b6d4' },
+  { rank: '🥉', name: 'SharpMoney7', vol: '$1.9M', trades: 19, buyPct: 45, cat: 'SPT', catColor: '#22c55e', initial: 'S', color: '#f59e0b' },
+  { rank: '4',  name: 'WhalePunter', vol: '$1.1M', trades: 15, buyPct: 60, cat: 'POL', catColor: '#f59e0b', initial: 'W', color: '#ef4444' },
+  { rank: '5',  name: 'PolyShark',   vol: '$890K', trades: 12, buyPct: 33, cat: 'CRY', catColor: '#06b6d4', initial: 'P', color: '#ec4899' },
+]
 
-function WalletAvatar({ name }: { name: string }) {
-  const colors = ['#7c3aed', '#06b6d4', '#22c55e', '#f59e0b', '#ef4444', '#ec4899']
-  const color = colors[name.charCodeAt(0) % colors.length]
-  return (
-    <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0"
-      style={{ background: color }}>
-      {name[0]?.toUpperCase() ?? 'W'}
-    </div>
-  )
-}
+type CategoryFilter = 'all' | 'POL' | 'CRY' | 'SPT' | 'OTH'
+const CATEGORIES: { id: CategoryFilter; label: string; color: string }[] = [
+  { id: 'all', label: 'ALL', color: '#00c805' },
+  { id: 'POL', label: 'POL', color: '#f59e0b' },
+  { id: 'CRY', label: 'CRY', color: '#06b6d4' },
+  { id: 'SPT', label: 'SPT', color: '#22c55e' },
+  { id: 'OTH', label: 'OTH', color: '#666666' },
+]
 
-function demoTimeAgo(ts: number) {
+function timeAgo(ts: number) {
   const diff = Math.floor(Date.now() / 1000) - ts
   if (diff < 60) return `${diff}s ago`
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
   return `${Math.floor(diff / 3600)}h ago`
 }
 
-export default function DemoDashboard() {
-  const [sideFilter, setSideFilter] = useState<'all' | 'buy' | 'sell'>('all')
-  const [catFilter, setCatFilter] = useState<'all' | 'Politics' | 'Crypto' | 'Sports' | 'Other'>('all')
-  const [search, setSearch] = useState('')
-  const [sort, setSort] = useState<'recent' | 'high' | 'low'>('recent')
+function fmt(n: number) {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`
+  return `$${n}`
+}
 
-  const buys = DEMO_SIGNALS.filter(s => s.side === 'BUY')
-  const sells = DEMO_SIGNALS.filter(s => s.side === 'SELL')
-  const totalVolume = DEMO_SIGNALS.reduce((s, t) => s + t.usdSize, 0)
-  const avgSize = totalVolume / DEMO_SIGNALS.length
-  const buyPct = (buys.length / DEMO_SIGNALS.length) * 100
-  const sellPct = 100 - buyPct
-  const buyVol = buys.reduce((s, t) => s + t.usdSize, 0)
-  const sellVol = sells.reduce((s, t) => s + t.usdSize, 0)
-  const sentiment = buyPct > 60 ? 'Bullish' : buyPct < 40 ? 'Bearish' : 'Neutral'
-  const sentimentColor = sentiment === 'Bullish' ? '#22c55e' : sentiment === 'Bearish' ? '#ef4444' : '#f59e0b'
+export default function DemoDashboard() {
+  const [side, setSide] = useState<'all' | 'buy' | 'sell'>('all')
+  const [category, setCategory] = useState<CategoryFilter>('all')
 
   const filtered = useMemo(() => {
-    let result = [...DEMO_SIGNALS]
-    if (sideFilter !== 'all') result = result.filter(s => s.side === sideFilter.toUpperCase())
-    if (catFilter !== 'all') result = result.filter(s => s.category === catFilter)
-    if (search) result = result.filter(s =>
-      s.title.toLowerCase().includes(search.toLowerCase()) ||
-      s.pseudonym.toLowerCase().includes(search.toLowerCase())
-    )
-    if (sort === 'high') result.sort((a, b) => b.usdSize - a.usdSize)
-    else if (sort === 'low') result.sort((a, b) => a.usdSize - b.usdSize)
-    else result.sort((a, b) => b.timestamp - a.timestamp)
-    return result
-  }, [sideFilter, catFilter, search, sort])
+    let r = [...DEMO_SIGNALS]
+    if (side !== 'all') r = r.filter(s => s.side === side.toUpperCase())
+    if (category !== 'all') r = r.filter(s => s.category === category)
+    return r
+  }, [side, category])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-xl font-semibold">SharpBet Dashboard</h1>
-          <p className="text-[#6b6b80] text-sm mt-0.5">
-            Whale activity on Polymarket · all categories · demo data
-          </p>
+    <div className="flex flex-col bg-black" style={{ height: 'calc(100vh - 56px - 45px)' }}>
+
+      {/* Status bar */}
+      <div className="flex items-center gap-3 px-4 py-1.5 bg-black border-b border-[#1f1f1f] shrink-0">
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <span className="text-[10px] font-mono text-amber-400 font-semibold">DEMO</span>
         </div>
-        <span className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
-          DEMO
-        </span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">POLYMARKET</span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">$10K+ THRESHOLD</span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">SAMPLE DATA</span>
+        <div className="ml-auto">
+          <Link href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#00c805] hover:bg-[#00e006] text-black font-bold transition-colors">
+            Sign up free
+          </Link>
+        </div>
       </div>
 
-      <div className="space-y-5">
-
-        {/* Hot Markets (demo) */}
-        <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest">🔥 Hot Markets</span>
-              <span className="text-[9px] font-mono text-[#3a3a45]">last 24h</span>
-            </div>
-            <span className="text-[10px] font-mono text-[#3a3a45]">demo data</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-            {[
-              { title: 'Will Republicans win the House in 2026?', category: 'Politics', volume: '$124K', buyPct: 72, color: '#f59e0b' },
-              { title: 'Will Bitcoin hit $150K before July 2026?', category: 'Crypto', volume: '$98K', buyPct: 34, color: '#06b6d4' },
-              { title: 'Will the Fed cut rates in May 2026?', category: 'Politics', volume: '$87K', buyPct: 68, color: '#f59e0b' },
-              { title: 'Will the Celtics win the 2026 NBA Finals?', category: 'Sports', volume: '$61K', buyPct: 55, color: '#22c55e' },
-              { title: 'Will Ethereum flip Bitcoin by market cap in 2026?', category: 'Crypto', volume: '$44K', buyPct: 29, color: '#06b6d4' },
-            ].map((m, i) => {
-              const isBullish = m.buyPct >= 65
-              const isBearish = m.buyPct <= 35
-              return (
-                <div key={i} className="bg-[#0d0d12] border border-[#1c1c2e] rounded-lg p-3 flex flex-col gap-2">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-[8px] font-mono px-1 py-0.5 rounded" style={{ color: m.color, background: m.color + '18' }}>
-                      {m.category.toUpperCase()}
-                    </span>
-                    <span className="text-[9px] font-mono text-[#4a4a55]">#{i + 1}</span>
-                  </div>
-                  <p className="text-[11px] text-[#c4c4d4] leading-snug line-clamp-2">{m.title}</p>
-                  <div className="flex items-center justify-between mt-auto">
-                    <span className="text-xs font-bold font-mono text-white">{m.volume}</span>
-                    <span className={`text-[10px] font-mono font-semibold ${isBullish ? 'text-green-400' : isBearish ? 'text-red-400' : 'text-[#f59e0b]'}`}>
-                      {isBullish ? '↑' : isBearish ? '↓' : '⇌'} {m.buyPct}%
-                    </span>
-                  </div>
-                  <div className="w-full h-0.5 rounded-full bg-[#1c1c2e] overflow-hidden">
-                    <div className={`h-full rounded-full ${isBullish ? 'bg-green-500' : isBearish ? 'bg-red-500' : 'bg-amber-500'}`} style={{ width: `${m.buyPct}%` }} />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Thesis explainer */}
-        <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-5">
-          <div className="flex items-start gap-4">
-            <div className="shrink-0 w-8 h-8 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 text-sm">
-              ◎
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-[#e8e8f0] mb-1">Why on-chain signals matter</p>
-              <p className="text-xs text-[#6b6b80] leading-relaxed">
-                Every Polymarket trade is a smart contract on a public blockchain. No account limits, no restrictions, no bans. The sharpest money in the world flows freely here across politics, crypto, sports, and more. When a wallet with a track record moves $10K+, the signal is real and verifiable. That is the edge.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* KPI Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { label: 'Total Volume', value: `$${totalVolume.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, icon: '💵', color: '#06b6d4' },
-            { label: 'Buy Orders', value: buys.length.toString(), icon: '↑', color: '#22c55e' },
-            { label: 'Sell Orders', value: sells.length.toString(), icon: '↓', color: '#ef4444' },
-            { label: 'Avg Trade Size', value: `$${avgSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, icon: '⚡', color: '#7c3aed' },
-          ].map(({ label, value, icon, color }) => (
-            <div key={label} className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl p-4 flex items-center justify-between">
-              <div>
-                <p className="text-[11px] text-[#6b7280] mb-1">{label}</p>
-                <p className="text-2xl font-bold text-white">{value}</p>
-              </div>
-              <div className="text-2xl opacity-60" style={{ color }}>{icon}</div>
-            </div>
+      {/* Quotron (static demo) */}
+      <div className="relative flex items-center h-7 bg-[#050505] border-b border-[#1a1a1a] overflow-hidden shrink-0 select-none">
+        <div className="absolute left-0 top-0 h-full w-10 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #050505, transparent)' }} />
+        <div className="flex items-center whitespace-nowrap" style={{ animation: 'quotronScroll 90s linear infinite' }}>
+          {[...DEMO_SIGNALS, ...DEMO_SIGNALS].map((s, i) => (
+            <span key={i} className="inline-flex items-center gap-2 px-5 shrink-0 border-r border-[#1a1a1a]">
+              <span className={`text-[10px] font-bold ${s.side === 'BUY' ? 'text-[#00c805]' : 'text-red-400'}`}>{s.side === 'BUY' ? '▲' : '▼'}</span>
+              <span className="text-[10px] font-mono text-[#888888]">{s.pseudonym}</span>
+              <span className="text-[10px] font-mono font-bold text-white">{fmt(s.usdSize)}</span>
+              <span className="text-[10px] font-mono text-[#555555]">{s.outcome} · {s.impliedProb}%</span>
+              <span className="text-[10px] font-mono text-[#444444] max-w-[200px] truncate">{s.title}</span>
+            </span>
           ))}
         </div>
+        <div className="absolute right-0 top-0 h-full w-10 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #050505, transparent)' }} />
+        <style>{`@keyframes quotronScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
+      </div>
 
-        {/* Sentiment Panel */}
-        <div className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-white">Market Sentiment</h3>
-            <span className="px-2 py-0.5 rounded-full text-xs font-semibold border"
-              style={{ color: sentimentColor, borderColor: sentimentColor + '40', background: sentimentColor + '15' }}>
-              {sentiment}
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-[#22c55e] font-semibold">Buy {buyPct.toFixed(1)}%</span>
-            <span className="text-[#ef4444] font-semibold">Sell {sellPct.toFixed(1)}%</span>
-          </div>
-          <div className="w-full h-2.5 rounded-full overflow-hidden bg-[#1c1c2e] flex">
-            <div className="h-full bg-[#22c55e] transition-all" style={{ width: `${buyPct}%` }} />
-            <div className="h-full bg-[#ef4444] transition-all" style={{ width: `${sellPct}%` }} />
-          </div>
-          <div className="flex items-center justify-between text-[11px] mt-1.5">
-            <span className="text-[#22c55e]">${buyVol.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
-            <span className="text-[#ef4444]">${sellVol.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
-          </div>
-          <p className="text-xs text-[#6b7280] mt-3 italic">
-            {buys.length} whale buy{buys.length !== 1 ? 's' : ''} vs {sells.length} sell{sells.length !== 1 ? 's' : ''} detected across all Polymarket categories.
-          </p>
-        </div>
+      {/* Main layout */}
+      <div className="flex flex-1 min-h-0">
 
-        {/* Trade Feed Header */}
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-2">
-            <h3 className="font-semibold text-white">Recent Whale Trades</h3>
-            <span className="text-[#6b7280] text-sm">({filtered.length})</span>
+        {/* Left 60%: Signals */}
+        <div className="flex flex-col border-r border-[#1f1f1f]" style={{ width: '60%' }}>
+          {/* Pane header */}
+          <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">🐋</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00c805]">Signals</span>
+            </div>
+            <span className="text-[10px] font-mono text-amber-400/70">demo data</span>
           </div>
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search trades..."
-            className="bg-[#0f0f17] border border-[#1c1c2e] rounded-lg px-3 py-1.5 text-sm text-white placeholder-[#4a4a55] focus:outline-none focus:border-[#7c3aed]/50 w-48"
-          />
-        </div>
-
-        {/* Filter + Sort */}
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            {([
-              { key: 'all', label: '≡ All', type: 'side' },
-              { key: 'buy', label: '↑ BUY', type: 'side' },
-              { key: 'sell', label: '↓ SELL', type: 'side' },
-            ] as const).map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setSideFilter(key)}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold border transition-colors ${
-                  sideFilter === key
-                    ? key === 'buy' ? 'bg-[#22c55e]/15 text-[#22c55e] border-[#22c55e]/30'
-                    : key === 'sell' ? 'bg-[#ef4444]/15 text-[#ef4444] border-[#ef4444]/30'
-                    : 'bg-[#7c3aed]/15 text-[#7c3aed] border-[#7c3aed]/30'
-                    : 'bg-[#0f0f17] text-[#6b7280] border-[#1c1c2e] hover:text-white'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-            <span className="text-[#2a2a32]">|</span>
-            {(['all', 'Politics', 'Crypto', 'Sports', 'Other'] as const).map(cat => {
-              const color = cat === 'all' ? '#9999aa' : CAT_COLORS[cat]
-              const active = catFilter === cat
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setCatFilter(cat)}
-                  className={`px-3 py-1 rounded-lg text-xs font-mono border transition-colors ${
-                    active ? '' : 'bg-[#0f0f17] text-[#6b7280] border-[#1c1c2e] hover:text-white'
-                  }`}
-                  style={active ? { color, background: color + '18', borderColor: color + '40' } : {}}
-                >
-                  {cat === 'all' ? 'All' : cat}
+          {/* Filters */}
+          <div className="flex flex-col border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
+            <div className="flex items-center gap-2 px-3 pt-2 pb-1.5">
+              {(['all', 'buy', 'sell'] as const).map(f => (
+                <button key={f} onClick={() => setSide(f)}
+                  className={`text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded transition-colors ${side === f
+                    ? f === 'buy'  ? 'bg-[#00c805]/15 text-[#00c805] border border-[#00c805]/30'
+                    : f === 'sell' ? 'bg-red-500/15 text-red-400 border border-red-500/30'
+                    : 'bg-[#1a1a1a] text-white border border-[#333333]'
+                    : 'text-[#444444] hover:text-[#888888] border border-transparent'}`}>
+                  {f === 'all' ? 'ALL' : f === 'buy' ? '▲ BUY' : '▼ SELL'}
                 </button>
+              ))}
+              <span className="ml-auto text-[10px] font-mono text-[#333333]">{filtered.length} signals</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 pb-2">
+              {CATEGORIES.map(c => {
+                const active = category === c.id
+                return (
+                  <button key={c.id} onClick={() => setCategory(c.id)}
+                    style={active ? { color: c.color, background: c.color + '18', borderColor: c.color + '40' } : {}}
+                    className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded border transition-colors ${active ? 'border' : 'text-[#444444] hover:text-[#888888] border-transparent'}`}>
+                    {c.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+          {/* Signal rows */}
+          <div className="overflow-y-auto flex-1">
+            {filtered.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-32 gap-2">
+                <p className="text-[#444444] text-sm font-mono">No signals</p>
+              </div>
+            ) : filtered.map((s, i) => {
+              const isBuy = s.side === 'BUY'
+              return (
+                <div key={i} className={`px-4 py-3 border-b border-[#111111] hover:bg-[#0f0f0f] transition-colors ${i % 2 === 0 ? 'bg-black' : 'bg-[#080808]'}`}>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${isBuy ? 'bg-[#00c805]/15 text-[#00c805]' : 'bg-red-500/15 text-red-400'}`}>
+                      {isBuy ? '▲ BUY' : '▼ SELL'}
+                    </span>
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: s.catColor, background: s.catColor + '18' }}>{s.category}</span>
+                    {s.strengthScore != null && (
+                      <span className={`text-[10px] font-mono font-semibold ${s.strengthScore >= 8 ? 'text-[#00c805]' : s.strengthScore >= 5 ? 'text-amber-400' : 'text-[#444444]'}`}>⚡{s.strengthScore}</span>
+                    )}
+                    <span className="ml-auto text-[10px] font-mono text-[#444444]">{timeAgo(s.timestamp)}</span>
+                    <span className="text-[10px] font-mono text-[#333333] cursor-default">Trade ↗</span>
+                  </div>
+                  <p className="text-sm text-white font-medium leading-snug mb-1.5 truncate">{s.title}</p>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono text-[#555555] truncate">{s.pseudonym}</span>
+                    <span className="text-[10px] font-mono text-[#333333]">·</span>
+                    <span className="text-[10px] font-mono text-[#555555]">{s.outcome} · {s.impliedProb}%</span>
+                    <span className="ml-auto text-sm font-bold font-mono text-white shrink-0">{fmt(s.usdSize)}</span>
+                  </div>
+                </div>
               )
             })}
-          </div>
-          <div className="flex items-center gap-2 text-xs text-[#6b7280]">
-            <span>Sort:</span>
-            <select
-              value={sort}
-              onChange={e => setSort(e.target.value as 'recent' | 'high' | 'low')}
-              className="bg-[#0f0f17] border border-[#1c1c2e] rounded-lg px-2 py-1 text-xs text-white focus:outline-none focus:border-[#7c3aed]/50"
-            >
-              <option value="recent">Most Recent</option>
-              <option value="high">High to Low</option>
-              <option value="low">Low to High</option>
-            </select>
+            {/* Signup nudge at bottom of feed */}
+            <div className="m-4 p-4 rounded-xl border border-[#00c805]/20 bg-[#00c805]/5 flex items-center justify-between gap-4">
+              <p className="text-sm text-[#888888]">Viewing <span className="text-white font-semibold">demo data</span> — sign up to see live on-chain signals.</p>
+              <Link href="/auth/signup" className="shrink-0 px-4 py-1.5 bg-[#00c805] hover:bg-[#00e006] rounded-lg font-bold text-sm text-black transition-colors">
+                Get started free
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Trade Cards */}
-        <div className="space-y-3">
-          {filtered.map((signal, i) => {
-            const catColor = CAT_COLORS[signal.category] ?? '#9999aa'
-            return (
-              <div key={`${signal.wallet}-${i}`}
-                className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl overflow-hidden hover:border-[#2a2a3e] transition-colors">
-                <div className="p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-white text-sm leading-snug truncate">{signal.title}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span
-                          className="text-[9px] font-mono px-1.5 py-0.5 rounded"
-                          style={{ color: catColor, background: catColor + '18' }}
-                        >
-                          {signal.category.toUpperCase()}
-                        </span>
-                        <StrengthBadge score={signal.strengthScore} />
-                        <span className="text-[11px] text-[#6b7280]">{demoTimeAgo(signal.timestamp)}</span>
-                      </div>
-                    </div>
-                    <span className="shrink-0 px-3 py-1.5 rounded-lg bg-[#1c1c2e] text-xs text-[#9999aa] border border-[#2a2a3e] whitespace-nowrap cursor-default">
-                      Trade ↗
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 mt-3 flex-wrap">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${signal.outcome === 'Yes' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
-                      {signal.outcome}
-                    </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1c1c2e] text-[#9999aa]">
-                      {signal.impliedProb}% implied
-                    </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/20">
-                      ⊙ ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                    </span>
-                  </div>
-                </div>
-                <div className="px-4 pb-4">
-                  <div className="bg-[#08080f] border border-[#1c1c2e] rounded-lg p-3 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className={`flex items-center gap-1 text-sm font-bold ${signal.side === 'BUY' ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
-                        {signal.side === 'BUY' ? '↑' : '↓'} {signal.side}
-                      </span>
-                      <div className="flex items-center gap-1.5">
-                        <WalletAvatar name={signal.pseudonym} />
-                        <span className="text-[11px] text-[#6b7280] font-mono">{signal.pseudonym}</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xl font-bold text-white">
-                        ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                      </p>
-                      <span className="text-[10px] text-[#3a3a45] font-mono">demo data</span>
-                    </div>
-                  </div>
-                </div>
+        {/* Right 40%: Hot Markets + Leaderboard */}
+        <div className="flex flex-col" style={{ width: '40%' }}>
+
+          {/* Hot Markets */}
+          <div className="flex flex-col border-b border-[#1f1f1f]" style={{ height: '50%' }}>
+            <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="text-sm">🔥</span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#666666]">Hot Markets</span>
               </div>
-            )
-          })}
-        </div>
-
-        <p className="text-[10px] text-[#3a3a45] font-mono text-center pt-2">
-          Demo data only · Sign up to see live on-chain signals · $10K+ threshold · all categories
-        </p>
-
-        {/* Signup nudge */}
-        <div className="p-5 rounded-xl border border-green-500/20 bg-green-500/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="font-semibold text-[#e8e8f0]">See live whale signals</p>
-            <p className="text-sm text-[#9999aa] mt-1">
-              Sign up free to track real Polymarket whale trades the moment they hit the blockchain.
-            </p>
+              <span className="text-[10px] font-mono text-amber-400/70">demo data</span>
+            </div>
+            <div className="overflow-y-auto flex-1 divide-y divide-[#111111] bg-black">
+              {DEMO_HOT_MARKETS.map(m => {
+                const isBull = m.buyPct >= 65
+                const isBear = m.buyPct <= 35
+                return (
+                  <div key={m.rank} className="flex items-start gap-2 px-3 py-3 hover:bg-[#0f0f0f] transition-colors">
+                    <span className="text-[10px] font-mono text-[#333333] w-4 shrink-0 mt-0.5">#{m.rank}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[12px] text-[#cccccc] leading-snug truncate font-medium">{m.title}</p>
+                      <div className="flex items-center gap-2 mt-1.5">
+                        <span className="text-[9px] font-mono px-1 py-px rounded" style={{ color: m.catColor, background: m.catColor + '18' }}>{m.cat}</span>
+                        <div className="flex-1 h-0.5 rounded-full bg-[#1a1a1a]">
+                          <div className="h-full rounded-full" style={{ width: `${m.buyPct}%`, background: isBull ? '#00c805' : isBear ? '#ef4444' : '#f59e0b' }} />
+                        </div>
+                        <span className={`text-[10px] font-mono font-semibold shrink-0 ${isBull ? 'text-[#00c805]' : isBear ? 'text-red-400' : 'text-amber-400'}`}>{m.buyPct}%</span>
+                      </div>
+                    </div>
+                    <span className="text-[11px] font-mono font-bold text-white shrink-0">{m.vol}</span>
+                  </div>
+                )
+              })}
+            </div>
           </div>
-          <Link
-            href="/auth/signup"
-            className="shrink-0 px-6 py-2.5 bg-green-600 hover:bg-green-500 rounded-lg font-semibold text-sm transition-colors"
-          >
-            Get started free
-          </Link>
+
+          {/* Leaderboard */}
+          <div className="flex flex-col" style={{ height: '50%' }}>
+            <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="text-sm">🏆</span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#666666]">Leaderboard</span>
+              </div>
+              <span className="text-[10px] font-mono text-amber-400/70">demo data</span>
+            </div>
+            <div className="overflow-y-auto flex-1 divide-y divide-[#111111] bg-black">
+              {DEMO_LEADERBOARD.map(w => (
+                <div key={w.name} className="flex items-center gap-2 px-3 py-2.5 hover:bg-[#0f0f0f] transition-colors">
+                  <span className="text-[10px] font-mono text-[#333333] w-5 shrink-0 text-center">{w.rank}</span>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold text-black shrink-0" style={{ background: w.color }}>
+                    {w.initial}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] text-[#cccccc] truncate font-medium">{w.name}</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[9px] font-mono px-1 py-px rounded" style={{ color: w.catColor, background: w.catColor + '18' }}>{w.cat}</span>
+                      <span className="text-[9px] font-mono text-[#444444]">{w.trades} trades</span>
+                      <span className={`text-[9px] font-mono ml-auto ${w.buyPct > 60 ? 'text-[#00c805]' : w.buyPct < 40 ? 'text-red-400' : 'text-amber-400'}`}>{w.buyPct}% buy</span>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-mono font-bold text-white shrink-0">{w.vol}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
