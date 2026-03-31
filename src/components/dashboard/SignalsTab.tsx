@@ -66,6 +66,7 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
   const [category, setCategory] = useState<Category>('all')
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<'recent' | 'high' | 'low'>('recent')
+  const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     fetch('/api/signals')
@@ -73,6 +74,16 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
       .then(d => { setData(d); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
+
+  useEffect(() => {
+    if (!isPremium) return
+    fetch('/api/follow')
+      .then(r => r.json())
+      .then(d => {
+        if (Array.isArray(d)) setFollowedWallets(new Set(d.map((f: { wallet: string }) => f.wallet)))
+      })
+      .catch(() => {})
+  }, [isPremium])
 
   const signals = data?.signals ?? []
 
@@ -275,6 +286,11 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
                           style={{ color: catColors[cat], borderColor: catColors[cat] + '40', background: catColors[cat] + '15' }}>
                           {cat.toUpperCase()}
                         </span>
+                        {followedWallets.has(signal.wallet) && (
+                          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20">
+                            ★ FOLLOWING
+                          </span>
+                        )}
                       </div>
                       <p className="font-semibold text-white text-sm leading-snug truncate">{signal.title}</p>
                       <p className="text-[11px] text-[#6b7280] mt-0.5">{timeAgo(signal.timestamp)}</p>
