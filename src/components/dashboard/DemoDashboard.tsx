@@ -205,6 +205,49 @@ export default function DemoDashboard() {
 
       <div className="space-y-5">
 
+        {/* Hot Markets (demo) */}
+        <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest">🔥 Hot Markets</span>
+              <span className="text-[9px] font-mono text-[#3a3a45]">last 24h</span>
+            </div>
+            <span className="text-[10px] font-mono text-[#3a3a45]">demo data</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+            {[
+              { title: 'Will Republicans win the House in 2026?', category: 'Politics', volume: '$124K', buyPct: 72, color: '#f59e0b' },
+              { title: 'Will Bitcoin hit $150K before July 2026?', category: 'Crypto', volume: '$98K', buyPct: 34, color: '#06b6d4' },
+              { title: 'Will the Fed cut rates in May 2026?', category: 'Politics', volume: '$87K', buyPct: 68, color: '#f59e0b' },
+              { title: 'Will the Celtics win the 2026 NBA Finals?', category: 'Sports', volume: '$61K', buyPct: 55, color: '#22c55e' },
+              { title: 'Will Ethereum flip Bitcoin by market cap in 2026?', category: 'Crypto', volume: '$44K', buyPct: 29, color: '#06b6d4' },
+            ].map((m, i) => {
+              const isBullish = m.buyPct >= 65
+              const isBearish = m.buyPct <= 35
+              return (
+                <div key={i} className="bg-[#0d0d12] border border-[#1c1c2e] rounded-lg p-3 flex flex-col gap-2">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[8px] font-mono px-1 py-0.5 rounded" style={{ color: m.color, background: m.color + '18' }}>
+                      {m.category.toUpperCase()}
+                    </span>
+                    <span className="text-[9px] font-mono text-[#4a4a55]">#{i + 1}</span>
+                  </div>
+                  <p className="text-[11px] text-[#c4c4d4] leading-snug line-clamp-2">{m.title}</p>
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="text-xs font-bold font-mono text-white">{m.volume}</span>
+                    <span className={`text-[10px] font-mono font-semibold ${isBullish ? 'text-green-400' : isBearish ? 'text-red-400' : 'text-[#f59e0b]'}`}>
+                      {isBullish ? '↑' : isBearish ? '↓' : '⇌'} {m.buyPct}%
+                    </span>
+                  </div>
+                  <div className="w-full h-0.5 rounded-full bg-[#1c1c2e] overflow-hidden">
+                    <div className={`h-full rounded-full ${isBullish ? 'bg-green-500' : isBearish ? 'bg-red-500' : 'bg-amber-500'}`} style={{ width: `${m.buyPct}%` }} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
         {/* Thesis explainer */}
         <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-5">
           <div className="flex items-start gap-4">
