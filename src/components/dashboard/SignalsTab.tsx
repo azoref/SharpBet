@@ -48,10 +48,10 @@ function StrengthBadge({ score }: { score: number | null }) {
     : { text: 'text-[#6b7280]', bg: 'bg-[#1c1c2e]', border: 'border-[#2a2a3e]' }
   return (
     <span className="relative group">
-      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border cursor-help ${color.text} ${color.bg} ${color.border}`}>
+      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${color.text} ${color.bg} ${color.border}`}>
         ⚡{score}
       </span>
-      <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 w-52 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e] px-2.5 py-2 text-[11px] text-[#c4c4d4] leading-snug opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-xl">
+      <span className="pointer-events-none absolute top-full left-0 mt-1.5 w-52 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e] px-2.5 py-2 text-[11px] text-[#c4c4d4] leading-snug opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow-xl">
         <span className="font-semibold text-white">Signal strength: {score}/10</span>
         <br />Based on trade size and wallet activity.
         <br /><span className="text-green-400">8–10</span> strong · <span className="text-amber-400">5–7</span> moderate · <span className="text-[#6b7280]">2–4</span> weak
