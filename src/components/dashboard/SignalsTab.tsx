@@ -122,7 +122,7 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
           <div>
             <p className="text-sm font-semibold text-[#e8e8f0] mb-1">The only market where insiders can&apos;t be limited</p>
             <p className="text-xs text-[#6b6b80] leading-relaxed">
-              Polymarket is a smart contract on a public blockchain. No accounts, no restrictions. The sharpest traders in the world — sports bettors, political insiders, crypto funds — trade freely at full size. When a wallet with a track record bets $10K+, that trade is a statement. SharpBet surfaces it the moment it happens.
+              Polymarket is a smart contract on a public blockchain. No accounts, no restrictions. The sharpest traders in the world: sports bettors, political insiders, crypto funds. They trade freely at full size. When a wallet with a track record bets $10K+, that trade is a statement. SharpBet surfaces it the moment it happens.
             </p>
           </div>
         </div>

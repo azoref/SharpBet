@@ -3,69 +3,58 @@ import Nav from '@/components/ui/Nav'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata = {
-  title: 'Pricing — SharpBet',
-  description: 'Free whale signal access and arb detection. Upgrade to SharpBet Pro for real-time data, divergence scores, wallet profiles, and instant alerts.',
+  title: 'Pricing | SharpBet',
+  description: 'Free access to whale signals on Polymarket. Upgrade to SharpBet Pro for real-time feeds, wallet profiles, category filters, and instant Discord alerts.',
 }
 
 export const dynamic = 'force-dynamic'
 
 const FREE_FEATURES = [
-  { label: 'Live odds viewer', note: '' },
-  { label: 'Up to 5 arb opportunities', note: '5-min delay' },
-  { label: 'Last 3 whale signals', note: 'delayed' },
-  { label: 'Book names hidden', note: '' },
-  { label: 'Arb calculator', note: '' },
+  { label: 'Delayed whale signal feed', note: 'last 3 signals' },
+  { label: 'Wallet profile pages', note: '' },
+  { label: 'Category filters', note: '' },
+  { label: 'On-chain verification', note: '' },
 ]
 
 const PRO_FEATURES = [
-  { label: 'Real-time arbs', note: 'no delay', highlight: false },
-  { label: 'Unlimited arb opportunities', note: '', highlight: false },
-  { label: 'All book names revealed', note: '', highlight: false },
-  { label: 'Full whale signal feed', note: '30+ live signals', highlight: true },
-  { label: 'Divergence score', note: 'Polymarket vs sportsbook gap', highlight: true },
+  { label: 'Full real-time whale signal feed', note: '30+ live signals', highlight: true },
+  { label: 'All Polymarket categories', note: 'Politics, Sports, Crypto, and more', highlight: true },
   { label: 'Wallet profiles', note: 'full on-chain trade history', highlight: true },
-  { label: 'Instant Discord alerts', note: '', highlight: false },
-  { label: 'Filter by sport, book, margin', note: '', highlight: false },
-  { label: 'Custom bankroll calculator', note: '', highlight: false },
+  { label: 'Instant Discord alerts', note: 'fires within 60s', highlight: false },
+  { label: 'Category and side filters', note: '', highlight: false },
+  { label: 'Signal sorting by size and recency', note: '', highlight: false },
   { label: 'Early access to new features', note: '', highlight: false },
 ]
 
 const COMPARISON = [
-  { feature: 'Arb opportunities', free: '5 (delayed)', pro: 'Unlimited, real-time' },
   { feature: 'Whale signals', free: '3 (delayed)', pro: '30+ live' },
-  { feature: 'Divergence score', free: false, pro: true },
-  { feature: 'Wallet profiles', free: false, pro: true },
-  { feature: 'Book names', free: 'Hidden', pro: 'Revealed' },
+  { feature: 'All categories', free: true, pro: true },
+  { feature: 'Wallet profiles', free: true, pro: true },
   { feature: 'Discord alerts', free: false, pro: true },
-  { feature: 'Arb calculator', free: true, pro: true },
-  { feature: 'Live odds viewer', free: true, pro: true },
-  { feature: 'On-chain signal verification', free: true, pro: true },
+  { feature: 'Real-time feed', free: false, pro: true },
+  { feature: 'On-chain verification', free: true, pro: true },
 ]
 
 const FAQS = [
   {
     q: 'What are whale signals?',
-    a: "Whale signals are trades placed by large-volume wallets on Polymarket, the on-chain prediction market. Because sportsbooks can't limit these wallets like they do sharp bettors, their trades reflect the sharpest information available. When a whale puts $20K+ on a team, we detect it in real time.",
+    a: 'Whale signals are trades of $10,000 or more placed on any Polymarket market. At that size you are looking at wallets with real conviction. Because Polymarket is a public smart contract with no account limits, the sharpest traders in the world: political insiders, crypto funds, sharp sports bettors, can all trade freely at full size.',
   },
   {
-    q: 'What is the divergence score?',
-    a: 'The divergence score shows the gap between Polymarket\'s implied probability for an outcome and the equivalent sportsbook moneyline. A +12pt score means Polymarket has the team 12 percentage points more likely to win than DraftKings does. That gap is the edge. It often closes within hours as books adjust.',
+    q: 'Why $10,000 as the threshold?',
+    a: 'Below $10K the signal-to-noise ratio drops significantly. At $10K+ you are filtering out casual activity and capturing trades where someone is putting real money behind real information. That is where the edge is.',
   },
   {
-    q: 'Is arbitrage betting legal?',
-    a: 'Yes. Arbitrage betting is legal in every US state where sports betting is permitted. Sportsbooks dislike it, but it is completely within the rules.',
+    q: 'Which Polymarket categories are covered?',
+    a: 'All of them. Politics, sports, crypto, economics, entertainment. You can filter by category in the dashboard. If a whale is moving size anywhere on Polymarket, it shows up.',
   },
   {
-    q: 'Will my accounts get limited?',
-    a: 'Sharp bettors sometimes get limited by sportsbooks. Keeping bet sizes reasonable, using multiple books, and rotating helps. Polymarket cannot limit accounts. It is a public smart contract.',
-  },
-  {
-    q: 'How fast do arb windows close?',
-    a: 'It varies. Anywhere from minutes to hours. Whale signal windows are usually longer since sportsbooks update manually. Instant alerts help you act before lines adjust.',
+    q: 'How do Discord alerts work?',
+    a: 'Pro users paste a Discord webhook URL into their settings. The moment a whale signal is detected, SharpBet posts a rich embed to their channel with the wallet, market, size, and implied probability. It fires within 60 seconds of the on-chain trade.',
   },
   {
     q: 'Where is this heading?',
-    a: 'We started with arbitrage and are expanding deeper into prediction market intelligence: more sophisticated signal scoring, historical wallet ROI tracking, and eventually direct Polymarket position management. The long-term vision is a full prediction market edge platform.',
+    a: 'Wallet ROI and win-rate tracking, signal strength scoring, smart money consensus detection when multiple whales pile into the same market, and Kalshi cross-referencing. The long-term vision is a full prediction market intelligence platform.',
   },
 ]
 
@@ -106,7 +95,7 @@ export default async function PricingPage() {
             </span>
           </h1>
           <p className="text-[#6b6b80] text-lg max-w-xl mx-auto leading-relaxed">
-            Free access to live odds and limited signals. Upgrade to unlock the full prediction market edge: real-time whale feeds, divergence scores, and wallet profiles.
+            Free access to delayed whale signals and wallet profiles. Upgrade to unlock the full feed in real time: every $10K+ trade across all Polymarket categories, with instant Discord alerts.
           </p>
         </div>
       </section>
@@ -196,7 +185,7 @@ export default async function PricingPage() {
           <div className="text-center mb-12">
             <h2 className="text-2xl font-semibold mb-3">The Pro edge, explained</h2>
             <p className="text-[#6b6b80] text-sm max-w-lg mx-auto">
-              Three features that make Pro meaningfully different from Free, built around prediction market intelligence rather than just arb scraping.
+              Three features that make Pro meaningfully different from Free.
             </p>
           </div>
 
@@ -206,13 +195,13 @@ export default async function PricingPage() {
                 icon: '🐋',
                 tag: 'WHALE SIGNALS',
                 title: 'Live signal feed',
-                body: 'Every $10,000+ trade on Polymarket hits your feed within 60 seconds. Politics, sports, crypto — all categories. Side, outcome, size, and the wallet behind it. All verified on-chain.',
+                body: 'Every $10,000+ trade on Polymarket hits your feed within 60 seconds. Politics, sports, crypto. All categories. Side, outcome, size, and the wallet behind it. All verified on-chain.',
               },
               {
-                icon: '📊',
-                tag: 'DIVERGENCE SCORE',
-                title: 'Polymarket vs sportsbook gap',
-                body: "Each signal shows the implied probability gap between Polymarket and the closest sportsbook line. A +15pt divergence means Poly has the team 15 points more likely to win. That's the window.",
+                icon: '🔔',
+                tag: 'DISCORD ALERTS',
+                title: 'Instant signal delivery',
+                body: 'The moment a whale trades $10K+ on Polymarket, a rich embed hits your Discord channel. Wallet, market, category, size, and implied probability. Under 60 seconds from on-chain trade to your phone.',
               },
               {
                 icon: '👤',
@@ -323,7 +312,6 @@ export default async function PricingPage() {
             For informational purposes only. Not financial advice. Check local laws regarding sports betting.
           </p>
           <div className="flex gap-4">
-            <Link href="/calculator" className="hover:text-[#6b6b80]">Calculator</Link>
             <Link href="/tracker" className="hover:text-[#6b6b80]">Tracker</Link>
             <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
             <Link href="/dashboard" className="hover:text-[#6b6b80]">Dashboard</Link>

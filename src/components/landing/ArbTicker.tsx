@@ -28,12 +28,12 @@ function fmtSize(n: number) {
 
 // Fallback demo data when whale_signals table is still empty
 const DEMO: TickerTrade[] = [
-  { tx_hash: 'd1', pseudonym: 'CryptoKing', side: 'BUY', outcome: 'Yes', price: 0.61, usd_size: 42000, title: 'Will the Chiefs win Super Bowl LIX?', traded_at: new Date(Date.now() - 180000).toISOString() },
-  { tx_hash: 'd2', pseudonym: 'SharpMoney7', side: 'BUY', outcome: 'Lakers', price: 0.54, usd_size: 28500, title: 'Lakers vs Nuggets — winner', traded_at: new Date(Date.now() - 420000).toISOString() },
-  { tx_hash: 'd3', pseudonym: 'WhalePunter', side: 'SELL', outcome: 'Yes', price: 0.38, usd_size: 19000, title: 'Will Mahomes win MVP?', traded_at: new Date(Date.now() - 600000).toISOString() },
-  { tx_hash: 'd4', pseudonym: 'EdgeHunter', side: 'BUY', outcome: 'Over', price: 0.52, usd_size: 55000, title: 'Celtics vs Heat total over 215.5', traded_at: new Date(Date.now() - 900000).toISOString() },
-  { tx_hash: 'd5', pseudonym: 'PolyShark', side: 'BUY', outcome: 'Adesanya', price: 0.67, usd_size: 31000, title: 'UFC 300 — Adesanya vs Periera', traded_at: new Date(Date.now() - 1200000).toISOString() },
-  { tx_hash: 'd6', pseudonym: 'MarketMaker9', side: 'SELL', outcome: 'No', price: 0.44, usd_size: 22000, title: 'Man City to win Champions League?', traded_at: new Date(Date.now() - 1500000).toISOString() },
+  { tx_hash: 'd1', pseudonym: 'CryptoKing', side: 'BUY', outcome: 'Yes', price: 0.61, usd_size: 42000, title: 'Will the Republicans win the House in 2026?', traded_at: new Date(Date.now() - 180000).toISOString() },
+  { tx_hash: 'd2', pseudonym: 'SharpMoney7', side: 'SELL', outcome: 'No', price: 0.38, usd_size: 28500, title: 'Will Bitcoin hit $150K before July 2026?', traded_at: new Date(Date.now() - 420000).toISOString() },
+  { tx_hash: 'd3', pseudonym: 'WhalePunter', side: 'BUY', outcome: 'Yes', price: 0.54, usd_size: 19000, title: 'Will the Chiefs win Super Bowl LX?', traded_at: new Date(Date.now() - 600000).toISOString() },
+  { tx_hash: 'd4', pseudonym: 'EdgeHunter', side: 'BUY', outcome: 'Yes', price: 0.72, usd_size: 55000, title: 'Will the Fed cut rates in May 2026?', traded_at: new Date(Date.now() - 900000).toISOString() },
+  { tx_hash: 'd5', pseudonym: 'PolyShark', side: 'SELL', outcome: 'No', price: 0.41, usd_size: 31000, title: 'Will Ethereum flip Bitcoin by market cap in 2026?', traded_at: new Date(Date.now() - 1200000).toISOString() },
+  { tx_hash: 'd6', pseudonym: 'MarketMaker9', side: 'BUY', outcome: 'Yes', price: 0.58, usd_size: 22000, title: 'Will Celtics win the 2026 NBA Finals?', traded_at: new Date(Date.now() - 1500000).toISOString() },
 ]
 
 export default function ArbTicker() {

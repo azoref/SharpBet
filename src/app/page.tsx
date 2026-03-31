@@ -145,7 +145,7 @@ export default async function LandingPage() {
                 <span className="text-green-400">leave footprints.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Prediction markets like Polymarket are open smart contracts. Anyone can trade any size. The sharpest bettors in the world — people with real informational edges — can't be limited, so they trade freely. The price reflects that.
+                Prediction markets like Polymarket are open smart contracts. Anyone can trade any size. The sharpest bettors in the world, people with real informational edges, can't be limited, so they trade freely. The price reflects that.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
                 SharpBet reads those footprints in real time. When a proven wallet bets big, that trade is the signal. No sportsbook comparison required.
@@ -375,7 +375,7 @@ export default async function LandingPage() {
             },
             {
               q: 'How accurate are whale wallets?',
-              a: 'It varies by wallet. Some are directional bettors with strong track records, others are market makers or hedgers. That\'s why we\'re building wallet ROI and win-rate tracking — so you can see the history before you follow a trade.',
+              a: 'It varies by wallet. Some are directional bettors with strong track records, others are market makers or hedgers. That\'s why we\'re building wallet ROI and win-rate tracking so you can see the history before you follow a trade.',
             },
             {
               q: 'How do Discord alerts work?',
@@ -383,7 +383,7 @@ export default async function LandingPage() {
             },
             {
               q: 'Is this only for sports?',
-              a: 'All of them. Politics, sports, crypto, economics, entertainment — if a whale is moving size on Polymarket, you will see it. You can filter by category in the dashboard.',
+              a: 'All of them. Politics, sports, crypto, economics, entertainment. If a whale is moving size on Polymarket, you will see it. You can filter by category in the dashboard.',
             },
           ].map(({ q, a }) => (
             <details key={q} className="group border border-[#2a2a32] rounded-lg">
@@ -457,7 +457,6 @@ export default async function LandingPage() {
           </p>
           <div className="flex gap-4">
             <Link href="/pricing" className="hover:text-[#6b6b80]">Pricing</Link>
-            <Link href="/calculator" className="hover:text-[#6b6b80]">Calculator</Link>
             <Link href="/tracker" className="hover:text-[#6b6b80]">Tracker</Link>
             <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
           </div>
