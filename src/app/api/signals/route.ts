@@ -78,6 +78,7 @@ export async function GET() {
         .from('whale_signals')
         .select('*')
         .gte('traded_at', since)
+        .gte('usd_size', 10000)
         .order('usd_size', { ascending: false })
         .limit(30),
       supabase

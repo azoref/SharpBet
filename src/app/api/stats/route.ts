@@ -12,16 +12,20 @@ export async function GET() {
     const [whaleCountResult, whaleVolumeResult, whaleWalletsResult, whaleMarketsResult] = await Promise.all([
       supabase
         .from('whale_signals')
-        .select('*', { count: 'exact', head: true }),
+        .select('*', { count: 'exact', head: true })
+        .gte('usd_size', 10000),
       supabase
         .from('whale_signals')
-        .select('usd_size'),
+        .select('usd_size')
+        .gte('usd_size', 10000),
       supabase
         .from('whale_signals')
-        .select('wallet'),
+        .select('wallet')
+        .gte('usd_size', 10000),
       supabase
         .from('whale_signals')
-        .select('slug'),
+        .select('slug')
+        .gte('usd_size', 10000),
     ])
 
     const whaleSignalCount = whaleCountResult.count ?? 0
