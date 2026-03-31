@@ -188,21 +188,21 @@ export default async function LandingPage() {
             {/* Left — the problem */}
             <div className="space-y-6">
               <div className="border-l-2 border-red-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">The problem with sportsbooks</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">Every trade is public</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Sportsbooks protect themselves. The moment you win consistently, they limit your account: cut your max bet to $50, then $20, then nothing. Sharp bettors get exiled. The market never fully reflects their information.
+                  Polymarket runs on a public blockchain. Every trade, every wallet, every dollar is visible on-chain the moment it happens. There are no dark pools, no hidden order books, no privileged access.
                 </p>
               </div>
               <div className="border-l-2 border-green-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">Prediction markets can&apos;t do that</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">Sharp money can&apos;t be stopped</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract on a public blockchain. There are no accounts to limit, no managers to call, no restrictions on size. Anyone with an edge can express it fully. The sharpest bettors in the world trade right alongside everyone else.
+                  Polymarket is a smart contract. There are no accounts to limit, no managers to call, no restrictions on size. Informed traders — political insiders, crypto funds, sharp bettors — express their full conviction freely.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">The result: the price is already sharp</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The price is already the signal</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Because nothing filters out informed traders, the Polymarket price is already the most accurate price available. A $40K bet from a wallet with a strong track record is not noise. It is a statement. You don&apos;t need a sportsbook line to validate it.
+                  Because nothing filters out informed traders, the Polymarket price reflects real conviction. A $40K trade from a wallet with a strong track record is not noise. It is a statement. The signal is already there.
                 </p>
               </div>
             </div>
@@ -218,7 +218,7 @@ export default async function LandingPage() {
                 {
                   step: '01',
                   title: 'Whale takes a position',
-                  body: 'A wallet with a strong track record buys $40K on Team A at 61%. On-chain, public, verifiable. No one can stop them.',
+                  body: 'A wallet with a strong track record buys $40K on a market at 61%. On-chain, public, verifiable. No one can stop them.',
                 },
                 {
                   step: '02',
@@ -371,7 +371,7 @@ export default async function LandingPage() {
             },
             {
               q: 'Why is a Polymarket whale trade a signal?',
-              a: 'Because Polymarket cannot limit sharp bettors. On a sportsbook, if you win consistently they cut your limits and eventually ban you. On Polymarket there are no accounts and no limits. Informed traders can express their full conviction. When a wallet with a proven track record bets big, that trade is the sharpest price available anywhere.',
+              a: 'Because Polymarket cannot limit sharp traders. There are no accounts and no limits. Informed traders across politics, crypto, sports, and more can express their full conviction freely. When a wallet with a proven track record moves $10K+, that trade is the sharpest signal available anywhere.',
             },
             {
               q: 'How accurate are whale wallets?',
