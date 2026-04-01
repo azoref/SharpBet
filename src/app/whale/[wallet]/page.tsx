@@ -145,20 +145,12 @@ export default async function WhalePage({
               <p className="text-xs font-mono text-[#4a4a55] mt-1 max-w-xs truncate">{wallet}</p>
               <div className="flex items-center gap-3 mt-2">
                 <a
-                  href={`https://polymarket.com/profile/${wallet}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors"
-                >
-                  View on Polymarket ↗
-                </a>
-                <a
                   href={`https://polygonscan.com/address/${wallet}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-[#4a4a55] hover:text-[#9999aa] transition-colors"
                 >
-                  PolygonScan ↗
+                  View on PolygonScan ↗
                 </a>
               </div>
             </div>
