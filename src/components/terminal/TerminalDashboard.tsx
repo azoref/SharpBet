@@ -48,6 +48,7 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
   const [leftPane, setLeftPane]       = useState<PaneType>('signals')
   const [rightTop, setRightTop]       = useState<PaneType>('movers')
   const [rightBottom, setRightBottom] = useState<PaneType>('leaderboard')
+  const [mobileTab, setMobileTab]     = useState<PaneType>('signals')
   const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
   const [now, setNow] = useState('')
 
@@ -68,22 +69,22 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
   return (
     <div className="flex flex-col bg-black" style={{ height: 'calc(100vh - 56px)' }}>
 
-      {/* Terminal status bar */}
-      <div className="flex items-center gap-3 px-4 py-1.5 bg-black border-b border-[#1f1f1f] shrink-0">
+      {/* Status bar */}
+      <div className="flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 bg-black border-b border-[#1f1f1f] shrink-0">
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00c805] animate-pulse" />
           <span className="text-[10px] font-mono text-[#00c805] font-semibold">LIVE</span>
         </div>
         <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
         <span className="text-[10px] font-mono text-[#444444]">POLYMARKET</span>
-        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
-        <span className="text-[10px] font-mono text-[#444444]">$10K+ THRESHOLD</span>
-        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
-        <span className="text-[10px] font-mono text-[#444444]">ON-CHAIN VERIFIED</span>
-        <div className="ml-auto flex items-center gap-3">
-          <span className="text-[10px] font-mono text-[#333333] tabular-nums">{now}</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">$10K+ THRESHOLD</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">ON-CHAIN VERIFIED</span>
+        <div className="ml-auto flex items-center gap-2 md:gap-3">
+          <span className="hidden md:inline text-[10px] font-mono text-[#333333] tabular-nums">{now}</span>
           {!isLoggedIn && (
-            <a href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#00c805] hover:bg-[#00e006] text-black font-bold transition-colors">
+            <a href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#00c805] hover:bg-[#00e006] text-black font-bold transition-colors whitespace-nowrap">
               Sign up free
             </a>
           )}
@@ -93,10 +94,10 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
       {/* Quotron ticker */}
       <TerminalQuotron />
 
-      {/* Main layout: left (signals) + right (movers + leaderboard) */}
-      <div className="flex flex-1 min-h-0">
+      {/* ── DESKTOP: 60/40 split ── */}
+      <div className="hidden md:flex flex-1 min-h-0">
 
-        {/* Left: main signals pane — 60% */}
+        {/* Left 60%: main signals pane */}
         <div className="flex flex-col border-r border-[#1f1f1f]" style={{ width: '60%' }}>
           <PaneHeader type={leftPane} onChange={setLeftPane} accent />
           <div className="flex-1 min-h-0 overflow-hidden">
@@ -104,22 +105,51 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
           </div>
         </div>
 
-        {/* Right: two stacked panes — 40% */}
+        {/* Right 40%: two stacked panes */}
         <div className="flex flex-col" style={{ width: '40%' }}>
-          {/* Top right */}
           <div className="flex flex-col border-b border-[#1f1f1f]" style={{ height: '50%' }}>
             <PaneHeader type={rightTop} onChange={setRightTop} />
             <div className="flex-1 min-h-0 overflow-hidden">
               <PaneContent type={rightTop} isPremium={isPremium} followedWallets={followedWallets} />
             </div>
           </div>
-          {/* Bottom right */}
           <div className="flex flex-col" style={{ height: '50%' }}>
             <PaneHeader type={rightBottom} onChange={setRightBottom} />
             <div className="flex-1 min-h-0 overflow-hidden">
               <PaneContent type={rightBottom} isPremium={isPremium} followedWallets={followedWallets} />
             </div>
           </div>
+        </div>
+
+      </div>
+
+      {/* ── MOBILE: full-width tabbed panes ── */}
+      <div className="flex md:hidden flex-col flex-1 min-h-0">
+
+        {/* Tab bar */}
+        <div className="flex border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
+          {PANES.map(p => {
+            const active = mobileTab === p.id
+            return (
+              <button
+                key={p.id}
+                onClick={() => setMobileTab(p.id)}
+                className={`flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[9px] font-mono font-bold uppercase tracking-widest transition-colors border-b-2 ${
+                  active
+                    ? 'text-[#00c805] border-[#00c805]'
+                    : 'text-[#444444] border-transparent hover:text-[#888888]'
+                }`}
+              >
+                <span className="text-base leading-none">{p.icon}</span>
+                <span>{p.label}</span>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Active pane — full width, full height */}
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <PaneContent type={mobileTab} isPremium={isPremium} followedWallets={followedWallets} />
         </div>
 
       </div>
