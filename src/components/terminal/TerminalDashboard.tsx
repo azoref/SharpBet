@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import TerminalSignals from './TerminalSignals'
 import TerminalHotMarkets from './TerminalHotMarkets'
 import TerminalLeaderboard from './TerminalLeaderboard'
@@ -18,19 +18,53 @@ const PANES = [
 
 function PaneHeader({ type, onChange, accent }: { type: PaneType; onChange: (t: PaneType) => void; accent?: boolean }) {
   const current = PANES.find(p => p.id === type)!
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
   return (
     <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
       <div className="flex items-center gap-2">
         <span className="text-sm">{current.icon}</span>
         <span className={`text-xs font-mono font-bold uppercase tracking-widest ${accent ? 'text-[#00c805]' : 'text-[#666666]'}`}>{current.label}</span>
       </div>
-      <select
-        value={type}
-        onChange={e => onChange(e.target.value as PaneType)}
-        className="text-[10px] font-mono bg-[#111111] border border-[#2a2a2a] text-[#555555] rounded px-1.5 py-0.5 focus:outline-none focus:border-[#00c805]/40 cursor-pointer"
-      >
-        {PANES.map(p => <option key={p.id} value={p.id}>{p.icon} {p.label}</option>)}
-      </select>
+
+      {/* Custom dropdown */}
+      <div ref={ref} className="relative">
+        <button
+          onClick={() => setOpen(o => !o)}
+          className="flex items-center gap-1.5 text-[10px] font-mono text-[#444444] hover:text-[#888888] px-2 py-1 rounded border border-[#222222] hover:border-[#333333] bg-[#111111] transition-colors"
+        >
+          <span>{current.icon} {current.label}</span>
+          <span className={`transition-transform text-[8px] ${open ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+        {open && (
+          <div className="absolute right-0 top-full mt-1 w-36 rounded-lg border border-[#222222] bg-[#111111] shadow-xl z-50 overflow-hidden">
+            {PANES.map(p => (
+              <button
+                key={p.id}
+                onClick={() => { onChange(p.id); setOpen(false) }}
+                className={`w-full flex items-center gap-2 px-3 py-2 text-[11px] font-mono transition-colors text-left ${
+                  p.id === type
+                    ? 'bg-[#1a1a1a] text-white'
+                    : 'text-[#666666] hover:bg-[#1a1a1a] hover:text-[#cccccc]'
+                }`}
+              >
+                <span>{p.icon}</span>
+                <span>{p.label}</span>
+                {p.id === type && <span className="ml-auto text-[#00c805] text-[8px]">●</span>}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
