@@ -86,7 +86,7 @@ export default async function LandingPage() {
             </div>
 
             {/* Right — dashboard preview */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-end w-full overflow-hidden">
               <DashboardPreview />
             </div>
           </div>

@@ -20,6 +20,59 @@ const LEADERBOARD = [
 export default function DashboardPreview() {
   return (
     <div className="relative w-full max-w-2xl">
+
+      {/* ── MOBILE: signals-only card ── */}
+      <div className="block lg:hidden">
+        <div className="rounded-xl border border-[#222222] bg-black overflow-hidden shadow-2xl">
+          {/* Title bar */}
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-[#0a0a0a] border-b border-[#1f1f1f]">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+            </div>
+            <span className="flex-1 text-center text-[10px] font-mono text-[#444444]">getsharpbet.com/dashboard</span>
+            <div className="flex items-center gap-1 text-[10px] font-mono text-[#00c805] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00c805] animate-pulse" />LIVE
+            </div>
+          </div>
+          {/* Pane header */}
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#0a0a0a] border-b border-[#1f1f1f]">
+            <span>🐋</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#00c805]">Signals</span>
+            <span className="ml-auto text-[10px] font-mono text-[#333333]">4 signals · 24h</span>
+          </div>
+          {/* Signal rows */}
+          {SIGNALS.map((s, i) => {
+            const isBuy = s.side === 'BUY'
+            return (
+              <div key={i} className={`px-4 py-3 border-b border-[#111111] ${i % 2 === 0 ? 'bg-black' : 'bg-[#080808]'}`}>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${isBuy ? 'bg-[#00c805]/15 text-[#00c805]' : 'bg-red-500/15 text-red-400'}`}>{isBuy ? '▲ BUY' : '▼ SELL'}</span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded" style={{ color: s.catColor, background: s.catColor + '18' }}>{s.category}</span>
+                  <span className={`text-[9px] font-mono font-semibold ${s.strength >= 8 ? 'text-[#00c805]' : s.strength >= 5 ? 'text-amber-400' : 'text-[#444444]'}`}>⚡{s.strength}</span>
+                  <span className="ml-auto text-[9px] font-mono text-[#444444]">{s.ago}</span>
+                </div>
+                <p className="text-sm text-white font-medium leading-snug mb-1.5">{s.title}</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono text-[#555555]">{s.pseudonym}</span>
+                  <span className="text-[9px] font-mono text-[#333333]">·</span>
+                  <span className="text-[9px] font-mono text-[#555555]">{s.outcome} · {s.prob}%</span>
+                  <span className="ml-auto text-sm font-bold font-mono text-white">{s.size}</span>
+                </div>
+              </div>
+            )
+          })}
+          {/* Footer */}
+          <div className="px-4 py-2 bg-[#0a0a0a] flex items-center justify-between">
+            <span className="text-[9px] text-[#333333] font-mono">POLYMARKET · $10K+ THRESHOLD</span>
+            <span className="text-[9px] text-[#00c805] font-mono font-semibold">ON-CHAIN VERIFIED ✓</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── DESKTOP: full terminal layout ── */}
+      <div className="hidden lg:block">
       {/* Glow */}
       <div className="absolute -inset-4 bg-gradient-to-r from-[#00c805]/10 via-transparent to-[#06b6d4]/10 rounded-2xl blur-2xl" />
 
@@ -172,6 +225,8 @@ export default function DashboardPreview() {
           </div>
         </div>
       </div>
+      </div>{/* end desktop wrapper */}
+
     </div>
   )
 }
