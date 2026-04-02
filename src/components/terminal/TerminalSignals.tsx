@@ -15,6 +15,7 @@ interface Signal {
   txHash: string
   impliedProb: number
   strengthScore: number | null
+  walletWinRate: number | null
 }
 
 function timeAgo(ts: number) {
@@ -149,12 +150,23 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
               {/* Row 2: market title */}
               <p className="text-sm text-white font-medium leading-snug mb-1.5 truncate">{s.title}</p>
 
-              {/* Row 3: wallet + outcome + size */}
-              <div className="flex items-center gap-3">
+              {/* Row 3: wallet + win rate + outcome + size */}
+              <div className="flex items-center gap-2">
                 <Link href={`/whale/${s.wallet}`} className="text-xs font-mono text-[#666666] hover:text-[#00c805] transition-colors truncate">
                   {s.pseudonym}
                 </Link>
-                <span className="text-[10px] font-mono text-[#333333]">·</span>
+                {s.walletWinRate !== null && (
+                  <span
+                    className="text-[10px] font-mono font-bold px-1 py-px rounded shrink-0"
+                    style={{
+                      color: s.walletWinRate >= 65 ? '#00c805' : s.walletWinRate >= 50 ? '#f59e0b' : '#ef4444',
+                      background: s.walletWinRate >= 65 ? '#00c80512' : s.walletWinRate >= 50 ? '#f59e0b12' : '#ef444412',
+                    }}
+                  >
+                    {s.walletWinRate}%W
+                  </span>
+                )}
+                <span className="text-[10px] font-mono text-[#333333] ml-1">·</span>
                 <span className="text-[10px] font-mono text-[#555555]">{s.outcome} · {s.impliedProb}%</span>
                 <span className="ml-auto text-sm font-bold font-mono text-white shrink-0">{formatSize(s.usdSize)}</span>
               </div>

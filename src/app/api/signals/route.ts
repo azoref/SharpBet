@@ -86,6 +86,34 @@ export async function GET() {
         .select('sport, data'),
     ])
 
+    // Build per-wallet win rates from all-time resolved signals
+    const uniqueWallets = [...new Set((signalsRes.data ?? []).map(r => r.wallet))]
+    let walletWinRates: Map<string, number | null> = new Map()
+
+    if (uniqueWallets.length > 0) {
+      const { data: winRows } = await supabase
+        .from('whale_signals')
+        .select('wallet, is_win')
+        .in('wallet', uniqueWallets)
+        .not('is_win', 'is', null)
+        .gte('usd_size', 10000)
+
+      const winMap = new Map<string, { wins: number; resolved: number }>()
+      for (const row of winRows ?? []) {
+        const prev = winMap.get(row.wallet) ?? { wins: 0, resolved: 0 }
+        winMap.set(row.wallet, {
+          wins: prev.wins + (row.is_win === true ? 1 : 0),
+          resolved: prev.resolved + 1,
+        })
+      }
+      for (const [wallet, stats] of winMap.entries()) {
+        walletWinRates.set(
+          wallet,
+          stats.resolved >= 3 ? Math.round((stats.wins / stats.resolved) * 100) : null
+        )
+      }
+    }
+
     if (signalsRes.error) {
       return NextResponse.json({ signals: [], error: signalsRes.error.message })
     }
@@ -124,6 +152,7 @@ export async function GET() {
         bookOdds:        match?.americanOdds    ?? null,
         bookImpliedProb: match?.bookImpliedProb ?? null,
         divergencePts,
+        walletWinRate: walletWinRates.get(row.wallet) ?? null,
       }
     })
 
