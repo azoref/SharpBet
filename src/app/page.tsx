@@ -53,14 +53,14 @@ export default async function LandingPage() {
               </div>
 
               <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                Follow the<br />
+                The wallets that<br />
                 <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                  smart money.<BlinkingCursor />
+                  never lose.<BlinkingCursor />
                 </span>
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                The sharpest money in the world trades on Polymarket. Every trade is public, on-chain, and verifiable. We track the wallets that move markets and alert you the moment they act.
+                We scan every wallet on Polymarket. Find the ones that consistently win. Alert you the moment they make their next move — so you can act before the market does.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -104,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Sharp money can't be limited on Polymarket. SharpBet surfaces it the moment it moves.
+            Thousands of wallets trade on Polymarket. A few of them almost never lose. SharpBet finds them and tells you when they move.
           </p>
         </div>
 
@@ -112,18 +112,18 @@ export default async function LandingPage() {
           {[
             {
               num: '01',
-              title: 'We watch the whales',
-              body: 'Polymarket is fully on-chain. Every trade is public. We track wallets that consistently beat the market and alert you the moment they make a significant move.',
+              title: 'We scan every wallet',
+              body: 'Polymarket is fully on-chain. Every trade, every wallet, every dollar is public. We track thousands of wallets across all categories — politics, crypto, sports — and rank them by track record.',
             },
             {
               num: '02',
-              title: 'We score the signal',
-              body: 'Not all whale trades are equal. We weight each signal by wallet win rate, trade size, and market divergence to surface the ones that actually matter.',
+              title: 'We find the ones that win',
+              body: 'Most wallets are noise. A few are consistently right. We score every wallet by win rate, trade size, and activity. High-conviction wallets get a higher signal strength score.',
             },
             {
               num: '03',
-              title: 'You act with conviction',
-              body: 'You see who moved, how much, and their track record. The whale signal is the conviction. You decide what to do with it.',
+              title: 'You copy the move',
+              body: 'The moment a top wallet places a $10K+ trade, you see it — who, what market, what side, how much. Their track record is right there. You decide in seconds.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -135,28 +135,28 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* "You don't have to be here" section */}
+      {/* The edge section */}
       <section className="border-t border-[#2a2a32] bg-[#080808]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-2xl font-semibold mb-4">
-                The sharpest bettors in the world<br />
-                <span className="text-green-400">leave footprints.</span>
+                Citadel has 400 engineers.<br />
+                <span className="text-green-400">You have one screen.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Prediction markets like Polymarket are open smart contracts. Anyone can trade any size. The sharpest bettors in the world, people with real informational edges, can't be limited, so they trade freely. The price reflects that.
+                The sharpest funds in the world copy-trade on public markets every day. Polymarket makes it even simpler — every trade is on-chain, every wallet is public, and sharp traders can't be limited or banned.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                SharpBet reads those footprints in real time. When a proven wallet bets big, that trade is the signal. No sportsbook comparison required.
+                SharpBet finds the wallets doing it right and shows you their next move the moment it happens. No 400 engineers required.
               </p>
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $10K+ trade across all Polymarket categories' },
-                { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history for any wallet' },
-                { emoji: '📊', label: 'Wallet track record', sub: 'Win rate, volume, and ROI for every whale' },
-                { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires the moment a whale moves' },
+                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $10K+ trade across all Polymarket categories, live' },
+                { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history, win rate, and volume' },
+                { emoji: '🏆', label: 'Wallet leaderboard', sub: 'Ranked by track record — find the ones that never lose' },
+                { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires the moment a top wallet places a trade' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
                   <span className="text-2xl">{emoji}</span>
@@ -178,57 +178,57 @@ export default async function LandingPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
               THE THESIS
             </div>
-            <h2 className="text-2xl font-semibold mb-3">The only market where insiders can't be limited</h2>
+            <h2 className="text-2xl font-semibold mb-3">Some wallets almost never lose. They trade in public.</h2>
             <p className="text-[#6b6b80] max-w-xl mx-auto text-sm">
-              When sharp money can't be shut out, the price tells the truth. That is the entire thesis.
+              Polymarket is a public blockchain. Every trade is visible. Sharp money can't be limited, banned, or hidden. That's the entire edge.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left — the problem */}
+            {/* Left */}
             <div className="space-y-6">
               <div className="border-l-2 border-red-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">Every trade is public</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">At a sportsbook, sharp bettors get banned</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket runs on a public blockchain. Every trade, every wallet, every dollar is visible on-chain the moment it happens. There are no dark pools, no hidden order books, no privileged access.
+                  Win too much and your account gets limited. Bet too big and they close you out. The house doesn't let you keep the edge.
                 </p>
               </div>
               <div className="border-l-2 border-green-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">Sharp money can&apos;t be stopped</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">On Polymarket, nobody can stop you</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract. There are no accounts to limit, no managers to call, no restrictions on size. Informed traders (political insiders, crypto funds, sharp bettors) express their full conviction freely.
+                  Polymarket is a smart contract. No accounts to limit. No managers to call. Political insiders, crypto funds, and sharp bettors trade their full conviction freely — and every trade is public on-chain.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">The price is already the signal</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The signal is already there</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Because nothing filters out informed traders, the Polymarket price reflects real conviction. A $40K trade from a wallet with a strong track record is not noise. It is a statement. The signal is already there.
+                  When a wallet with a 70%+ win rate drops $50K on one side, that's not noise. It's the sharpest signal available anywhere. SharpBet surfaces it the moment it hits the chain.
                 </p>
               </div>
             </div>
 
-            {/* Right — the opportunity */}
+            {/* Right */}
             <div className="bg-[#0d0d10] border border-[#2a2a32] rounded-2xl p-6 space-y-5">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest">The opportunity</span>
+                <span className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest">What happens in real time</span>
               </div>
 
               {[
                 {
                   step: '01',
-                  title: 'Whale takes a position',
-                  body: 'A wallet with a strong track record buys $40K on a market at 61%. On-chain, public, verifiable. No one can stop them.',
+                  title: 'A top wallet moves $50K',
+                  body: 'A wallet in our top 50 leaderboard — 71% win rate, $2.4M in volume — buys YES on a political market at 58%. On-chain. Public. Verifiable.',
                 },
                 {
                   step: '02',
-                  title: 'The track record matters',
-                  body: 'This wallet has hit 68% of its last 50 trades. That is not luck. When they move size, it means something.',
+                  title: 'SharpBet catches it instantly',
+                  body: 'Signal strength score: 9/10. Size, track record, category all factor in. You see it in the terminal before most people know the market moved.',
                 },
                 {
                   step: '03',
-                  title: 'You act with conviction',
-                  body: 'SharpBet fires the alert the moment it happens. You have the wallet history, the size, the market. The signal speaks for itself.',
+                  title: 'You copy the position',
+                  body: 'Same market. Same side. You\'re in within minutes of the sharpest wallet on Polymarket. That\'s the entire play.',
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -242,7 +242,7 @@ export default async function LandingPage() {
 
               <div className="border-t border-[#1a1a1f] pt-4 mt-2">
                 <p className="text-[11px] text-[#4a4a55] font-mono">
-                  All trades are public on Polygon blockchain · No accounts · No limits · $8B+ Polymarket volume in 2024
+                  All trades verified on Polygon blockchain · No accounts · No limits · $8B+ Polymarket volume
                 </p>
               </div>
             </div>
@@ -320,9 +320,16 @@ export default async function LandingPage() {
               },
               {
                 tag: 'COMING SOON',
+                icon: '⚡',
+                title: '1-click copy trade',
+                body: 'See a whale signal and copy the position on Polymarket in one click. Connect your wallet, set a max size, and mirror the move before the market reacts.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
                 icon: '🧠',
                 title: 'Smart money consensus',
-                body: 'When three or more independent whale wallets pile into the same side within a few hours, surface it as a high-conviction play.',
+                body: 'When three or more independent top wallets pile into the same side within hours, surface it as a high-conviction play. Multiple whales agreeing is the strongest signal.',
                 live: false,
               },
               {
@@ -433,11 +440,11 @@ export default async function LandingPage() {
       <section className="border-t border-[#2a2a32] bg-[#080808]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center py-20">
           <h2 className="text-3xl font-bold mb-4">
-            The sharpest money in the world<br />
-            <span className="text-green-400">trades in the open.</span>
+            Find the wallets that never lose.<br />
+            <span className="text-green-400">Copy what they do next.</span>
           </h2>
           <p className="text-[#9999aa] mb-8 max-w-md mx-auto">
-            On-chain, public, verifiable. SharpBet reads it in real time so you can act before anyone else does.
+            Every trade is public. Every wallet is traceable. SharpBet surfaces the signal the moment it hits the chain.
           </p>
           <Link
             href="/auth/signup"
