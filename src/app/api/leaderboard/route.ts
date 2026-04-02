@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-export const revalidate = 120
+export const dynamic = 'force-dynamic'
 
 type Category = 'Politics' | 'Crypto' | 'Sports' | 'Other'
 
