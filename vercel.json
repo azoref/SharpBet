@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/resolve-signals",
-      "schedule": "0 * * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
