@@ -126,7 +126,7 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
             <div key={`${s.wallet}-${s.slug}-${i}`}
               className={`px-4 py-3 border-b border-[#111111] hover:bg-[#0f0f0f] transition-colors ${isFollowed ? 'border-l-2 border-l-[#00c805]' : ''} ${i % 2 === 0 ? 'bg-black' : 'bg-[#080808]'}`}>
 
-              {/* Row 1: side + category + strength + time + trade link */}
+              {/* Row 1: side + category + strength + followed + time */}
               <div className="flex items-center gap-2 mb-1.5">
                 <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${isBuy ? 'bg-[#00c805]/15 text-[#00c805]' : 'bg-red-500/15 text-red-400'}`}>
                   {isBuy ? '▲ BUY' : '▼ SELL'}
@@ -141,16 +141,12 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
                 )}
                 {isFollowed && <span className="text-[10px] font-mono text-[#00c805]">★ FOLLOWING</span>}
                 <span className="ml-auto text-[10px] font-mono text-[#444444]">{timeAgo(s.timestamp)}</span>
-                <a href={`https://polymarket.com/event/${s.slug}`} target="_blank" rel="noopener noreferrer"
-                  className="text-[10px] font-mono text-[#444444] hover:text-[#00c805] transition-colors">
-                  Trade ↗
-                </a>
               </div>
 
               {/* Row 2: market title */}
               <p className="text-sm text-white font-medium leading-snug mb-1.5 truncate">{s.title}</p>
 
-              {/* Row 3: wallet + win rate + outcome + size */}
+              {/* Row 3: wallet + win rate + outcome + size + copy trade */}
               <div className="flex items-center gap-2">
                 <Link href={`/whale/${s.wallet}`} className="text-xs font-mono text-[#666666] hover:text-[#00c805] transition-colors truncate">
                   {s.pseudonym}
@@ -166,10 +162,24 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
                     {s.walletWinRate}%W
                   </span>
                 )}
-                <span className="text-[10px] font-mono text-[#333333] ml-1">·</span>
+                <span className="text-[10px] font-mono text-[#333333]">·</span>
                 <span className="text-[10px] font-mono text-[#555555]">{s.outcome} · {s.impliedProb}%</span>
                 <span className="ml-auto text-sm font-bold font-mono text-white shrink-0">{formatSize(s.usdSize)}</span>
               </div>
+
+              {/* Row 4: copy trade CTA */}
+              {isBuy && (
+                <div className="mt-2">
+                  <a
+                    href={`https://polymarket.com/event/${s.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-mono font-bold bg-[#00c805]/10 text-[#00c805] border border-[#00c805]/20 hover:bg-[#00c805]/20 hover:border-[#00c805]/40 transition-colors"
+                  >
+                    Copy Trade: {s.outcome} ↗
+                  </a>
+                </div>
+              )}
             </div>
           )
         })}

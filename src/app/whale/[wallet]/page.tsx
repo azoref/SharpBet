@@ -293,6 +293,18 @@ export default async function WhalePage({
                       verify →
                     </a>
                   </div>
+                  {r.side === 'BUY' && (r.event_slug || r.slug) && (
+                    <div className="mt-2">
+                      <a
+                        href={`https://polymarket.com/event/${r.event_slug || r.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-mono font-bold bg-[#00c805]/10 text-[#00c805] border border-[#00c805]/20 hover:bg-[#00c805]/20 hover:border-[#00c805]/40 transition-colors"
+                      >
+                        Copy Trade: {r.outcome} ↗
+                      </a>
+                    </div>
+                  )}
                 </div>
               )
             })}
