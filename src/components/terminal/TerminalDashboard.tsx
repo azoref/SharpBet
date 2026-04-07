@@ -6,13 +6,15 @@ import TerminalHotMarkets from './TerminalHotMarkets'
 import TerminalLeaderboard from './TerminalLeaderboard'
 import TerminalFollowing from './TerminalFollowing'
 import TerminalQuotron from './TerminalQuotron'
+import TerminalNews from './TerminalNews'
 
-type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following'
+type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following' | 'news'
 
 const PANES = [
   { id: 'signals'     as PaneType, label: 'Signals',     icon: '🐋' },
   { id: 'movers'      as PaneType, label: 'Hot Markets', icon: '🔥' },
   { id: 'leaderboard' as PaneType, label: 'Leaderboard', icon: '🏆' },
+  { id: 'news'        as PaneType, label: 'News',         icon: '📰' },
   { id: 'following'   as PaneType, label: 'Following',   icon: '★'  },
 ]
 
@@ -74,13 +76,14 @@ function PaneContent({ type, isPremium, followedWallets }: { type: PaneType; isP
     case 'signals':     return <TerminalSignals isPremium={isPremium} followedWallets={followedWallets} />
     case 'movers':      return <TerminalHotMarkets />
     case 'leaderboard': return <TerminalLeaderboard />
+    case 'news':        return <TerminalNews />
     case 'following':   return <TerminalFollowing isPremium={isPremium} />
   }
 }
 
 export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium: boolean; isLoggedIn: boolean }) {
   const [leftPane, setLeftPane]       = useState<PaneType>('signals')
-  const [rightTop, setRightTop]       = useState<PaneType>('movers')
+  const [rightTop, setRightTop]       = useState<PaneType>('news')
   const [rightBottom, setRightBottom] = useState<PaneType>('leaderboard')
   const [mobileTab, setMobileTab]     = useState<PaneType>('signals')
   const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
