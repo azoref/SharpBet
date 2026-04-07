@@ -53,14 +53,14 @@ export default async function LandingPage() {
               </div>
 
               <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                The wallets that<br />
+                Someone always<br />
                 <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                  never lose.<BlinkingCursor />
+                  bets first.<BlinkingCursor />
                 </span>
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                We scan every wallet on Polymarket. Find the ones that consistently win. Alert you the moment they make their next move so you can act before the market does.
+                Before the news breaks, someone already placed the bet. Political insiders, crypto funds, and sharp money trade on Polymarket. Their trades are public. SharpBet surfaces them the moment they hit the chain.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -104,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Thousands of wallets trade on Polymarket. A few of them almost never lose. SharpBet finds them and tells you when they move.
+            Polymarket is fully on-chain. Every trade is public. When someone with inside information bets big on a niche market, the trade is visible to anyone who knows where to look.
           </p>
         </div>
 
@@ -112,18 +112,18 @@ export default async function LandingPage() {
           {[
             {
               num: '01',
-              title: 'We scan every wallet',
-              body: 'Polymarket is fully on-chain. Every trade, every wallet, every dollar is public. We track thousands of wallets across all categories (politics, crypto, sports) and rank them by track record.',
+              title: 'An unusual bet appears',
+              body: 'A dormant market suddenly gets a $200K trade from a single wallet. No news. No obvious catalyst. Someone knows something. SharpBet catches it the moment it hits the chain.',
             },
             {
               num: '02',
-              title: 'We find the ones that win',
-              body: 'Most wallets are noise. A few are consistently right. We score every wallet by win rate, trade size, and activity. High-conviction wallets get a higher signal strength score.',
+              title: 'We surface the signal',
+              body: 'Who placed it, what market, what side, how much. We check that wallet\'s track record instantly. If they\'ve been right before, the signal score reflects it. You see all of this in seconds.',
             },
             {
               num: '03',
-              title: 'You copy the move',
-              body: 'The moment a top wallet places a $10K+ trade, you see it: who, what market, what side, how much. Their track record is right there. You decide in seconds.',
+              title: 'You act before the market does',
+              body: 'The market hasn\'t moved yet. The news hasn\'t broken yet. You have a window. Copy the position on Polymarket while the price still reflects public information.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -141,22 +141,22 @@ export default async function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-2xl font-semibold mb-4">
-                Citadel has 400 engineers.<br />
-                <span className="text-green-400">You have one screen.</span>
+                The trade happens before<br />
+                <span className="text-green-400">the story gets written.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                The sharpest funds in the world copy-trade on public markets every day. Polymarket makes it even simpler: every trade is on-chain, every wallet is public, and sharp traders can't be limited or banned.
+                When CNN covers a prediction market story, someone already placed the bet days earlier. A single wallet. A niche market. A large position. No noise around it. Just a trade that knew something the public didn't.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                SharpBet finds the wallets doing it right and shows you their next move the moment it happens. No 400 engineers required.
+                That trade was public the entire time. SharpBet makes sure you see it first.
               </p>
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $10K+ trade across all Polymarket categories, live' },
-                { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history, win rate, and volume' },
-                { emoji: '🏆', label: 'Wallet leaderboard', sub: 'Ranked by track record. Find the ones that never lose.' },
-                { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires the moment a top wallet places a trade' },
+                { emoji: '🐋', label: 'Unusual bet detector', sub: 'Niche markets, large single-wallet positions, zero news catalyst. The signals that matter.' },
+                { emoji: '👤', label: 'Wallet track records', sub: 'Win rate, volume, and full trade history for every whale. Know who is actually sharp.' },
+                { emoji: '🏆', label: 'Leaderboard', sub: 'The wallets with the best records ranked by win rate. Find them before they move again.' },
+                { emoji: '⚡', label: 'Instant alerts', sub: 'Get notified the moment a top wallet places a trade. Act before the market reacts.' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
                   <span className="text-2xl">{emoji}</span>
@@ -178,9 +178,9 @@ export default async function LandingPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
               THE THESIS
             </div>
-            <h2 className="text-2xl font-semibold mb-3">Some wallets almost never lose. They trade in public.</h2>
+            <h2 className="text-2xl font-semibold mb-3">Insider information is expressed through trades. Those trades are public.</h2>
             <p className="text-[#6b6b80] max-w-xl mx-auto text-sm">
-              Polymarket is a public blockchain. Every trade is visible. Sharp money can't be limited, banned, or hidden. That's the entire edge.
+              On Polymarket, there are no accounts to limit and no positions to restrict. Sharp money, informed money, and connected money all trade the same way. On-chain. In public. Traceable.
             </p>
           </div>
 
@@ -188,21 +188,21 @@ export default async function LandingPage() {
             {/* Left */}
             <div className="space-y-6">
               <div className="border-l-2 border-red-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">At a sportsbook, sharp bettors get banned</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">Information asymmetry is real</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Win too much and your account gets limited. Bet too big and they close you out. The house doesn't let you keep the edge.
+                  Political insiders know things before announcements. Crypto teams know things before launches. Connected people know things before the public does. They bet on it.
                 </p>
               </div>
               <div className="border-l-2 border-green-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">On Polymarket, nobody can stop you</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">Polymarket is where that edge gets expressed</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract. No accounts to limit. No managers to call. Political insiders, crypto funds, and sharp bettors trade their full conviction freely. Every trade is public on-chain.
+                  No accounts to limit. No positions to restrict. A smart contract with no management. Informed money bets its full conviction freely. Every trade is recorded on-chain the moment it happens.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
-                <h3 className="font-semibold text-[#e8e8f0] mb-2">The signal is already there</h3>
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The signal is public. Most people just miss it.</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  When a wallet with a 70%+ win rate drops $50K on one side, that's not noise. It's the sharpest signal available anywhere. SharpBet surfaces it the moment it hits the chain.
+                  A single wallet drops $300K on a niche market with no news around it. That trade is visible to anyone. SharpBet makes sure you see it in real time, with the wallet's full track record attached.
                 </p>
               </div>
             </div>
@@ -217,18 +217,18 @@ export default async function LandingPage() {
               {[
                 {
                   step: '01',
-                  title: 'A top wallet moves $50K',
-                  body: 'A wallet in our top 50 leaderboard (71% win rate, $2.4M in volume) buys YES on a political market at 58%. On-chain. Public. Verifiable.',
+                  title: 'A niche market lights up',
+                  body: 'A market with low volume suddenly gets a $300K BUY from a single wallet. No news. No public narrative. The wallet has a 74% win rate across 40+ resolved trades.',
                 },
                 {
                   step: '02',
-                  title: 'SharpBet catches it instantly',
-                  body: 'Signal strength score: 9/10. Size, track record, category all factor in. You see it in the terminal before most people know the market moved.',
+                  title: 'SharpBet surfaces it instantly',
+                  body: 'Signal strength score: 9/10. You see the wallet, the market, the size, the implied probability, and that wallet\'s full track record. All of it before the market price moves.',
                 },
                 {
                   step: '03',
-                  title: 'You copy the position',
-                  body: 'Same market. Same side. You\'re in within minutes of the sharpest wallet on Polymarket. That\'s the entire play.',
+                  title: 'The news catches up later',
+                  body: 'Days later, a story breaks. The market moves hard. You were already in. That\'s the window SharpBet gives you.',
                 },
               ].map(({ step, title, body }) => (
                 <div key={step} className="flex gap-4">
@@ -261,9 +261,9 @@ export default async function LandingPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
               ROADMAP
             </div>
-            <h2 className="text-2xl font-semibold mb-3">Building the prediction market intelligence stack</h2>
+            <h2 className="text-2xl font-semibold mb-3">Building the insider signal intelligence stack</h2>
             <p className="text-[#6b6b80] max-w-md mx-auto text-sm">
-              We started with whale signals. Here is everything we are building on top.
+              We started with detecting unusual bets. Here is everything we are building on top.
             </p>
           </div>
 
@@ -313,6 +313,13 @@ export default async function LandingPage() {
               },
               {
                 tag: 'COMING SOON',
+                icon: '📰',
+                title: 'Market news feed',
+                body: 'Breaking news matched to active markets. See the signal, see the story, see how the price moved. SharpBet connects the dots between insider bets and public news.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
                 icon: '⚡',
                 title: '1-click copy trade',
                 body: 'See a signal and copy the position on Polymarket in one click. Connect your wallet, set a size limit, and mirror the move before the market reacts.',
@@ -320,16 +327,9 @@ export default async function LandingPage() {
               },
               {
                 tag: 'COMING SOON',
-                icon: '💰',
-                title: 'Signal P&L tracker',
-                body: 'See exactly what you would have made if you had followed the top wallets this week. Real returns from real signals, automatically tracked.',
-                live: false,
-              },
-              {
-                tag: 'COMING SOON',
                 icon: '🧠',
                 title: 'Smart money consensus',
-                body: 'When three or more top wallets pile into the same side within hours, it surfaces as a high-conviction play. The strongest signal SharpBet can fire.',
+                body: 'When multiple top wallets pile into the same niche market within hours, it fires as a high-conviction signal. The strongest alert SharpBet can generate.',
                 live: false,
               },
             ].map(({ tag, icon, title, body, live }) => (
@@ -366,24 +366,24 @@ export default async function LandingPage() {
         <div className="space-y-4">
           {[
             {
-              q: 'What is a whale signal?',
-              a: 'A whale signal is a trade of $10,000 or more on any Polymarket market. We set the threshold at $10K because it filters out noise and captures only genuine conviction. At that size, you are looking at wallets that have meaningful information and are willing to back it with real money.',
+              q: 'What is an unusual bet?',
+              a: 'A large single-wallet position on a niche market with no obvious public catalyst. We flag trades of $10,000+ because below that threshold, trades rarely reflect meaningful information. When a wallet puts $200K into a quiet market out of nowhere, that is the signal.',
             },
             {
-              q: 'Why is a Polymarket whale trade a signal?',
-              a: 'Because Polymarket cannot limit sharp traders. There are no accounts and no limits. Informed traders across politics, crypto, sports, and more can express their full conviction freely. When a wallet with a proven track record moves $10K+, that trade is the sharpest signal available anywhere.',
+              q: 'Why does a big trade on Polymarket mean anything?',
+              a: 'Because the people with real information have to express it somewhere. Polymarket is permissionless: no accounts, no limits, no one to call and restrict your size. Political insiders, crypto insiders, and informed money all bet there freely. When they do, the trade is public and permanent on-chain.',
             },
             {
-              q: 'How accurate are whale wallets?',
-              a: 'It varies by wallet. Some are directional bettors with strong track records, others are market makers or hedgers. That\'s why we\'re building wallet ROI and win-rate tracking so you can see the history before you follow a trade.',
+              q: 'How do I know if the wallet actually knows something?',
+              a: 'You check their track record. Every wallet on SharpBet has a full win rate, trade history, and volume breakdown. A wallet that is 70%+ correct across dozens of resolved trades and suddenly bets big on a niche market is a very different signal than a random new wallet doing the same.',
             },
             {
               q: 'How do Discord alerts work?',
-              a: 'Pro users paste a Discord webhook URL into their settings. The moment a whale signal or edge is detected, SharpBet posts a rich embed directly to their Discord channel with the wallet, market, size, and implied probability.',
+              a: 'Pro users paste a Discord webhook URL into their settings. The moment a high-signal trade is detected, SharpBet posts a rich embed directly to their channel with the wallet, market, size, implied probability, and the wallet\'s win rate.',
             },
             {
-              q: 'Is this only for sports?',
-              a: 'All of them. Politics, sports, crypto, economics, entertainment. If a whale is moving size on Polymarket, you will see it. You can filter by category in the dashboard.',
+              q: 'What markets does this cover?',
+              a: 'All of them. Politics, crypto, sports, economics, geopolitics, entertainment. If a wallet is moving size on Polymarket, you see it. You can filter by category in the dashboard.',
             },
           ].map(({ q, a }) => (
             <details key={q} className="group border border-[#2a2a32] rounded-lg">
@@ -433,11 +433,11 @@ export default async function LandingPage() {
       <section className="border-t border-[#2a2a32] bg-[#080808]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center py-20">
           <h2 className="text-3xl font-bold mb-4">
-            Find the wallets that never lose.<br />
-            <span className="text-green-400">Copy what they do next.</span>
+            The bet happens before the news.<br />
+            <span className="text-green-400">Now you see it first.</span>
           </h2>
           <p className="text-[#9999aa] mb-8 max-w-md mx-auto">
-            Every trade is public. Every wallet is traceable. SharpBet surfaces the signal the moment it hits the chain.
+            Every trade is public. Every wallet is traceable. SharpBet surfaces the signal the moment it hits the chain, before the market catches up.
           </p>
           <Link
             href="/auth/signup"
