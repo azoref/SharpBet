@@ -10,51 +10,51 @@ export const metadata = {
 export const dynamic = 'force-dynamic'
 
 const FREE_FEATURES = [
-  { label: 'Delayed whale signal feed', note: 'last 3 signals' },
-  { label: 'Wallet profile pages', note: '' },
-  { label: 'Category filters', note: '' },
-  { label: 'On-chain verification', note: '' },
+  { label: 'Live whale signal feed', note: 'real-time' },
+  { label: 'Wallet leaderboard and profiles', note: '' },
+  { label: 'Market movers', note: '' },
+  { label: 'News feed', note: '' },
 ]
 
 const PRO_FEATURES = [
-  { label: 'Full real-time whale signal feed', note: '30+ live signals', highlight: true },
-  { label: 'All Polymarket categories', note: 'Politics, Sports, Crypto, and more', highlight: true },
-  { label: 'Wallet profiles', note: 'full on-chain trade history', highlight: true },
-  { label: 'Instant Discord alerts', note: 'fires within 60s', highlight: false },
-  { label: 'Category and side filters', note: '', highlight: false },
-  { label: 'Signal sorting by size and recency', note: '', highlight: false },
+  { label: 'Automated paper trading bot', note: 'mirrors top wallets automatically', highlight: true },
+  { label: 'Live paper portfolio and P&L', note: 'tracks every simulated position', highlight: true },
+  { label: 'Full wallet scoring', note: '86M trades analyzed', highlight: true },
+  { label: 'Instant Discord alerts', note: 'fires within 60s of on-chain trade', highlight: false },
+  { label: 'Priority access to real trading', note: 'when live trading launches', highlight: false },
+  { label: 'Signal sorting and filters', note: '', highlight: false },
   { label: 'Early access to new features', note: '', highlight: false },
 ]
 
 const COMPARISON = [
-  { feature: 'Whale signals', free: '3 (delayed)', pro: '30+ live' },
-  { feature: 'All categories', free: true, pro: true },
+  { feature: 'Whale signal feed', free: 'Live', pro: 'Live' },
   { feature: 'Wallet profiles', free: true, pro: true },
+  { feature: 'Paper trading bot', free: false, pro: true },
+  { feature: 'Portfolio and P&L', free: false, pro: true },
   { feature: 'Discord alerts', free: false, pro: true },
-  { feature: 'Real-time feed', free: false, pro: true },
-  { feature: 'On-chain verification', free: true, pro: true },
+  { feature: 'Real trading access', free: false, pro: 'Priority' },
 ]
 
 const FAQS = [
   {
-    q: 'What are whale signals?',
-    a: 'Whale signals are trades of $10,000 or more placed on any Polymarket market. At that size you are looking at wallets with real conviction. Because Polymarket is a public smart contract with no account limits, the sharpest traders in the world: political insiders, crypto funds, sharp sports bettors, can all trade freely at full size.',
+    q: 'What is the paper trading bot?',
+    a: 'When a top-scored wallet makes a significant trade on Polymarket, the SharpBet bot automatically mirrors that position as a simulated trade on your behalf. You see the market, the entry price, and real P&L as the market resolves. No real money involved. It proves the edge before you risk anything.',
   },
   {
-    q: 'Why $10,000 as the threshold?',
-    a: 'Below $10K the signal-to-noise ratio drops significantly. At $10K+ you are filtering out casual activity and capturing trades where someone is putting real money behind real information. That is where the edge is.',
+    q: 'How does SharpBet find the sharp wallets?',
+    a: 'We processed 86 million historical Polymarket trades across 50,000+ markets and scored every wallet on four factors: capital velocity, cross-market divergence, conviction size, and market breadth. The top 200 wallets make up the live watchlist. When they trade, SharpBet trades with them.',
   },
   {
-    q: 'Which Polymarket categories are covered?',
-    a: 'All of them. Politics, sports, crypto, economics, entertainment. You can filter by category in the dashboard. If a whale is moving size anywhere on Polymarket, it shows up.',
+    q: 'When does real money trading go live?',
+    a: 'Paper trading launches first so we can prove the system generates consistent returns. Once the track record is established, real automated trading unlocks for Pro users. You set your own position size and risk limits.',
+  },
+  {
+    q: 'Which markets does this cover?',
+    a: 'All of Polymarket. Politics, crypto, sports, geopolitics, economics, entertainment. If a top-scored wallet is moving size on any market, SharpBet catches it and mirrors the position.',
   },
   {
     q: 'How do Discord alerts work?',
-    a: 'Pro users paste a Discord webhook URL into their settings. The moment a whale signal is detected, SharpBet posts a rich embed to their channel with the wallet, market, size, and implied probability. It fires within 60 seconds of the on-chain trade.',
-  },
-  {
-    q: 'Where is this heading?',
-    a: 'Wallet ROI and win-rate tracking, signal strength scoring, smart money consensus detection when multiple whales pile into the same market, and Kalshi cross-referencing. The long-term vision is a full prediction market intelligence platform.',
+    a: 'Pro users paste a Discord webhook URL into settings. The moment a high-scored wallet trades, SharpBet posts a rich embed to their channel with the wallet, market, size, entry price, and score. It fires within 60 seconds of the on-chain trade.',
   },
 ]
 
@@ -89,13 +89,13 @@ export default async function PricingPage() {
             PRICING
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
-            Follow the smart money.<br />
+            The bot trades for you.<br />
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-              Start free.
+              Start on paper.
             </span>
           </h1>
           <p className="text-[#6b6b80] text-lg max-w-xl mx-auto leading-relaxed">
-            Free access to delayed whale signals and wallet profiles. Upgrade to unlock the full feed in real time: every $10K+ trade across all Polymarket categories, with instant Discord alerts.
+            Free gives you the full signal feed. Pro activates the automated paper trading bot that mirrors top-scored wallets on your behalf, so you can see the returns before risking a dollar.
           </p>
         </div>
       </section>
@@ -192,22 +192,22 @@ export default async function PricingPage() {
           <div className="grid sm:grid-cols-3 gap-5">
             {[
               {
-                icon: '🐋',
-                tag: 'WHALE SIGNALS',
-                title: 'Live signal feed',
-                body: 'Every $10,000+ trade on Polymarket hits your feed within 60 seconds. Politics, sports, crypto. All categories. Side, outcome, size, and the wallet behind it. All verified on-chain.',
+                icon: '🤖',
+                tag: 'PAPER TRADING BOT',
+                title: 'Automated copy trading',
+                body: 'When a top-scored wallet makes a move, SharpBet mirrors it as a paper trade automatically. You see the position, the entry price, and real P&L as markets resolve. Zero effort required.',
+              },
+              {
+                icon: '📊',
+                tag: 'PORTFOLIO',
+                title: 'Live P&L dashboard',
+                body: 'Every paper position tracked in real time. Open trades, resolved bets, win rate, and total return. See exactly what the bot is doing and how it is performing.',
               },
               {
                 icon: '🔔',
                 tag: 'DISCORD ALERTS',
-                title: 'Instant signal delivery',
-                body: 'The moment a whale trades $10K+ on Polymarket, a rich embed hits your Discord channel. Wallet, market, category, size, and implied probability. Under 60 seconds from on-chain trade to your phone.',
-              },
-              {
-                icon: '👤',
-                tag: 'WALLET PROFILES',
-                title: 'Full trade history',
-                body: 'Click any whale pseudonym to see their complete on-chain history: total volume, buy/sell ratio, top markets traded, and every verified transaction.',
+                title: 'Instant trade alerts',
+                body: 'The moment a top wallet trades, a rich embed hits your Discord channel. Wallet score, market, size, and entry price. Under 60 seconds from on-chain trade to your phone.',
               },
             ].map(({ icon, tag, title, body }) => (
               <div key={title} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-green-500/20 transition-colors">

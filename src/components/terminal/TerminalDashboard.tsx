@@ -7,10 +7,12 @@ import TerminalLeaderboard from './TerminalLeaderboard'
 import TerminalFollowing from './TerminalFollowing'
 import TerminalQuotron from './TerminalQuotron'
 import TerminalNews from './TerminalNews'
+import TerminalPortfolio from './TerminalPortfolio'
 
-type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following' | 'news'
+type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following' | 'news' | 'portfolio'
 
 const PANES = [
+  { id: 'portfolio'   as PaneType, label: 'Portfolio',   icon: '🤖' },
   { id: 'signals'     as PaneType, label: 'Signals',     icon: '🐋' },
   { id: 'movers'      as PaneType, label: 'Hot Markets', icon: '🔥' },
   { id: 'leaderboard' as PaneType, label: 'Leaderboard', icon: '🏆' },
@@ -73,6 +75,7 @@ function PaneHeader({ type, onChange, accent }: { type: PaneType; onChange: (t: 
 
 function PaneContent({ type, isPremium, followedWallets }: { type: PaneType; isPremium: boolean; followedWallets: Set<string> }) {
   switch (type) {
+    case 'portfolio':   return <TerminalPortfolio />
     case 'signals':     return <TerminalSignals isPremium={isPremium} followedWallets={followedWallets} />
     case 'movers':      return <TerminalHotMarkets />
     case 'leaderboard': return <TerminalLeaderboard />
@@ -82,9 +85,9 @@ function PaneContent({ type, isPremium, followedWallets }: { type: PaneType; isP
 }
 
 export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium: boolean; isLoggedIn: boolean }) {
-  const [leftPane, setLeftPane]       = useState<PaneType>('signals')
-  const [rightTop, setRightTop]       = useState<PaneType>('news')
-  const [rightBottom, setRightBottom] = useState<PaneType>('leaderboard')
+  const [leftPane, setLeftPane]       = useState<PaneType>('portfolio')
+  const [rightTop, setRightTop]       = useState<PaneType>('signals')
+  const [rightBottom, setRightBottom] = useState<PaneType>('news')
   const [mobileTab, setMobileTab]     = useState<PaneType>('signals')
   const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
   const [now, setNow] = useState('')
@@ -113,11 +116,11 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
           <span className="text-[10px] font-mono text-[#00c805] font-semibold">LIVE</span>
         </div>
         <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
-        <span className="text-[10px] font-mono text-[#444444]">POLYMARKET</span>
+        <span className="text-[10px] font-mono text-[#444444]">SHARPBET BOT</span>
         <span className="hidden md:inline text-[10px] font-mono text-[#2a2a2a]">·</span>
-        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">$10K+ THRESHOLD</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">200 WALLETS WATCHED</span>
         <span className="hidden md:inline text-[10px] font-mono text-[#2a2a2a]">·</span>
-        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">ON-CHAIN VERIFIED</span>
+        <span className="hidden md:inline text-[10px] font-mono text-[#444444]">AUTO PAPER TRADING</span>
         <div className="ml-auto flex items-center gap-2 md:gap-3">
           <span className="hidden md:inline text-[10px] font-mono text-[#333333] tabular-nums">{now}</span>
           {!isLoggedIn && (

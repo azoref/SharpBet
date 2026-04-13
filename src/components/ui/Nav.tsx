@@ -30,22 +30,15 @@ export default function Nav({ user, isPremium }: NavProps) {
               <span className="text-[#e8e8f0] font-semibold">Bet</span>
             </Link>
             <div className="hidden sm:flex items-center gap-6">
-              {user && (
-                <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                  Dashboard
-                </Link>
-              )}
+              <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                Terminal
+              </Link>
               <Link href="/leaderboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Leaderboard
               </Link>
               <Link href="/movers" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Movers
               </Link>
-              {user && (
-                <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                  Journal
-                </Link>
-              )}
               <Link href="/pricing" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Pricing
               </Link>

@@ -64,8 +64,8 @@ export default function SignUpPage() {
             <span className="text-green-500 font-mono font-bold text-xl">SHARP</span>
             <span className="text-[#e8e8f0] font-semibold text-xl">Bet</span>
           </Link>
-          <h1 className="text-2xl font-semibold">Create account</h1>
-          <p className="text-[#6b6b80] text-sm mt-1">Free tier · no credit card required</p>
+          <h1 className="text-2xl font-semibold">Request access</h1>
+          <p className="text-[#6b6b80] text-sm mt-1">Paper trading starts immediately. No credit card.</p>
         </div>
 
         <div className="bg-[#111114] border border-[#2a2a32] rounded-lg p-6 space-y-4">
@@ -123,7 +123,7 @@ export default function SignUpPage() {
               disabled={loading}
               className="w-full py-2.5 bg-green-600 hover:bg-green-500 disabled:opacity-50 rounded-md text-sm font-medium transition-colors"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? 'Requesting access...' : 'Get access'}
             </button>
           </form>
         </div>
