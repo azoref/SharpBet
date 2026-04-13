@@ -1,10 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
-import LiveStatsBar from '@/components/landing/LiveStatsBar'
 import ArbTicker from '@/components/landing/ArbTicker'
-import DashboardPreview from '@/components/landing/DashboardPreview'
-import BlinkingCursor from '@/components/landing/BlinkingCursor'
 
 export const dynamic = 'force-dynamic'
 
@@ -28,64 +25,62 @@ export default async function LandingPage() {
     <div className="min-h-screen">
       <Nav user={user} isPremium={profile?.is_premium} />
 
-      {/* Live stats bar */}
-      <LiveStatsBar />
+      {/* Hero — full viewport, dark, minimal */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
+        {/* Background glows */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/8 rounded-full blur-[120px]" />
-          <div className="absolute top-20 right-1/4 w-80 h-80 bg-emerald-600/6 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-teal-500/5 rounded-full blur-[80px]" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-emerald-600/4 rounded-full blur-[100px]" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left copy */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                AUTOMATED COPY TRADING ON POLYMARKET
-              </div>
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
 
-              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                We trade like<br />
-                <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                  the sharpest wallets.<BlinkingCursor />
-                </span>
-              </h1>
-
-              <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                We analyzed 86 million Polymarket trades to find the wallets that consistently win. SharpBet automatically mirrors their positions the moment they trade. You just watch the returns.
-              </p>
-
-              <div className="flex items-center gap-3 flex-wrap">
-                <Link
-                  href="/auth/signup"
-                  className="px-7 py-3.5 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 rounded-full text-base font-semibold transition-all shadow-lg shadow-green-900/30"
-                >
-                  Start paper trading free
-                </Link>
-                <Link
-                  href="/demo"
-                  className="px-7 py-3.5 border border-[#2a2a32] hover:border-green-500/30 rounded-full text-base font-medium text-[#9999aa] hover:text-[#e8e8f0] transition-all"
-                >
-                  See live signals →
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-6 mt-8 text-xs text-[#4a4a55]">
-                <span>✓ Paper trade first</span>
-                <span>✓ No credit card</span>
-                <span>✓ Real signals, zero effort</span>
-              </div>
-            </div>
-
-            {/* Right dashboard preview */}
-            <div className="flex justify-center lg:justify-end w-full overflow-hidden">
-              <DashboardPreview />
-            </div>
+        <div className="relative text-center max-w-3xl mx-auto px-6">
+          {/* Status pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/20 bg-green-500/5 text-green-500/70 text-[11px] font-mono tracking-widest mb-12">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            LIVE SYSTEM ACTIVE
           </div>
+
+          {/* Main headline */}
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-white">
+            We know who<br />
+            <span className="text-green-400">bets first.</span>
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-[#555566] text-lg leading-relaxed mb-14 max-w-lg mx-auto">
+            A closed group of wallets moves before markets react. We found them. SharpBet trades with them — automatically.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <Link
+              href="/auth/signup"
+              className="px-8 py-4 bg-white text-black rounded-full text-sm font-semibold hover:bg-green-400 transition-all duration-300"
+            >
+              Request access
+            </Link>
+            <Link
+              href="/demo"
+              className="px-8 py-4 border border-[#2a2a32] hover:border-[#3a3a45] rounded-full text-sm font-medium text-[#555566] hover:text-[#9999aa] transition-all"
+            >
+              View live signals
+            </Link>
+          </div>
+
+          {/* Subtle stat line */}
+          <p className="mt-16 text-xs font-mono text-[#2a2a35] tracking-widest">
+            86,000,000 TRADES ANALYZED &nbsp;·&nbsp; 200 WALLETS WATCHLISTED &nbsp;·&nbsp; FULLY AUTOMATED
+          </p>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#2a2a35]">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#2a2a35]" />
         </div>
       </section>
 
