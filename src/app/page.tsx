@@ -45,10 +45,10 @@ export default async function LandingPage() {
             <span className="text-green-400">The bot does the rest.</span>
           </h1>
 
-          <p className="text-[#444455] text-base leading-relaxed mb-4 max-w-md mx-auto">
+          <p className="text-[#9999aa] text-base leading-relaxed mb-4 max-w-md mx-auto">
             We scored every wallet on Polymarket. Four factors. The top 200 get watched 24/7. Every trade mirrored automatically.
           </p>
-          <p className="text-[#333344] text-sm mb-12 max-w-sm mx-auto">
+          <p className="text-[#666677] text-sm mb-12 max-w-sm mx-auto">
             No Bloomberg terminal. No team. No manual work.
           </p>
 
