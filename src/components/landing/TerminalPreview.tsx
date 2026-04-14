@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-// ── Static data ───────────────────────────────────────────────────────────────
-
 const ALL_SIGNALS = [
   { wallet: '0x3f8a...c2d1', market: 'MSFT beats Q3',     price: 0.624, size: 2400, score: 91 },
   { wallet: '0x9c1d...7e3a', market: 'Trump indictment',  price: 0.318, size: 5100, score: 88 },
@@ -40,8 +38,6 @@ function buildPath(pts: [number, number][]) {
 function buildArea(pts: [number, number][]) {
   return `M 0,210 ${pts.map(([x, y]) => `L ${x},${y}`).join(' ')} L 520,210 Z`
 }
-
-// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function TerminalPreview() {
   const [clock, setClock] = useState('')
@@ -96,145 +92,137 @@ export default function TerminalPreview() {
   const areaD = buildArea(chartPts)
   const lastPt = chartPts[chartPts.length - 1]
 
+  // ── shared label style ──────────────────────────────────────────────────────
+  const label = 'text-[#666677] tracking-widest text-[9px] uppercase'
+
   return (
     <div className="w-full max-w-5xl mx-auto rounded-xl overflow-hidden border border-[#1a1a22] bg-[#050507] font-mono text-[11px] shadow-2xl shadow-black/60">
 
-      {/* ── Header ── */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-[#111116] bg-[#030305]">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-2 border-b border-[#1a1a22] bg-[#030305]">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" />
-          <span className="text-green-500/70 tracking-widest text-[10px] font-bold shrink-0">SHARPBET</span>
-          <span className="text-[#222230] hidden sm:inline">·</span>
-          <span className="text-[#2a2a3a] tracking-widest text-[10px] hidden sm:inline truncate">BOT ACTIVE · 200 WALLETS WATCHED</span>
+          <span className="text-green-400 tracking-widest text-[10px] font-bold shrink-0">SHARPBET</span>
+          <span className="text-[#333344] hidden sm:inline">·</span>
+          <span className="text-[#888899] tracking-widest text-[10px] hidden sm:inline truncate">BOT ACTIVE · 200 WALLETS WATCHED</span>
         </div>
-        <span className="text-green-500/40 text-[10px] shrink-0">{clock}{blink ? '█' : ' '}</span>
+        <span className="text-green-400/60 text-[10px] shrink-0">{clock}{blink ? '█' : ' '}</span>
       </div>
 
       {/* ── Mobile layout ── */}
       <div className="sm:hidden flex flex-col">
-
-        {/* Chart */}
-        <div className="border-b border-[#111116]">
-          <div className="px-4 py-2 flex items-center justify-between border-b border-[#111116]">
-            <span className="text-[#2a2a3a] tracking-widest text-[9px] uppercase">Paper P&L</span>
+        <div className="border-b border-[#1a1a22]">
+          <div className="px-4 py-2 flex items-center justify-between border-b border-[#1a1a22]">
+            <span className={label}>Paper P&L</span>
             <span className="text-green-400 font-bold text-base">+${pnl.toLocaleString()}</span>
           </div>
           <div className="px-3 py-2">
             <svg viewBox="0 0 520 160" className="w-full" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="grad-m" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#22c55e" stopOpacity="0.18" />
+                  <stop offset="0%" stopColor="#22c55e" stopOpacity="0.2" />
                   <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
                 </linearGradient>
               </defs>
               {[40, 80, 120].map(y => (
-                <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#0f0f14" strokeWidth="1" />
+                <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#1a1a22" strokeWidth="1" />
               ))}
               <path d={areaD} fill="url(#grad-m)" />
               <path d={pathD} fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               {lastPt && (
                 <>
-                  <circle cx={lastPt[0]} cy={lastPt[1]} r="5" fill="#22c55e" opacity="0.25" />
+                  <circle cx={lastPt[0]} cy={lastPt[1]} r="5" fill="#22c55e" opacity="0.3" />
                   <circle cx={lastPt[0]} cy={lastPt[1]} r="3" fill="#22c55e" />
                 </>
               )}
             </svg>
           </div>
-          {/* Stats row */}
-          <div className="grid grid-cols-4 border-t border-[#111116]">
+          <div className="grid grid-cols-4 border-t border-[#1a1a22]">
             {[
-              { label: 'OPEN',     val: '6',   green: false },
-              { label: 'WON',      val: '18',  green: false },
-              { label: 'LOST',     val: '5',   green: false },
-              { label: 'WIN %',    val: '78%', green: true  },
-            ].map(({ label, val, green }) => (
-              <div key={label} className="px-2 py-2 border-r border-[#111116] last:border-r-0 text-center">
-                <div className="text-[#222230] text-[8px] tracking-widest uppercase mb-1">{label}</div>
-                <div className={`font-bold text-sm ${green ? 'text-green-400' : 'text-[#555566]'}`}>{val}</div>
+              { label: 'OPEN', val: '6',   green: false },
+              { label: 'WON',  val: '18',  green: false },
+              { label: 'LOST', val: '5',   green: false },
+              { label: 'WIN%', val: '78%', green: true  },
+            ].map(({ label: l, val, green }) => (
+              <div key={l} className="px-2 py-2 border-r border-[#1a1a22] last:border-r-0 text-center">
+                <div className={`${label} mb-1`}>{l}</div>
+                <div className={`font-bold text-sm ${green ? 'text-green-400' : 'text-[#ccccdd]'}`}>{val}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Signal feed — mobile, 3 items */}
-        <div className="border-b border-[#111116]">
-          <div className="px-3 py-1.5 border-b border-[#111116] text-[#2a2a3a] tracking-widest text-[9px] uppercase flex justify-between">
+        <div className="border-b border-[#1a1a22]">
+          <div className={`px-3 py-1.5 border-b border-[#1a1a22] flex justify-between ${label}`}>
             <span>Alpha Feed</span>
-            <span className="text-green-500/30">SCANNING</span>
+            <span className="text-green-400/70">SCANNING</span>
           </div>
           {feed.slice(0, 3).map((s, i) => (
-            <div
-              key={`m-${s.wallet}-${i}`}
-              className={`px-3 py-2 border-b border-[#0a0a0d] flex items-center justify-between ${i === 0 ? 'bg-green-500/5' : ''}`}
-            >
+            <div key={`m-${s.wallet}-${i}`} className={`px-3 py-2 border-b border-[#0d0d12] flex items-center justify-between ${i === 0 ? 'bg-green-500/5' : ''}`}>
               <div className="min-w-0">
-                <div className={`text-[10px] truncate ${i === 0 ? 'text-[#aaaacc]' : 'text-[#444455]'}`}>{s.market}</div>
-                <div className={`text-[9px] ${i === 0 ? 'text-green-400/70' : 'text-[#333344]'}`}>BUY @ {s.price.toFixed(3)}</div>
+                <div className={`text-[10px] truncate ${i === 0 ? 'text-[#ddddee]' : 'text-[#888899]'}`}>{s.market}</div>
+                <div className={`text-[9px] ${i === 0 ? 'text-green-400' : 'text-[#666677]'}`}>BUY @ {s.price.toFixed(3)}</div>
               </div>
               <div className="text-right shrink-0 ml-3">
-                <div className={`text-[9px] font-bold ${i === 0 ? 'text-green-500/60' : 'text-[#2a2a3a]'}`}>{s.score}</div>
-                <div className="text-[#2a2a3a] text-[9px]">${s.size.toLocaleString()}</div>
+                <div className={`text-[9px] font-bold ${i === 0 ? 'text-green-400' : 'text-[#777788]'}`}>{s.score}</div>
+                <div className="text-[#777788] text-[9px]">${s.size.toLocaleString()}</div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom meters */}
-        <div className="grid grid-cols-2 divide-x divide-[#111116]">
+        <div className="grid grid-cols-2 divide-x divide-[#1a1a22]">
           <div className="px-3 py-3">
-            <div className="text-[#2a2a3a] text-[9px] tracking-widest uppercase mb-2">Disposition</div>
+            <div className={`${label} mb-2`}>Disposition</div>
             <div className="flex justify-between mb-1">
               <div>
                 <div className="text-green-400 font-bold text-sm">86%</div>
-                <div className="text-[#222230] text-[8px]">WIN CAP</div>
+                <div className="text-[#666677] text-[8px]">WIN CAP</div>
               </div>
               <div className="text-center">
-                <div className="text-[#888844] font-bold text-[10px]">D=0.74</div>
+                <div className="text-yellow-400/80 font-bold text-[10px]">D=0.74</div>
               </div>
               <div className="text-right">
-                <div className="text-red-400/60 font-bold text-sm">12%</div>
-                <div className="text-[#222230] text-[8px]">LOSS CUT</div>
+                <div className="text-red-400 font-bold text-sm">12%</div>
+                <div className="text-[#666677] text-[8px]">LOSS CUT</div>
               </div>
             </div>
-            <div className="h-px bg-[#111116] relative mt-2">
-              <div className="absolute left-0 top-0 h-full bg-green-500/40" style={{ width: '74%' }} />
+            <div className="h-px bg-[#1a1a22] relative mt-2">
+              <div className="absolute left-0 top-0 h-full bg-green-500/50" style={{ width: '74%' }} />
             </div>
           </div>
           <div className="px-3 py-3">
-            <div className="text-[#2a2a3a] text-[9px] tracking-widest uppercase mb-2">Capital Velocity</div>
+            <div className={`${label} mb-2`}>Capital Velocity</div>
             <div className="flex items-baseline gap-1">
               <span className="text-white font-bold text-xl">49</span>
-              <span className="text-[#333344]">×</span>
-              <span className="text-[#2a2a3a] text-[9px]">vs avg</span>
+              <span className="text-[#888899]">×</span>
+              <span className="text-[#888899] text-[9px]">vs avg</span>
             </div>
-            <div className="mt-2 text-[#2a2a3a] text-[9px]">Pair network: <span className="text-[#444455]">42</span></div>
+            <div className="mt-2 text-[#777788] text-[9px]">Pair network: <span className="text-[#aaaacc]">42</span></div>
           </div>
         </div>
       </div>
 
-      {/* ── Desktop layout: 3 columns ── */}
+      {/* ── Desktop layout ── */}
       <div className="hidden sm:grid grid-cols-[210px_1fr_230px] min-h-[340px]">
 
         {/* Left: Signal feed */}
-        <div className="border-r border-[#111116] flex flex-col">
-          <div className="px-3 py-1.5 border-b border-[#111116] text-[#2a2a3a] tracking-widest text-[9px] uppercase flex justify-between">
+        <div className="border-r border-[#1a1a22] flex flex-col">
+          <div className={`px-3 py-1.5 border-b border-[#1a1a22] flex justify-between ${label}`}>
             <span>Alpha Feed</span>
-            <span className="text-green-500/30">SCANNING</span>
+            <span className="text-green-400/70">SCANNING</span>
           </div>
           <div ref={feedRef} className="flex-1 overflow-hidden">
             {feed.map((s, i) => (
-              <div
-                key={`d-${s.wallet}-${i}`}
-                className={`px-3 py-2 border-b border-[#0a0a0d] transition-all duration-500 ${i === 0 ? 'bg-green-500/5' : ''}`}
-              >
+              <div key={`d-${s.wallet}-${i}`} className={`px-3 py-2 border-b border-[#0d0d12] transition-all duration-500 ${i === 0 ? 'bg-green-500/5' : ''}`}>
                 <div className="flex justify-between mb-0.5">
-                  <span className="text-[#222230] text-[9px]">{s.wallet}</span>
-                  <span className={`text-[9px] ${i === 0 ? 'text-green-500/60' : 'text-[#2a2a3a]'}`}>{s.score}</span>
+                  <span className="text-[#777788] text-[9px]">{s.wallet}</span>
+                  <span className={`text-[9px] font-bold ${i === 0 ? 'text-green-400' : 'text-[#777788]'}`}>{s.score}</span>
                 </div>
-                <div className={`truncate text-[10px] ${i === 0 ? 'text-[#aaaacc]' : 'text-[#444455]'}`}>{s.market}</div>
+                <div className={`truncate text-[10px] ${i === 0 ? 'text-[#ddddee]' : 'text-[#888899]'}`}>{s.market}</div>
                 <div className="flex justify-between mt-0.5">
-                  <span className={`text-[9px] ${i === 0 ? 'text-green-400/70' : 'text-[#333344]'}`}>BUY @ {s.price.toFixed(3)}</span>
-                  <span className="text-[#2a2a3a] text-[9px]">${s.size.toLocaleString()}</span>
+                  <span className={`text-[9px] ${i === 0 ? 'text-green-400' : 'text-[#666677]'}`}>BUY @ {s.price.toFixed(3)}</span>
+                  <span className="text-[#777788] text-[9px]">${s.size.toLocaleString()}</span>
                 </div>
               </div>
             ))}
@@ -242,42 +230,42 @@ export default function TerminalPreview() {
         </div>
 
         {/* Center: Chart */}
-        <div className="border-r border-[#111116] flex flex-col">
-          <div className="px-4 py-1.5 border-b border-[#111116] flex items-center justify-between">
-            <span className="text-[#2a2a3a] tracking-widest text-[9px] uppercase">Paper Portfolio · Live Session</span>
+        <div className="border-r border-[#1a1a22] flex flex-col">
+          <div className="px-4 py-1.5 border-b border-[#1a1a22] flex items-center justify-between">
+            <span className={label}>Paper Portfolio · Live Session</span>
             <span className="text-green-400 font-bold text-base tracking-tight">+${pnl.toLocaleString()}</span>
           </div>
           <div className="flex-1 relative p-2">
             <svg viewBox="0 0 520 210" className="w-full h-full" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="grad-d" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#22c55e" stopOpacity="0.18" />
+                  <stop offset="0%" stopColor="#22c55e" stopOpacity="0.2" />
                   <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
                 </linearGradient>
               </defs>
               {[52, 104, 156].map(y => (
-                <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#0f0f14" strokeWidth="1" />
+                <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#1a1a22" strokeWidth="1" />
               ))}
               <path d={areaD} fill="url(#grad-d)" />
               <path d={pathD} fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               {lastPt && (
                 <>
-                  <circle cx={lastPt[0]} cy={lastPt[1]} r="4" fill="#22c55e" opacity="0.3" />
+                  <circle cx={lastPt[0]} cy={lastPt[1]} r="4" fill="#22c55e" opacity="0.35" />
                   <circle cx={lastPt[0]} cy={lastPt[1]} r="2.5" fill="#22c55e" />
                 </>
               )}
             </svg>
           </div>
-          <div className="grid grid-cols-4 border-t border-[#111116]">
+          <div className="grid grid-cols-4 border-t border-[#1a1a22]">
             {[
-              { label: 'OPEN',     val: '6',   green: false },
-              { label: 'WON',      val: '18',  green: false },
-              { label: 'LOST',     val: '5',   green: false },
-              { label: 'WIN RATE', val: '78%', green: true  },
-            ].map(({ label, val, green }) => (
-              <div key={label} className="px-3 py-2 border-r border-[#111116] last:border-r-0">
-                <div className="text-[#222230] text-[9px] tracking-widest uppercase mb-1">{label}</div>
-                <div className={`font-bold text-sm ${green ? 'text-green-400' : 'text-[#555566]'}`}>{val}</div>
+              { l: 'OPEN',     val: '6',   green: false },
+              { l: 'WON',      val: '18',  green: false },
+              { l: 'LOST',     val: '5',   green: false },
+              { l: 'WIN RATE', val: '78%', green: true  },
+            ].map(({ l, val, green }) => (
+              <div key={l} className="px-3 py-2 border-r border-[#1a1a22] last:border-r-0">
+                <div className={`${label} mb-1`}>{l}</div>
+                <div className={`font-bold text-sm ${green ? 'text-green-400' : 'text-[#ccccdd]'}`}>{val}</div>
               </div>
             ))}
           </div>
@@ -285,58 +273,64 @@ export default function TerminalPreview() {
 
         {/* Right: Live entries + meters */}
         <div className="flex flex-col">
-          <div className="px-3 py-1.5 border-b border-[#111116] text-[#2a2a3a] tracking-widest text-[9px] uppercase">Live Entries</div>
+          <div className={`px-3 py-1.5 border-b border-[#1a1a22] ${label}`}>Live Entries</div>
           <div className="flex-1 overflow-hidden">
             {LIVE_ENTRIES.map((e, i) => (
-              <div key={i} className="px-3 py-2 border-b border-[#0a0a0d] flex items-start justify-between">
+              <div key={i} className="px-3 py-2 border-b border-[#0d0d12] flex items-start justify-between">
                 <div>
-                  <div className="text-[#555566] text-[10px] truncate w-[120px]">{e.market}</div>
-                  <div className="text-[#2a2a3a] text-[9px] mt-0.5">
-                    MKT {e.mkt} → <span className="text-green-400/50">{e.true_}</span> <span className="text-green-400/40">{e.gap}</span>
+                  <div className="text-[#ccccdd] text-[10px] truncate w-[120px]">{e.market}</div>
+                  <div className="text-[#777788] text-[9px] mt-0.5">
+                    MKT {e.mkt} → <span className="text-green-400/80">{e.true_}</span> <span className="text-green-400/70">{e.gap}</span>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
                   <div className={`text-[9px] tracking-widest font-bold ${
                     e.status === 'BUY'  ? 'text-green-400' :
-                    e.status === 'HOLD' ? 'text-yellow-500/70' :
-                    'text-[#333344]'
+                    e.status === 'HOLD' ? 'text-yellow-400/80' :
+                    'text-[#888899]'
                   }`}>{e.status}</div>
-                  {e.pnl && <div className="text-green-400/60 text-[9px] mt-0.5">{e.pnl}</div>}
+                  {e.pnl && <div className="text-green-400 text-[9px] mt-0.5">{e.pnl}</div>}
                 </div>
               </div>
             ))}
           </div>
-          <div className="border-t border-[#111116] px-3 py-2">
-            <div className="text-[#2a2a3a] text-[9px] tracking-widest uppercase mb-2">Disposition Meter</div>
+
+          {/* Disposition meter */}
+          <div className="border-t border-[#1a1a22] px-3 py-2">
+            <div className={`${label} mb-2`}>Disposition Meter</div>
             <div className="flex justify-between mb-1.5">
               <div>
                 <div className="text-green-400 font-bold">86%</div>
-                <div className="text-[#222230] text-[8px]">WIN CAPTURE</div>
+                <div className="text-[#666677] text-[8px]">WIN CAPTURE</div>
               </div>
               <div className="text-center">
-                <div className="text-[#888844] font-bold text-[10px]">D=0.74</div>
-                <div className="text-[#222230] text-[8px]">COEFF</div>
+                <div className="text-yellow-400/80 font-bold text-[10px]">D=0.74</div>
+                <div className="text-[#666677] text-[8px]">COEFF</div>
               </div>
               <div className="text-right">
-                <div className="text-red-400/60 font-bold">12%</div>
-                <div className="text-[#222230] text-[8px]">LOSS CUT</div>
+                <div className="text-red-400 font-bold">12%</div>
+                <div className="text-[#666677] text-[8px]">LOSS CUT</div>
               </div>
             </div>
-            <div className="h-px bg-[#111116] relative">
-              <div className="absolute left-0 top-0 h-full bg-green-500/40" style={{ width: '74%' }} />
+            <div className="h-px bg-[#1a1a22] relative">
+              <div className="absolute left-0 top-0 h-full bg-green-500/50" style={{ width: '74%' }} />
             </div>
           </div>
-          <div className="border-t border-[#111116] px-3 py-2">
-            <div className="text-[#2a2a3a] text-[9px] tracking-widest uppercase mb-1">Capital Velocity</div>
+
+          {/* Capital velocity */}
+          <div className="border-t border-[#1a1a22] px-3 py-2">
+            <div className={`${label} mb-1`}>Capital Velocity</div>
             <div className="flex items-baseline gap-1">
               <span className="text-white font-bold text-xl">49</span>
-              <span className="text-[#333344] text-sm">×</span>
-              <span className="text-[#2a2a3a] text-[9px]">vs avg wallet</span>
+              <span className="text-[#888899] text-sm">×</span>
+              <span className="text-[#888899] text-[9px]">vs avg wallet</span>
             </div>
           </div>
-          <div className="border-t border-[#111116] px-3 py-2 flex justify-between items-center">
-            <div className="text-[#2a2a3a] text-[9px] tracking-widest uppercase">Pair Network</div>
-            <div className="font-bold text-[#444455]">42 <span className="text-[9px] font-normal text-[#2a2a3a]">correlations</span></div>
+
+          {/* Pair network */}
+          <div className="border-t border-[#1a1a22] px-3 py-2 flex justify-between items-center">
+            <div className={label}>Pair Network</div>
+            <div className="font-bold text-[#ccccdd]">42 <span className="text-[9px] font-normal text-[#888899]">correlations</span></div>
           </div>
         </div>
       </div>
