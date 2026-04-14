@@ -3,25 +3,25 @@
 import { useEffect, useRef, useState } from 'react'
 
 const ALL_SIGNALS = [
-  { wallet: '0x3f8a...c2d1', market: 'MSFT beats Q3',     price: 0.624, size: 2400, score: 91 },
-  { wallet: '0x9c1d...7e3a', market: 'Trump indictment',  price: 0.318, size: 5100, score: 88 },
-  { wallet: '0x7b2e...4f9c', market: 'ETH $4K Aug',       price: 0.481, size: 1800, score: 94 },
-  { wallet: '0x2a5f...8b0d', market: 'Fed rate cut Sept', price: 0.712, size: 3200, score: 87 },
-  { wallet: '0x4d8c...1a6e', market: 'Senate vote 60',    price: 0.643, size: 900,  score: 82 },
-  { wallet: '0x1e9b...5c3f', market: 'Silver $35',        price: 0.558, size: 2100, score: 89 },
-  { wallet: '0x6f0a...2d8b', market: 'AMD beats Q2',      price: 0.761, size: 4400, score: 93 },
-  { wallet: '0x8c3d...9f1e', market: 'Tesla Robotaxi',    price: 0.493, size: 3700, score: 90 },
-  { wallet: '0x5a7e...3c2a', market: 'NYC heat record',   price: 0.387, size: 1200, score: 85 },
-  { wallet: '0xb1f4...6d9c', market: 'Iran deal signed',  price: 0.271, size: 2900, score: 88 },
+  { wallet: '0x3f8a...c2d1', market: 'BTC above $100K',        price: 0.624, size: 2400, score: 91 },
+  { wallet: '0x9c1d...7e3a', market: 'Fed cuts rates in 2025', price: 0.318, size: 5100, score: 88 },
+  { wallet: '0x7b2e...4f9c', market: 'ETH above $3K',          price: 0.481, size: 1800, score: 94 },
+  { wallet: '0x2a5f...8b0d', market: 'GOP wins Senate 2026',   price: 0.712, size: 3200, score: 87 },
+  { wallet: '0x4d8c...1a6e', market: 'Nvidia $200 by Jul',     price: 0.643, size: 900,  score: 82 },
+  { wallet: '0x1e9b...5c3f', market: 'Gold above $3500',       price: 0.558, size: 2100, score: 89 },
+  { wallet: '0x6f0a...2d8b', market: 'Apple earnings beat',    price: 0.761, size: 4400, score: 93 },
+  { wallet: '0x8c3d...9f1e', market: 'SPX 6000 by June',       price: 0.493, size: 3700, score: 90 },
+  { wallet: '0x5a7e...3c2a', market: 'US recession 2025',      price: 0.387, size: 1200, score: 85 },
+  { wallet: '0xb1f4...6d9c', market: 'Solana above $200',      price: 0.271, size: 2900, score: 88 },
 ]
 
 const LIVE_ENTRIES = [
-  { market: 'MSFT beats Q3',    mkt: '80¢', true_: '93¢', gap: '+13¢', status: 'HOLD', pnl: '+$96'  },
-  { market: 'Trump indictment', mkt: '62¢', true_: '79¢', gap: '+17¢', status: 'BUY',  pnl: '+$184' },
-  { market: 'ETH $4K Aug',      mkt: '48¢', true_: '64¢', gap: '+16¢', status: 'BUY',  pnl: '+$142' },
-  { market: 'Fed rate cut',     mkt: '71¢', true_: '87¢', gap: '+16¢', status: 'HOLD', pnl: '+$68'  },
-  { market: 'Senate vote 60',   mkt: '64¢', true_: '78¢', gap: '+14¢', status: 'SCAN', pnl: null    },
-  { market: 'Silver $35',       mkt: '55¢', true_: '72¢', gap: '+17¢', status: 'BUY',  pnl: '+$211' },
+  { market: 'BTC above $100K',      mkt: '62¢', true_: '79¢', gap: '+17¢', status: 'BUY',  pnl: '+$184' },
+  { market: 'Fed cuts 2025',        mkt: '31¢', true_: '48¢', gap: '+17¢', status: 'BUY',  pnl: '+$142' },
+  { market: 'ETH above $3K',        mkt: '48¢', true_: '64¢', gap: '+16¢', status: 'HOLD', pnl: '+$96'  },
+  { market: 'GOP wins Senate 2026', mkt: '71¢', true_: '84¢', gap: '+13¢', status: 'HOLD', pnl: '+$68'  },
+  { market: 'Nvidia $200 by Jul',   mkt: '64¢', true_: '78¢', gap: '+14¢', status: 'SCAN', pnl: null    },
+  { market: 'Gold above $3500',     mkt: '55¢', true_: '72¢', gap: '+17¢', status: 'BUY',  pnl: '+$211' },
 ]
 
 const BASE_POINTS: [number, number][] = [
