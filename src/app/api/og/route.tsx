@@ -9,116 +9,109 @@ export async function GET() {
         style={{
           width: '1200px',
           height: '630px',
-          background: '#080808',
+          background: '#060608',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '64px',
+          padding: '60px 64px',
           fontFamily: 'monospace',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
-        {/* Grid lines background */}
+        {/* Grid */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
+              'linear-gradient(rgba(74,222,128,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.025) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
           }}
         />
 
-        {/* Green glow top-right */}
+        {/* Green glow center-left */}
         <div
           style={{
             position: 'absolute',
-            top: '-120px',
-            right: '-120px',
-            width: '500px',
-            height: '500px',
+            top: '50%',
+            left: '-100px',
+            transform: 'translateY(-50%)',
+            width: '600px',
+            height: '600px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(74,222,128,0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(74,222,128,0.07) 0%, transparent 65%)',
           }}
         />
 
-        {/* Top bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: '#e8e8f0', fontSize: '32px', fontWeight: 700, letterSpacing: '-1px' }}>
-              SHARP
-            </span>
-            <span style={{ color: '#4ade80', fontSize: '32px', fontWeight: 700, letterSpacing: '-1px' }}>
-              Bet
-            </span>
+        {/* Top: logo + status */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ color: '#e8e8f0', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.5px' }}>SHARP</span>
+            <span style={{ color: '#4ade80', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.5px' }}>BET</span>
           </div>
-          {/* Status pill */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'rgba(74,222,128,0.08)',
-              border: '1px solid rgba(74,222,128,0.2)',
+              background: 'rgba(74,222,128,0.06)',
+              border: '1px solid rgba(74,222,128,0.15)',
               borderRadius: '999px',
-              padding: '8px 20px',
+              padding: '8px 18px',
             }}
           >
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ade80' }} />
-            <span style={{ color: '#4ade80', fontSize: '14px', letterSpacing: '2px' }}>SIGNALS LIVE</span>
+            <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#4ade80' }} />
+            <span style={{ color: 'rgba(74,222,128,0.7)', fontSize: '12px', letterSpacing: '2.5px' }}>BOT ACTIVE</span>
           </div>
         </div>
 
-        {/* Main headline */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ color: '#4a4a55', fontSize: '14px', letterSpacing: '3px' }}>
-              SMART MONEY INTELLIGENCE
+        {/* Main copy */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'relative' }}>
+          <span style={{ color: 'rgba(74,222,128,0.4)', fontSize: '13px', letterSpacing: '3px' }}>
+            AUTOMATED PAPER TRADING
+          </span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ color: '#e8e8f0', fontSize: '68px', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-2px' }}>
+              We analyzed 86M trades.
             </span>
-            <span style={{ color: '#e8e8f0', fontSize: '72px', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
-              Follow the
-            </span>
-            <span style={{ color: '#4ade80', fontSize: '72px', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
-              smart money.
+            <span style={{ color: '#4ade80', fontSize: '68px', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-2px' }}>
+              The bot does the rest.
             </span>
           </div>
-          <p style={{ color: '#6b6b80', fontSize: '22px', maxWidth: '640px', lineHeight: 1.5, margin: 0 }}>
-            Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Alerts before the lines move.
+          <p style={{ color: '#555566', fontSize: '22px', margin: 0, lineHeight: 1.5, maxWidth: '680px' }}>
+            The top 200 wallets on Polymarket, watched 24/7. Every trade mirrored automatically as a paper position.
           </p>
         </div>
 
-        {/* Bottom bar: whale signal + arb ticker */}
+        {/* Bottom stats */}
         <div
           style={{
             display: 'flex',
-            gap: '24px',
-            borderTop: '1px solid #1a1a1f',
-            paddingTop: '24px',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            borderTop: '1px solid #111116',
+            paddingTop: '28px',
+            position: 'relative',
           }}
         >
-          {[
-            { label: 'WHALE SIGNAL', value: 'Chiefs ML · $42K', color: '#4ade80' },
-            { label: 'POLY PRICE', value: '67% implied', color: '#e8e8f0' },
-            { label: 'BOOK PRICE', value: 'DraftKings +145', color: '#e8e8f0' },
-            { label: 'EDGE', value: '+21pt divergence', color: '#4ade80' },
-          ].map(({ label, value, color }) => (
-            <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <span style={{ color: '#4a4a55', fontSize: '11px', letterSpacing: '2px' }}>{label}</span>
-              <span style={{ color, fontSize: '16px', fontWeight: 600 }}>{value}</span>
-            </div>
-          ))}
-          <div style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-end' }}>
-            <span style={{ color: '#4a4a55', fontSize: '11px', letterSpacing: '2px' }}>URL</span>
-            <span style={{ color: '#6b6b80', fontSize: '16px' }}>getsharpbet.com</span>
+          <div style={{ display: 'flex', gap: '48px' }}>
+            {[
+              { label: 'TRADES ANALYZED', value: '86M',  green: false },
+              { label: 'WIN RATE',         value: '78%',  green: true  },
+              { label: 'WALLETS WATCHED',  value: '200',  green: false },
+              { label: 'MONTHLY COST',     value: '$29',  green: false },
+            ].map(({ label, value, green }) => (
+              <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ color: '#2a2a3a', fontSize: '10px', letterSpacing: '2px' }}>{label}</span>
+                <span style={{ color: green ? '#4ade80' : '#e8e8f0', fontSize: '24px', fontWeight: 700 }}>{value}</span>
+              </div>
+            ))}
           </div>
+          <span style={{ color: '#2a2a3a', fontSize: '15px' }}>getsharpbet.com</span>
         </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    { width: 1200, height: 630 }
   )
 }
